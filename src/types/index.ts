@@ -5,11 +5,9 @@ export interface Work {
   price_rub: number
   work_type: string
   unit: string
-  image_key?: string
-  video_key?: string
-  tag1?: string
-  tag2?: string
-  tag3?: string
+  image_url?: string       // ← было image_key
+  video_url?: string       // ← было video_key
+  tags?: string[]
   param_deadline?: string
   param_quantity?: string
   param_unit?: string

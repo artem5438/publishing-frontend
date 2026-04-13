@@ -11,25 +11,20 @@ interface BreadcrumbsProps {
 
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
-    <nav aria-label="breadcrumb" className="py-2">
-      <ol className="breadcrumb mb-0">
-        {items.map((item, index) => {
-          const isLast = index === items.length - 1
-          return (
-            <li
-              key={index}
-              className={`breadcrumb-item ${isLast ? 'active' : ''}`}
-              aria-current={isLast ? 'page' : undefined}
-            >
-              {isLast || !item.path ? (
-                item.label
-              ) : (
-                <Link to={item.path}>{item.label}</Link>
-              )}
-            </li>
-          )
-        })}
-      </ol>
-    </nav>
+    <div className="mis-breadcrumbs">
+      {items.map((item, index) => {
+        const isLast = index === items.length - 1
+        return (
+          <span key={index}>
+            {index > 0 && <span className="sep">/</span>}
+            {isLast || !item.path ? (
+              <span>{item.label}</span>
+            ) : (
+              <Link to={item.path}>{item.label}</Link>
+            )}
+          </span>
+        )
+      })}
+    </div>
   )
 }

@@ -1,20 +1,11 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
-import Badge from 'react-bootstrap/Badge'
-import Spinner from 'react-bootstrap/Spinner'
-import Alert from 'react-bootstrap/Alert'
-import Table from 'react-bootstrap/Table'
+import { useParams, Link } from 'react-router-dom'
+import { Spinner } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
 import { mockWorks } from '../mocks/works'
 import type { Work } from '../types'
 
 const USE_MOCK = false
-const DEFAULT_IMAGE = 'https://placehold.co/600x400?text=Нет+фото'
-const MINIO_URL = 'http://localhost:9000/publishing-media/'
-
 export default function WorkDetailPage() {
   const { id } = useParams<{ id: string }>()
   const [work, setWork] = useState<Work | null>(null)
@@ -32,68 +23,120 @@ export default function WorkDetailPage() {
       return
     }
     fetch(`/api/works/${id}`)
-      .then((r) => {
-        if (!r.ok) throw new Error('Услуга не найдена')
-        return r.json()
-      })
-      .then((data: Work) => {
-        setWork(data)
-        setLoading(false)
-      })
-      .catch((err: Error) => {
-        setError(err.message)
-        setLoading(false)
-      })
+      .then((r) => { if (!r.ok) throw new Error('Услуга не найдена'); return r.json() })
+      .then((data: Work) => { setWork(data); setLoading(false) })
+      .catch((err: Error) => { setError(err.message); setLoading(false) })
   }, [id])
 
-  if (loading) return <Container className="py-5 text-center"><Spinner animation="border" /></Container>
-  if (error) return <Container className="py-4"><Alert variant="danger">{error}</Alert></Container>
-  if (!work) return null
+  if (loading) {
+    return <div className="text-center py-5"><Spinner animation="border" /></div>
+  }
+  if (error || !work) {
+    return <div className="mis-error py-5">{error || 'Не найдено'}</div>
+  }
 
-  const imageUrl = work.image_key ? MINIO_URL + work.image_key : DEFAULT_IMAGE
-  const tags = [work.tag1, work.tag2, work.tag3].filter(Boolean)
+  const imageUrl = work.image_url || null
+  const tags = work.tags ?? []
 
   return (
-    <Container className="py-4">
-      <Breadcrumbs
-        items={[
-          { label: 'Главная', path: '/' },
-          { label: 'Услуги', path: '/' },
-          { label: work.name },
-        ]}
-      />
-      <Row className="mt-3 g-4">
-        <Col md={5}>
-          <img
-            src={imageUrl}
-            alt={work.name}
-            className="img-fluid rounded shadow-sm w-100"
-            style={{ maxHeight: '400px', objectFit: 'cover' }}
-            onError={(e) => { (e.target as HTMLImageElement).src = DEFAULT_IMAGE }}
-          />
-        </Col>
-        <Col md={7}>
-          <h2>{work.name}</h2>
-          <p className="text-muted">{work.work_type}</p>
-          <p>{work.description || 'Описание отсутствует'}</p>
-          <div className="mb-3">
-            {tags.map((tag, i) => (
-              <Badge key={i} bg="secondary" className="me-1">{tag}</Badge>
-            ))}
+    <>
+      <Breadcrumbs items={[
+        { label: 'Главная', path: '/' },
+        { label: 'Услуги', path: '/' },
+        { label: work.name },
+      ]} />
+
+      <div className="detail-page-wrapper">
+        <Link to="/" className="back-link">← Все работы</Link>
+
+        {/* Основная карточка */}
+        <div className="detail-card-custom">
+          <div>
+            {imageUrl ? (
+              <img
+                src={imageUrl}
+                alt={work.name}
+                className="detail-image-custom"
+                onError={(e) => {
+                  const el = e.target as HTMLImageElement
+                  el.style.display = 'none'
+                  el.nextElementSibling?.removeAttribute('style')
+                }}
+              />
+            ) : (
+              <div className="detail-image-placeholder">фото услуги</div>
+            )}
           </div>
-          <h3 className="text-dark">{work.price_rub.toLocaleString()} ₽ / {work.unit}</h3>
-          {(work.param_deadline || work.param_quantity || work.param_unit || work.param_format) && (
-            <Table bordered size="sm" className="mt-3">
+
+          <div className="detail-info">
+            <h1>{work.name}</h1>
+            <p className="detail-work-type">{work.work_type}</p>
+
+            {work.description && (
+              <p style={{ fontSize: '14px', color: '#444', lineHeight: '1.7', marginBottom: '20px' }}>
+                {work.description}
+              </p>
+            )}
+
+            <div className="price-row-custom">
+              <span className="price-label">Стоимость</span>
+              <span className="price-value">{work.price_rub.toLocaleString()} ₽</span>
+            </div>
+
+            <button className="btn-add-custom">Добавить в корзину</button>
+
+            <table className="params-table-custom">
+              <thead>
+                <tr>
+                  <th>Срок</th>
+                  <th>Тираж</th>
+                  <th>Единица</th>
+                  <th>Формат</th>
+                </tr>
+              </thead>
               <tbody>
-                {work.param_deadline && <tr><td className="fw-semibold">Срок</td><td>{work.param_deadline}</td></tr>}
-                {work.param_quantity && <tr><td className="fw-semibold">Объём</td><td>{work.param_quantity}</td></tr>}
-                {work.param_unit && <tr><td className="fw-semibold">Единица</td><td>{work.param_unit}</td></tr>}
-                {work.param_format && <tr><td className="fw-semibold">Формат</td><td>{work.param_format}</td></tr>}
+                <tr>
+                  <td>{work.param_deadline || '—'}</td>
+                  <td>{work.param_quantity || '—'}</td>
+                  <td>{work.param_unit || '—'}</td>
+                  <td>{work.param_format || '—'}</td>
+                </tr>
               </tbody>
-            </Table>
+            </table>
+          </div>
+        </div>
+
+        {/* Преимущества */}
+        <div className="detail-lower">
+          <h2>Преимущества услуги</h2>
+
+          {tags.length > 0 && (
+            <div className="tags-row">
+              {tags.map((tag, i) => (
+                <span key={i} className="tag-item">{tag}</span>
+              ))}
+            </div>
           )}
-        </Col>
-      </Row>
-    </Container>
+
+          <div className="description-tab">Описание</div>
+          <div className="description-text">
+            <strong>{work.name} — профессиональная работа издательства.</strong>
+            <p>{work.description || 'Описание отсутствует'}</p>
+          </div>
+        </div>
+
+        {/* Видео */}
+        <div className="video-block">
+          <h3>Видео о работе</h3>
+          {work.video_url ? (
+            <video autoPlay muted loop playsInline>
+              <source src={work.video_url} type="video/mp4" />
+            </video>
+          ) : (
+            <div className="video-placeholder">[ВИДЕО: ПРОЦЕСС ПЕЧАТИ]</div>
+          )}
+        </div>
+      </div>
+    </>
   )
 }
