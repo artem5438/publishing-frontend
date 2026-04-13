@@ -11,7 +11,12 @@ body {
 .navbar.bg-dark {
   background: #FFFFFF !important;
   border-bottom: 1px solid #E8E8E8;
-  padding: 16px 40px;
+  padding: 10px 40px; /* ← уменьшили с 16px до 10px */
+  min-height: unset !important;
+}
+.navbar .navbar-collapse .nav {
+  flex-wrap: nowrap !important;
+  gap: 4px;
 }
 .navbar-brand {
   font-size: 22px !important;
@@ -32,7 +37,7 @@ body {
   background: transparent !important;
   transition: all 0.2s !important;
   font-weight: 400 !important;
-  margin-left: 8px;
+  margin-left: 4px;
 }
 .mis-nav-btn:hover {
   background: #1C1C1C !important;
@@ -515,4 +520,78 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 input[type="number"] {
   -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.login-page-wrapper {
+  max-width: 440px;
+  margin: 60px auto;
+  padding: 0 16px;
+}
+
+.login-card {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 40px 36px;
+}
+
+.login-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.login-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 28px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.login-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.login-field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1c1c1c;
+}
+
+.login-field input {
+  padding: 10px 14px;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.login-field input:focus {
+  border-color: #1c1c1c;
+}
+
+.login-error {
+  font-size: 13px;
+  color: #e53935;
+  background: #ffeaea;
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+.mis-nav-btn-logout {
+  border-color: #e53935 !important;
+  color: #e53935 !important;
+}
+
+.mis-nav-btn-logout:hover {
+  background: #e53935 !important;
+  color: #fff !important;
 }

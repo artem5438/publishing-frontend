@@ -20,7 +20,7 @@ export interface OrderWork {
   price_rub: number
   quantity: number
   comment: string
-  image_key?: string
+  image_url?: string
 }
 
 export type OrderStatus = 'draft' | 'deleted' | 'formed' | 'completed' | 'rejected'

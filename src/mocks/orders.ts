@@ -1,5 +1,7 @@
 import type { Order } from '../types'
 
+const MINIO_URL = 'http://localhost:9000/publishing-media'
+
 export const mockCart: Order = {
   id: 17,
   status: 'draft',
@@ -15,7 +17,7 @@ export const mockCart: Order = {
       price_rub: 2500,
       quantity: 1,
       comment: '',
-      image_key: 'hard-cover.jpg',
+      image_url: `${MINIO_URL}/hard-cover.jpg`,
     },
     {
       work_id: 3,
@@ -23,7 +25,7 @@ export const mockCart: Order = {
       price_rub: 800,
       quantity: 1,
       comment: '',
-      image_key: 'soft-cover.jpg',
+      image_url: `${MINIO_URL}/soft-cover.jpg`,
     },
   ],
 }
@@ -47,7 +49,7 @@ export const mockOrders: Order[] = [
         price_rub: 5000,
         quantity: 1,
         comment: '',
-        image_key: 'print-digital.jpg',
+        image_url: `${MINIO_URL}/print-digital.jpg`,
       },
       {
         work_id: 2,
@@ -55,7 +57,7 @@ export const mockOrders: Order[] = [
         price_rub: 15000,
         quantity: 3,
         comment: 'срочный заказ',
-        image_key: 'print-offset.jpg',
+        image_url: `${MINIO_URL}/print-offset.jpg`,
       },
     ],
   },

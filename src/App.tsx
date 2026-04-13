@@ -5,15 +5,17 @@ import AppNavbar from './components/Navbar'
 import WorksListPage from './pages/WorksListPage'
 import WorkDetailPage from './pages/WorkDetailPage'
 import OrdersPage from './pages/OrdersPage'
+import LoginPage from './pages/LoginPage'
 
 export default function App() {
   return (
     <BrowserRouter>
-      <AppNavbar cartCount={0} />
+      <AppNavbar />
       <Routes>
         <Route path="/" element={<WorksListPage />} />
         <Route path="/works/:id" element={<WorkDetailPage />} />
         <Route path="/orders" element={<OrdersPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   )

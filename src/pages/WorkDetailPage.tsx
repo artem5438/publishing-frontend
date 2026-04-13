@@ -6,11 +6,13 @@ import { mockWorks } from '../mocks/works'
 import type { Work } from '../types'
 
 const USE_MOCK = false
+
 export default function WorkDetailPage() {
   const { id } = useParams<{ id: string }>()
   const [work, setWork] = useState<Work | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [addStatus, setAddStatus] = useState<'idle' | 'loading' | 'ok' | 'error'>('idle')
 
   useEffect(() => {
     if (USE_MOCK) {
@@ -28,6 +30,27 @@ export default function WorkDetailPage() {
       .catch((err: Error) => { setError(err.message); setLoading(false) })
   }, [id])
 
+  const handleAddToCart = () => {
+    if (!work) return
+    setAddStatus('loading')
+    fetch('/api/publishing-orders/cart/works', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ work_id: work.id }),
+    })
+      .then((r) => {
+        if (r.status === 409) throw new Error('already')
+        if (!r.ok) throw new Error('error')
+        return r.json()
+      })
+      .then(() => { setAddStatus('ok') })
+      .catch((err: Error) => {
+        if (err.message === 'already') setAddStatus('ok') // уже в корзине — ок
+        else setAddStatus('error')
+      })
+  }
+
   if (loading) {
     return <div className="text-center py-5"><Spinner animation="border" /></div>
   }
@@ -37,6 +60,12 @@ export default function WorkDetailPage() {
 
   const imageUrl = work.image_url || null
   const tags = work.tags ?? []
+
+  const btnLabel =
+    addStatus === 'loading' ? 'Добавляем...' :
+    addStatus === 'ok'      ? '✓ В корзине' :
+    addStatus === 'error'   ? 'Ошибка, повторите' :
+    'Добавить в корзину'
 
   return (
     <>
@@ -83,7 +112,13 @@ export default function WorkDetailPage() {
               <span className="price-value">{work.price_rub.toLocaleString()} ₽</span>
             </div>
 
-            <button className="btn-add-custom">Добавить в корзину</button>
+            <button
+              className="btn-add-custom"
+              onClick={handleAddToCart}
+              disabled={addStatus === 'loading' || addStatus === 'ok'}
+            >
+              {btnLabel}
+            </button>
 
             <table className="params-table-custom">
               <thead>
