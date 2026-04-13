@@ -2,25 +2,27 @@ export interface Work {
   id: number
   name: string
   description: string
-  pricerub: number
-  worktype: string
+  price_rub: number
+  work_type: string
   unit: string
-  imageurl?: string
-  videourl?: string
-  tags: string[]
-  paramdeadline: string
-  paramquantity: string
-  paramunit: string
-  paramformat: string
+  image_key?: string
+  video_key?: string
+  tag1?: string
+  tag2?: string
+  tag3?: string
+  param_deadline?: string
+  param_quantity?: string
+  param_unit?: string
+  param_format?: string
 }
 
 export interface OrderWork {
-  workid: number
-  workname: string
-  pricerub: number
+  work_id: number
+  work_name: string
+  price_rub: number
   quantity: number
   comment: string
-  imageurl?: string
+  image_key?: string
 }
 
 export type OrderStatus = 'draft' | 'deleted' | 'formed' | 'completed' | 'rejected'
@@ -28,13 +30,13 @@ export type OrderStatus = 'draft' | 'deleted' | 'formed' | 'completed' | 'reject
 export interface Order {
   id: number
   status: OrderStatus
-  creatorlogin: string
-  booktitle: string
+  creator_login: string
+  book_title: string
   circulation: number
-  totalprice?: number
-  createdat: string
-  formedat?: string
-  completedat?: string
+  total_price?: number
+  created_at: string
+  formed_at?: string
+  completed_at?: string
   works?: OrderWork[]
-  filledworkscount: number
+  filled_works_count: number
 }
