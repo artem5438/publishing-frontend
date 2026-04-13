@@ -63,7 +63,7 @@ export default function AppNavbar() {
 
             {userLogin ? (
               <>
-                <Button className="mis-nav-btn" onClick={() => navigate('/orders')}>
+                <Button className="mis-nav-btn" onClick={() => navigate('/profile')}>
                   👤 {userLogin}
                 </Button>
                 <Button className="mis-nav-btn mis-nav-btn-logout" onClick={handleLogout}>

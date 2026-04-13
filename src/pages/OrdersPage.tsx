@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
@@ -13,6 +14,7 @@ export default function OrdersPage() {
   const [error, setError] = useState('')
   const [deleting, setDeleting] = useState(false)
   const [updatingId, setUpdatingId] = useState<number | null>(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (USE_MOCK) {
@@ -68,7 +70,7 @@ export default function OrdersPage() {
       method: 'DELETE',
       credentials: 'include',
     })
-      .then((r) => { if (!r.ok) throw new Error('Ошибка удаления'); setOrder(null) })
+      .then((r) => { if (!r.ok) throw new Error('Ошибка удаления'); navigate('/') })
       .catch((err: Error) => setError(err.message))
       .finally(() => setDeleting(false))
   }
