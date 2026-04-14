@@ -6,75 +6,112 @@ import WorkCard from '../components/WorkCard'
 import { mockWorks } from '../mocks/works'
 import type { Work } from '../types'
 
-const USE_MOCK = false
+interface Filters {
+  search: string
+  minPrice: string
+  maxPrice: string
+  workType: string
+}
 
 export default function WorksListPage() {
-  const [works, setWorks] = useState<Work[]>([])
+  const [works, setWorks]     = useState<Work[]>([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
-  const [search, setSearch] = useState('')
-  const [minPrice, setMinPrice] = useState('')
-  const [maxPrice, setMaxPrice] = useState('')
-  const [workType, setWorkType] = useState('')
+  const [error, setError]     = useState('')
+
+  const [searchInput, setSearchInput]     = useState('')
+  const [minPriceInput, setMinPriceInput] = useState('')
+  const [maxPriceInput, setMaxPriceInput] = useState('')
+  const [workTypeInput, setWorkTypeInput] = useState('')
+
+  const [filters, setFilters] = useState<Filters>({
+    search: '', minPrice: '', maxPrice: '', workType: ''
+  })
+
+  const workTypes = [...new Set(mockWorks.map(w => w.work_type).filter(Boolean))] as string[]
 
   useEffect(() => {
-    if (USE_MOCK) {
-      setTimeout(() => { setWorks(mockWorks); setLoading(false) }, 0)
-      return
-    }
-    fetch('/api/works')
-      .then((r) => { if (!r.ok) throw new Error('Ошибка загрузки'); return r.json() })
-      .then((data: Work[]) => { setWorks(data); setLoading(false) })
-      .catch((err: Error) => { setError(err.message); setLoading(false) })
-  }, [])
+    const params = new URLSearchParams()
+    if (filters.search)   params.append('query',    filters.search)
+    if (filters.minPrice) params.append('minPrice', filters.minPrice)
+    if (filters.maxPrice) params.append('maxPrice', filters.maxPrice)
+    if (filters.workType) params.append('workType', filters.workType)
 
-  const workTypes = [...new Set(works.map((w) => w.work_type).filter(Boolean))]
+    const url = `/api/works${params.toString() ? '?' + params.toString() : ''}`
 
-  const filtered = works.filter((w) => {
-    const matchSearch = w.name.toLowerCase().includes(search.toLowerCase())
-    const matchMin = minPrice === '' || w.price_rub >= Number(minPrice)
-    const matchMax = maxPrice === '' || w.price_rub <= Number(maxPrice)
-    const matchType = workType === '' || w.work_type === workType
-    return matchSearch && matchMin && matchMax && matchType
-  })
+    fetch(url)
+      .then(r => { if (!r.ok) throw new Error('Ошибка сервера'); return r.json() })
+      .then((data: Work[]) => {
+        setWorks(data)
+        setError('')
+        setLoading(false)
+      })
+      .catch(() => {
+        const mocked = mockWorks.filter(w => {
+          const matchSearch = !filters.search   || w.name.toLowerCase().includes(filters.search.toLowerCase())
+          const matchMin    = !filters.minPrice || w.price_rub >= Number(filters.minPrice)
+          const matchMax    = !filters.maxPrice || w.price_rub <= Number(filters.maxPrice)
+          const matchType   = !filters.workType || w.work_type === filters.workType
+          return matchSearch && matchMin && matchMax && matchType
+        })
+        setWorks(mocked)
+        setError('')
+        setLoading(false)
+      })
+  }, [filters])
+
+  const handleApplyFilters = () => {
+    setLoading(true)
+    setFilters({
+      search:   searchInput,
+      minPrice: minPriceInput,
+      maxPrice: maxPriceInput,
+      workType: workTypeInput,
+    })
+  }
+
+  const handleReset = () => {
+    setLoading(true)
+    setSearchInput('')
+    setMinPriceInput('')
+    setMaxPriceInput('')
+    setWorkTypeInput('')
+    setFilters({ search: '', minPrice: '', maxPrice: '', workType: '' })
+  }
 
   return (
     <>
-      <Breadcrumbs items={[{ label: 'Главная', path: '/' }, { label: 'Услуги' }]} />
+      <Breadcrumbs items={[{ label: 'Каталог услуг' }]} />
       <Container fluid className="px-5 py-4">
-        <h1 className="works-page-title">Работы издательства</h1>
-
+        <h1 className="works-page-title">Услуги издательства</h1>
         <FilterPanel
-          search={search}
-          minPrice={minPrice}
-          maxPrice={maxPrice}
-          workType={workType}
+          search={searchInput}
+          minPrice={minPriceInput}
+          maxPrice={maxPriceInput}
+          workType={workTypeInput}
           workTypes={workTypes}
-          onSearchChange={setSearch}
-          onMinPriceChange={setMinPrice}
-          onMaxPriceChange={setMaxPrice}
-          onWorkTypeChange={setWorkType}
-          onReset={() => {
-            setSearch('')
-            setMinPrice('')
-            setMaxPrice('')
-            setWorkType('')
-          }}
+          onSearchChange={setSearchInput}
+          onMinPriceChange={setMinPriceInput}
+          onMaxPriceChange={setMaxPriceInput}
+          onWorkTypeChange={setWorkTypeInput}
+          onApply={handleApplyFilters}
+          onReset={handleReset}
         />
-
         {loading && (
-          <div className="text-center py-5"><Spinner animation="border" /></div>
+          <div className="text-center py-5">
+            <Spinner animation="border" />
+          </div>
         )}
-        {error && <div className="mis-error">{error}</div>}
-        {!loading && !error && filtered.length === 0 && (
+        {!loading && error && (
+          <div className="mis-error">{error}</div>
+        )}
+        {!loading && !error && works.length === 0 && (
           <div className="mis-empty">Услуги не найдены. Попробуйте изменить фильтры.</div>
         )}
-
-        <div className="works-grid-custom">
-          {filtered.map((work) => (
-            <WorkCard key={work.id} work={work} />
-          ))}
-        </div>
+        {!loading && works.length > 0 && (
+          <div className="works-grid-custom">
+            {works.map(work => <WorkCard key={work.id} work={work} />)}
+          </div>
+        )}
       </Container>
     </>
   )

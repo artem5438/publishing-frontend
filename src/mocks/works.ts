@@ -14,7 +14,7 @@ export const mockWorks: Work[] = [
     description: 'Высококачественная печать больших тиражей от 1000 экземпляров.',
     price_rub: 15000, work_type: 'Печать', unit: 'экз.',
     image_url: 'print-offset.jpg',
-    tags: ['Крупный тираж, Низкая цена за экз.,	Стабильный цвет'],
+    tags: ['Крупный тираж', 'Низкая цена за экз.',	'Стабильный цвет'],
     param_deadline: 'от 10 дней', param_quantity: 'от 1000 экз.', param_unit: 'за тираж', param_format: 'A4, A5, 70×100',
   },
   {
@@ -22,7 +22,7 @@ export const mockWorks: Work[] = [
     description: 'Скрепление блока книги на термоклей или скобу с мягкой обложкой.',
     price_rub: 800, work_type: 'Переплёт', unit: 'экз.',
     image_url: 'soft-cover.jpg',
-    tags: ['Экономично, Лёгкий вес, Быстро'],
+    tags: ['Экономично', 'Лёгкий вес', 'Быстро'],
     param_deadline: 'от 1 дня', param_quantity: 'от 10 экз.', param_unit: 'за экземпляр', param_format: 'A4, A5, A6',
   },
   {
@@ -30,7 +30,7 @@ export const mockWorks: Work[] = [
     description: 'Переплёт в твёрдую обложку с тиснением фольгой или УФ-лаком.',
     price_rub: 2500, work_type: 'Переплёт', unit: 'экз.',
     image_url: 'hard-cover.jpg',
-    tags: ['Долговечность, Премиум вид, Тиснение'],
+    tags: ['Долговечность', 'Премиум вид', 'Тиснение'],
     param_deadline: 'от 5 дней', param_quantity: 'от 50 экз.', param_unit: 'за экземпляр', param_format: 'A4, A5, 60×84',
   },
   {
@@ -38,7 +38,7 @@ export const mockWorks: Work[] = [
     description: 'Профессиональная вёрстка текста и иллюстраций в Adobe InDesign.',
     price_rub: 3000, work_type: 'Допечать', unit: 'стр.',
     image_url: 'layout.jpg',
-    tags: ['InDesign, PDF для печати, По ГОСТ'],
+    tags: ['InDesign', 'PDF для печати', 'По ГОСТ'],
     param_deadline: 'от 3 дней', param_quantity: 'любой объём', param_unit: 'за полосу', param_format: 'любой',
   },
   {
@@ -46,7 +46,7 @@ export const mockWorks: Work[] = [
     description: 'Вычитка текста на орфографию, пунктуацию и стилистику.',
     price_rub: 1500, work_type: 'Допечать', unit: 'стр.',
     image_url: 'proofreading.jpg',
-    tags: ['Орфография, Пунктуация, Стилистика'],
+    tags: ['Орфография', 'Пунктуация', 'Стилистика'],
     param_deadline: 'от 2 дней', param_quantity: 'любой объём', param_unit: 'за 1000 знаков', param_format: 'Word / PDF',
   },
   {
@@ -54,7 +54,7 @@ export const mockWorks: Work[] = [
     description: 'Разработка уникального дизайна обложки с учётом жанра.',
     price_rub: 4000, work_type: 'Дизайн', unit: 'шт.',
     image_url: 'cover-design.jpg',
-    tags: ['3 концепции, CMYK, Уникальный стиль'],
+    tags: ['3 концепции', 'CMYK', 'Уникальный стиль'],
     param_deadline: 'от 5 дней', param_quantity: '1 обложка', param_unit: 'за проект', param_format: 'любой формат',
   },
   {
@@ -62,7 +62,7 @@ export const mockWorks: Work[] = [
     description: 'Оформление и присвоение международного стандартного книжного номера.',
     price_rub: 1000, work_type: 'Оформление', unit: 'шт.',
     image_url: 'isbn.jpg',
-    tags: ['Официально, Для продажи, Библиотеки'],
+    tags: ['Официально', 'Для продажи', 'Библиотеки'],
     param_deadline: 'до 14 дней', param_quantity: '1 издание', param_unit: 'за издание', param_format: '—',
   },
   {
