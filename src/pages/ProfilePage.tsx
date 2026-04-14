@@ -4,8 +4,6 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import { mockOrders } from '../mocks/orders'
 import type { Order } from '../types'
 
-const USE_MOCK = false
-
 const STATUS_LABELS: Record<string, { label: string; color: string }> = {
   formed:    { label: 'На рассмотрении', color: '#f59e0b' },
   completed: { label: 'Выполнен',        color: '#22c55e' },
@@ -24,23 +22,13 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
-  // Поля ввода (черновик фильтров)
-  const [statusInput, setStatusInput] = useState('')
+  const [statusInput, setStatusInput]     = useState('')
   const [dateFromInput, setDateFromInput] = useState('')
-  const [dateToInput, setDateToInput] = useState('')
+  const [dateToInput, setDateToInput]     = useState('')
 
-  // Применённые фильтры — только их слушает useEffect
   const [filters, setFilters] = useState<Filters>({ status: '', dateFrom: '', dateTo: '' })
 
   useEffect(() => {
-    if (USE_MOCK) {
-      setTimeout(() => {
-        setOrders(mockOrders)
-        setLoading(false)
-      }, 0)
-      return
-    }
-
     const params = new URLSearchParams()
     if (filters.status)   params.append('status', filters.status)
     if (filters.dateFrom) params.append('from', filters.dateFrom)
@@ -48,22 +36,23 @@ export default function ProfilePage() {
 
     fetch(`/api/publishing-orders?${params.toString()}`, { credentials: 'include' })
       .then((r) => { if (!r.ok) throw new Error('Ошибка загрузки заказов'); return r.json() })
-      .then((data: Order[]) => { setOrders(data); setLoading(false) })
-      .catch((err: Error) => { setError(err.message); setLoading(false) })
+      .then((data: Order[]) => setOrders(data))
+      .catch(() => setOrders(mockOrders))
+      .finally(() => setLoading(false))
   }, [filters])
 
   const handleFilter = () => {
-    setError('')
     setLoading(true)
+    setError('')
     setFilters({ status: statusInput, dateFrom: dateFromInput, dateTo: dateToInput })
   }
 
   const handleReset = () => {
+    setLoading(true)
     setStatusInput('')
     setDateFromInput('')
     setDateToInput('')
     setError('')
-    setLoading(true)
     setFilters({ status: '', dateFrom: '', dateTo: '' })
   }
 
@@ -77,11 +66,7 @@ export default function ProfilePage() {
         <div className="profile-filter-panel">
           <div className="profile-filter-field">
             <label>Статус</label>
-            <select
-              value={statusInput}
-              onChange={(e) => setStatusInput(e.target.value)}
-              className="profile-select"
-            >
+            <select value={statusInput} onChange={(e) => setStatusInput(e.target.value)} className="profile-select">
               <option value="">Все</option>
               <option value="formed">На рассмотрении</option>
               <option value="completed">Выполнен</option>
@@ -91,22 +76,12 @@ export default function ProfilePage() {
 
           <div className="profile-filter-field">
             <label>Дата от</label>
-            <input
-              type="date"
-              value={dateFromInput}
-              onChange={(e) => setDateFromInput(e.target.value)}
-              className="profile-input"
-            />
+            <input type="date" value={dateFromInput} onChange={(e) => setDateFromInput(e.target.value)} className="profile-input" />
           </div>
 
           <div className="profile-filter-field">
             <label>Дата до</label>
-            <input
-              type="date"
-              value={dateToInput}
-              onChange={(e) => setDateToInput(e.target.value)}
-              className="profile-input"
-            />
+            <input type="date" value={dateToInput} onChange={(e) => setDateToInput(e.target.value)} className="profile-input" />
           </div>
 
           <div className="profile-filter-actions">
@@ -116,7 +91,7 @@ export default function ProfilePage() {
         </div>
 
         {loading && <div className="text-center py-5"><Spinner animation="border" /></div>}
-        {error && <div className="mis-error py-4">{error}</div>}
+        {!loading && error && <div className="mis-error py-4">{error}</div>}
         {!loading && !error && orders.length === 0 && (
           <div className="order-empty">Заказов не найдено</div>
         )}
@@ -132,10 +107,7 @@ export default function ProfilePage() {
             <div key={order.id} className="profile-order-card">
               <div className="profile-order-header">
                 <span className="profile-order-id">Заявка №{order.id}</span>
-                <span
-                  className="profile-order-status"
-                  style={{ color: statusInfo.color, borderColor: statusInfo.color }}
-                >
+                <span className="profile-order-status" style={{ color: statusInfo.color, borderColor: statusInfo.color }}>
                   {statusInfo.label}
                 </span>
               </div>

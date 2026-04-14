@@ -5,8 +5,6 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import { mockWorks } from '../mocks/works'
 import type { Work } from '../types'
 
-const USE_MOCK = false
-
 export default function WorkDetailPage() {
   const { id } = useParams<{ id: string }>()
   const [work, setWork] = useState<Work | null>(null)
@@ -15,19 +13,15 @@ export default function WorkDetailPage() {
   const [addStatus, setAddStatus] = useState<'idle' | 'loading' | 'ok' | 'error'>('idle')
 
   useEffect(() => {
-    if (USE_MOCK) {
-      setTimeout(() => {
+    fetch(`/api/works/${id}`)
+      .then((r) => { if (!r.ok) throw new Error('Услуга не найдена'); return r.json() })
+      .then((data: Work) => { setWork(data) })
+      .catch(() => {
         const found = mockWorks.find((w) => w.id === Number(id))
         if (found) setWork(found)
         else setError('Услуга не найдена')
-        setLoading(false)
-      }, 0)
-      return
-    }
-    fetch(`/api/works/${id}`)
-      .then((r) => { if (!r.ok) throw new Error('Услуга не найдена'); return r.json() })
-      .then((data: Work) => { setWork(data); setLoading(false) })
-      .catch((err: Error) => { setError(err.message); setLoading(false) })
+      })
+      .finally(() => setLoading(false))
   }, [id])
 
   const handleAddToCart = () => {
@@ -44,23 +38,18 @@ export default function WorkDetailPage() {
         if (!r.ok) throw new Error('error')
         return r.json()
       })
-      .then(() => { setAddStatus('ok') })
+      .then(() => setAddStatus('ok'))
       .catch((err: Error) => {
-        if (err.message === 'already') setAddStatus('ok') // уже в корзине — ок
+        if (err.message === 'already') setAddStatus('ok')
         else setAddStatus('error')
       })
   }
 
-  if (loading) {
-    return <div className="text-center py-5"><Spinner animation="border" /></div>
-  }
-  if (error || !work) {
-    return <div className="mis-error py-5">{error || 'Не найдено'}</div>
-  }
+  if (loading) return <div className="text-center py-5"><Spinner animation="border" /></div>
+  if (error || !work) return <div className="mis-error py-5">{error || 'Не найдено'}</div>
 
   const imageUrl = work.image_url || null
   const tags = work.tags ?? []
-
   const btnLabel =
     addStatus === 'loading' ? 'Добавляем...' :
     addStatus === 'ok'      ? '✓ В корзине' :
@@ -78,7 +67,6 @@ export default function WorkDetailPage() {
       <div className="detail-page-wrapper">
         <Link to="/" className="back-link">← Все работы</Link>
 
-        {/* Основная карточка */}
         <div className="detail-card-custom">
           <div>
             {imageUrl ? (
@@ -123,10 +111,7 @@ export default function WorkDetailPage() {
             <table className="params-table-custom">
               <thead>
                 <tr>
-                  <th>Срок</th>
-                  <th>Тираж</th>
-                  <th>Единица</th>
-                  <th>Формат</th>
+                  <th>Срок</th><th>Тираж</th><th>Единица</th><th>Формат</th>
                 </tr>
               </thead>
               <tbody>
@@ -141,15 +126,12 @@ export default function WorkDetailPage() {
           </div>
         </div>
 
-        {/* Преимущества */}
         <div className="detail-lower">
           <h2>Преимущества услуги</h2>
 
           {tags.length > 0 && (
             <div className="tags-row">
-              {tags.map((tag, i) => (
-                <span key={i} className="tag-item">{tag}</span>
-              ))}
+              {tags.map((tag, i) => <span key={i} className="tag-item">{tag}</span>)}
             </div>
           )}
 
@@ -160,7 +142,6 @@ export default function WorkDetailPage() {
           </div>
         </div>
 
-        {/* Видео */}
         <div className="video-block">
           <h3>Видео о работе</h3>
           {work.video_url ? (

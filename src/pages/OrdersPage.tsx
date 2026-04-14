@@ -1,12 +1,9 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
 import { mockCart } from '../mocks/orders'
 import type { Order } from '../types'
-
-const USE_MOCK = false
 
 export default function OrdersPage() {
   const [order, setOrder] = useState<Order | null>(null)
@@ -17,14 +14,11 @@ export default function OrdersPage() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (USE_MOCK) {
-      setTimeout(() => { setOrder(mockCart); setLoading(false) }, 0)
-      return
-    }
     fetch('/api/publishing-orders/cart', { credentials: 'include' })
       .then((r) => { if (!r.ok) throw new Error('Ошибка загрузки корзины'); return r.json() })
-      .then((data: Order) => { setOrder(data); setLoading(false) })
-      .catch((err: Error) => { setError(err.message); setLoading(false) })
+      .then((data: Order) => setOrder(data))
+      .catch(() => setOrder(mockCart))
+      .finally(() => setLoading(false))
   }, [])
 
   const handleQty = (workId: number, delta: number) => {
@@ -34,7 +28,6 @@ export default function OrdersPage() {
     const newQty = item.quantity + delta
     if (newQty < 1) return
 
-    // Оптимистичное обновление — меняем сразу в UI
     setOrder((prev) => prev ? {
       ...prev,
       works: prev.works!.map((w) =>
@@ -51,7 +44,6 @@ export default function OrdersPage() {
     })
       .then((r) => { if (!r.ok) throw new Error('Ошибка обновления') })
       .catch(() => {
-        // Откатываем если ошибка
         setOrder((prev) => prev ? {
           ...prev,
           works: prev.works!.map((w) =>
@@ -75,7 +67,6 @@ export default function OrdersPage() {
       .finally(() => setDeleting(false))
   }
 
-  // Считаем стоимость на фронте из текущих количеств
   const totalPrice = order?.works?.reduce(
     (sum, item) => sum + item.price_rub * item.quantity, 0
   ) ?? 0
@@ -87,16 +78,13 @@ export default function OrdersPage() {
       <Breadcrumbs items={[{ label: 'Главная', path: '/' }, { label: 'Мои заказы' }]} />
 
       <div className="order-page-wrapper">
-        {loading && (
-          <div className="text-center py-5"><Spinner animation="border" /></div>
-        )}
+        {loading && <div className="text-center py-5"><Spinner animation="border" /></div>}
 
         {error && (
           <>
             <h1>Заявка</h1>
             <div className="order-empty">
-              {error}
-              <br /><br />
+              {error}<br /><br />
               <Link to="/" className="btn-detail-custom">Просмотреть работы →</Link>
             </div>
           </>
@@ -154,9 +142,7 @@ export default function OrdersPage() {
                   <span className="order-result-text">
                     Ориентировочная стоимость: {totalPrice.toLocaleString()} ₽
                   </span>
-                  <Link to="/" className="btn-submit-custom">
-                    Перейти к оформлению
-                  </Link>
+                  <Link to="/" className="btn-submit-custom">Перейти к оформлению</Link>
                 </div>
 
                 <button
@@ -169,8 +155,7 @@ export default function OrdersPage() {
               </>
             ) : (
               <div className="order-empty">
-                Добавьте что-нибудь в заявку
-                <br /><br />
+                Добавьте что-нибудь в заявку<br /><br />
                 <Link to="/" className="btn-detail-custom">Просмотреть работы →</Link>
               </div>
             )}
