@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
+import WorkCard from '../components/WorkCard'
 import { mockWorks } from '../mocks/works'
+import { getEmbedding, cosineSimilarity } from '../utils/similarity'
 import type { Work } from '../types'
 
 export default function WorkDetailPage() {
@@ -11,11 +13,16 @@ export default function WorkDetailPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [addStatus, setAddStatus] = useState<'idle' | 'loading' | 'ok' | 'error'>('idle')
+  const [similar, setSimilar] = useState<Work[] | null>(null)
 
+  // Derived: true если work загружен, но similar ещё не посчитан
+  const similarLoading = work !== null && similar === null
+
+  // Загрузка текущей услуги
   useEffect(() => {
     fetch(`/api/works/${id}`)
       .then((r) => { if (!r.ok) throw new Error('Услуга не найдена'); return r.json() })
-      .then((data: Work) => { setWork(data) })
+      .then((data: Work) => setWork(data))
       .catch(() => {
         const found = mockWorks.find((w) => w.id === Number(id))
         if (found) setWork(found)
@@ -23,6 +30,37 @@ export default function WorkDetailPage() {
       })
       .finally(() => setLoading(false))
   }, [id])
+
+  // Вычисление похожих услуг через transformer.js
+  useEffect(() => {
+    if (!work) return
+
+    fetch('/api/works')
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .catch(() => mockWorks)
+      .then(async (allWorks: Work[]) => {
+        const others = allWorks.filter(w => w.id !== work.id)
+        const targetText = `${work.name} ${work.description ?? ''}`
+        const targetEmb = await getEmbedding(targetText)
+
+        const scored = await Promise.all(
+          others.map(async w => ({
+            work: w,
+            score: cosineSimilarity(
+              targetEmb,
+              await getEmbedding(`${w.name} ${w.description ?? ''}`)
+            ),
+          }))
+        )
+
+        const top3 = scored
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 3)
+          .map(s => s.work)
+
+        setSimilar(top3)
+      })
+  }, [work])
 
   const handleAddToCart = () => {
     if (!work) return
@@ -67,6 +105,7 @@ export default function WorkDetailPage() {
       <div className="detail-page-wrapper">
         <Link to="/" className="back-link">← Все работы</Link>
 
+        {/* Основная карточка */}
         <div className="detail-card-custom">
           <div>
             {imageUrl ? (
@@ -126,6 +165,7 @@ export default function WorkDetailPage() {
           </div>
         </div>
 
+        {/* Преимущества */}
         <div className="detail-lower">
           <h2>Преимущества услуги</h2>
 
@@ -142,6 +182,7 @@ export default function WorkDetailPage() {
           </div>
         </div>
 
+        {/* Видео */}
         <div className="video-block">
           <h3>Видео о работе</h3>
           {work.video_url ? (
@@ -152,6 +193,23 @@ export default function WorkDetailPage() {
             <div className="video-placeholder">[ВИДЕО: ПРОЦЕСС ПЕЧАТИ]</div>
           )}
         </div>
+
+        {/* Похожие услуги */}
+        <div className="similar-block">
+          <h2>Похожие услуги</h2>
+          {similarLoading && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#999', fontSize: 14, marginBottom: 16 }}>
+              <Spinner animation="border" size="sm" />
+              Вычисляем похожие услуги...
+            </div>
+          )}
+          {!similarLoading && similar && similar.length > 0 && (
+            <div className="works-grid-custom">
+              {similar.map(w => <WorkCard key={w.id} work={w} />)}
+            </div>
+          )}
+        </div>
+
       </div>
     </>
   )

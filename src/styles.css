@@ -746,3 +746,15 @@ body,
 .profile-page-wrapper {
   min-height: calc(100vh - 70px);
 }
+
+/* Similar works block */
+.similar-block {
+  background: #FFFFFF;
+  border-radius: 8px;
+  padding: 32px;
+  margin-bottom: 24px;
+}
+.similar-block h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
