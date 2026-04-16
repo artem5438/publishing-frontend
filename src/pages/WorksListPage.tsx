@@ -27,7 +27,7 @@ export default function WorksListPage() {
     search: '', minPrice: '', maxPrice: '', workType: ''
   })
 
-  const workTypes = [...new Set(mockWorks.map(w => w.work_type).filter(Boolean))] as string[]
+  const workTypes = [...new Set(works.map(w => w.work_type).filter(Boolean))] as string[]
 
   useEffect(() => {
     const params = new URLSearchParams()
