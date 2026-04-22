@@ -10,7 +10,7 @@ interface FilterPanelProps {
   onMinPriceChange: (val: string) => void
   onMaxPriceChange: (val: string) => void
   onWorkTypeChange: (val: string) => void
-  onApply: () => void   // ← новый проп
+  onApply: () => void   
   onReset: () => void
 }
 

@@ -15,7 +15,6 @@ export default function WorkDetailPage() {
   const [addStatus, setAddStatus] = useState<'idle' | 'loading' | 'ok' | 'error'>('idle')
   const [similar, setSimilar] = useState<Work[] | null>(null)
 
-  // Derived: true если work загружен, но similar ещё не посчитан
   const similarLoading = work !== null && similar === null
 
   // Загрузка текущей услуги

@@ -5,8 +5,8 @@ export interface Work {
   price_rub: number
   work_type: string
   unit: string
-  image_url?: string       // ← было image_key
-  video_url?: string       // ← было video_key
+  image_url?: string       
+  video_url?: string       
   tags?: string[]
   param_deadline?: string
   param_quantity?: string
