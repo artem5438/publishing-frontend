@@ -37,4 +37,5 @@ export interface Order {
   completed_at?: string
   works?: OrderWork[]
   filled_works_count: number
+  user_role?: string
 }

@@ -8,6 +8,7 @@ export default function AppNavbar() {
   const location = useLocation()
   const [userLogin, setUserLogin] = useState<string | null>(null)
   const [cartCount, setCartCount] = useState(0)
+  const [userRole, setUserRole] = useState<string | null>(null)
 
   useEffect(() => {
     fetch('/api/publishing-orders/cart', { credentials: 'include' })
@@ -15,6 +16,7 @@ export default function AppNavbar() {
         if (r.status === 401) {
           setUserLogin(null)
           setCartCount(0)
+          setUserRole(null)
           return null
         }
         return r.json()
@@ -23,10 +25,12 @@ export default function AppNavbar() {
         if (!data) return
         setUserLogin(data.creator_login ?? 'Пользователь')
         setCartCount(data.works?.length ?? 0)
+        setUserRole(data.user_role ?? null)
       })
       .catch(() => {
         setUserLogin(null)
         setCartCount(0)
+        setUserRole(null)
       })
   }, [location.pathname])
 
@@ -35,6 +39,7 @@ export default function AppNavbar() {
       .finally(() => {
         setUserLogin(null)
         setCartCount(0)
+        setUserRole(null)
         navigate('/login')
       })
   }
@@ -60,6 +65,12 @@ export default function AppNavbar() {
             >
               🛒 Корзина {cartCount > 0 && <span className="cart-badge-custom">{cartCount}</span>}
             </Button>
+
+            {userRole === 'moderator' && (
+              <Button className="mis-nav-btn" onClick={() => navigate('/admin')}>
+                Панель модератора
+              </Button>
+            )}
 
             {userLogin ? (
               <>
