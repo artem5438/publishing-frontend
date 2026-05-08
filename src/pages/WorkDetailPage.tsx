@@ -6,7 +6,7 @@ import WorkCard from '../components/WorkCard'
 import { mockWorks } from '../mocks/works'
 import { getEmbedding, cosineSimilarity } from '../utils/similarity'
 import type { Work } from '../types'
-
+  // Страница детального просмотра услуги
 export default function WorkDetailPage() {
   const { id } = useParams<{ id: string }>()
   const [work, setWork] = useState<Work | null>(null)
@@ -30,7 +30,7 @@ export default function WorkDetailPage() {
       .finally(() => setLoading(false))
   }, [id])
 
-  // Вычисление похожих услуг через transformer.js
+  // Вычисление похожих услуг через transformer.js 
   useEffect(() => {
     if (!work) return
 
@@ -60,7 +60,7 @@ export default function WorkDetailPage() {
         setSimilar(top3)
       })
   }, [work])
-
+  // Добавляем услугу в корзину
   const handleAddToCart = () => {
     if (!work) return
     setAddStatus('loading')

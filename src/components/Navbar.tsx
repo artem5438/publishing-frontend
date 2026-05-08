@@ -9,7 +9,7 @@ export default function AppNavbar() {
   const [userLogin, setUserLogin] = useState<string | null>(null)
   const [cartCount, setCartCount] = useState(0)
   const [userRole, setUserRole] = useState<string | null>(null)
-
+  // Получаем корзину из API
   useEffect(() => {
     fetch('/api/publishing-orders/cart', { credentials: 'include' })
       .then((r) => {

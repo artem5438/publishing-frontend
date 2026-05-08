@@ -13,7 +13,7 @@ interface FilterPanelProps {
   onApply: () => void   
   onReset: () => void
 }
-
+  // Фильтры для поиска услуг
 export default function FilterPanel({
   search, minPrice, maxPrice, workType, workTypes,
   onSearchChange, onMinPriceChange, onMaxPriceChange, onWorkTypeChange,

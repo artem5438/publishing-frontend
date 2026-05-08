@@ -28,7 +28,7 @@ export default function WorksListPage() {
   })
 
   const workTypes = [...new Set(works.map(w => w.work_type).filter(Boolean))] as string[]
-
+  // Получаем услуги из API
   useEffect(() => {
     const params = new URLSearchParams()
     if (filters.search)   params.append('query',    filters.search)
@@ -37,7 +37,7 @@ export default function WorksListPage() {
     if (filters.workType) params.append('workType', filters.workType)
 
     const url = `/api/works${params.toString() ? '?' + params.toString() : ''}`
-
+    // Сохраняем фильтры и mock не падает
     fetch(url)
       .then(r => { if (!r.ok) throw new Error('Ошибка сервера'); return r.json() })
       .then((data: Work[]) => {
@@ -58,7 +58,7 @@ export default function WorksListPage() {
         setLoading(false)
       })
   }, [filters])
-
+  // Применяем фильтры
   const handleApplyFilters = () => {
     setLoading(true)
     setFilters({
@@ -68,7 +68,7 @@ export default function WorksListPage() {
       workType: workTypeInput,
     })
   }
-
+  // Сбрасываем фильтры
   const handleReset = () => {
     setLoading(true)
     setSearchInput('')

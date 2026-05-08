@@ -16,7 +16,7 @@ interface Filters {
   dateFrom: string
   dateTo: string
 }
-
+  // Страница профиля
 export default function ProfilePage() {
   const [orders, setOrders] = useState<Order[]>([])
   const [loading, setLoading] = useState(true)
@@ -27,7 +27,7 @@ export default function ProfilePage() {
   const [dateToInput, setDateToInput]     = useState('')
 
   const [filters, setFilters] = useState<Filters>({ status: '', dateFrom: '', dateTo: '' })
-
+  // Получаем заказы из API
   useEffect(() => {
     const params = new URLSearchParams()
     if (filters.status)   params.append('status', filters.status)

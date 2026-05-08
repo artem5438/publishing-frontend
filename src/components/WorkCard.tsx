@@ -8,7 +8,7 @@ interface WorkCardProps {
 export default function WorkCard({ work }: WorkCardProps) {
   const navigate = useNavigate()
   const imageUrl = work.image_url || null
-
+  // Отображаем карточку услуги
   return (
     <div
       className="work-card-custom"

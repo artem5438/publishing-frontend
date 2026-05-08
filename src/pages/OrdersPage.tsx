@@ -21,8 +21,8 @@ export default function OrdersPage() {
   const [circulation, setCirculation] = useState(1)
   const [bookTitleError, setBookTitleError] = useState('')
   const navigate = useNavigate()
-
-  useEffect(() => {
+  // Получаем корзину из API
+  useEffect(() => { 
     const stored = sessionStorage.getItem(SUBMIT_NOTICE_KEY)
     if (stored) {
       setSubmitNotice(stored)
@@ -40,7 +40,7 @@ export default function OrdersPage() {
       })
       .finally(() => setLoading(false))
   }, [])
-
+  // Получаем название книги и тираж из заявки
   useEffect(() => {
     if (loading || !order) return
     setBookTitle(order.book_title ?? '')
@@ -57,21 +57,21 @@ export default function OrdersPage() {
     }
     return text.trim() || `Ошибка ${r.status}`
   }
-
+  // Обновляем количество услуг в корзине
   const handleQty = (workId: number, delta: number) => {
     if (!order) return
     const item = order.works!.find((w) => w.work_id === workId)
     if (!item) return
     const newQty = item.quantity + delta
     if (newQty < 1) return
-
+    // Обновляем количество услуг в корзине
     setOrder((prev) => prev ? {
       ...prev,
       works: prev.works!.map((w) =>
         w.work_id === workId ? { ...w, quantity: newQty } : w
       ),
     } : prev)
-
+    // Обновляем количество услуг в корзине
     setUpdatingId(workId)
     fetch(`/api/publishing-orders/${order.id}/works/${workId}`, {
       method: 'PUT',
@@ -90,7 +90,7 @@ export default function OrdersPage() {
       })
       .finally(() => setUpdatingId(null))
   }
-
+  // Удаляем заявку
   const handleDelete = () => {
     if (!order) return
     if (!confirm('Удалить заявку?')) return
@@ -103,11 +103,11 @@ export default function OrdersPage() {
       .catch((err: Error) => setError(err.message))
       .finally(() => setDeleting(false))
   }
-
+  // Считаем общую стоимость заказа
   const totalPrice = order?.works?.reduce(
     (sum, item) => sum + item.price_rub * item.quantity, 0
   ) ?? 0
-
+  // Проверяем есть ли услуги в корзине
   const hasItems = order?.works && order.works.length > 0
 
   const handleCheckout = async () => {

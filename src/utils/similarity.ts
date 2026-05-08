@@ -3,7 +3,7 @@ import { pipeline, env, FeatureExtractionPipeline } from '@huggingface/transform
 env.allowLocalModels = false
 
 let extractor: FeatureExtractionPipeline | null = null
-
+// Получаем embedding для текста
 async function getExtractor(): Promise<FeatureExtractionPipeline> {
   if (!extractor) {
     extractor = await pipeline(

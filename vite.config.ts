@@ -9,6 +9,7 @@ export default defineConfig({
   build: {
     target: 'esnext',
   },
+  // Проксируем запросы к API на backend
   server: {
     proxy: {
       '/api': 'http://localhost:8080',
