@@ -175,7 +175,7 @@ export default function PublishingOrderPage() {
             В заявке нет услуг.
             <br />
             <br />
-            <Link to="/" className="btn-detail-custom">
+            <Link to="/works" className="btn-detail-custom">
               Добавить услуги →
             </Link>
           </div>

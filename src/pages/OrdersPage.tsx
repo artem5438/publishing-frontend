@@ -41,7 +41,7 @@ export default function OrdersPage() {
             Добавьте услугу в каталоге.
             <br />
             <br />
-            <Link to="/" className="btn-detail-custom">
+            <Link to="/works" className="btn-detail-custom">
               Перейти к услугам →
             </Link>
           </div>

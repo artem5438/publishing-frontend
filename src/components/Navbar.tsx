@@ -50,6 +50,9 @@ export default function AppNavbar() {
             <Button className="mis-nav-btn" onClick={() => navigate('/')}>
               🏠 Главная
             </Button>
+            <Button className="mis-nav-btn" onClick={() => navigate('/works')}>
+              📚 Услуги
+            </Button>
 
             <Button
               className="mis-nav-btn"

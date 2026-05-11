@@ -90,12 +90,12 @@ export default function WorkDetailPage() {
     <>
       <Breadcrumbs items={[
         { label: 'Главная', path: '/' },
-        { label: 'Услуги', path: '/' },
+        { label: 'Услуги', path: '/works' },
         { label: work.name },
       ]} />
 
       <div className="detail-page-wrapper">
-        <Link to="/" className="back-link">← Все работы</Link>
+        <Link to="/works" className="back-link">← Все работы</Link>
 
         {/* Основная карточка */}
         <div className="detail-card-custom">
