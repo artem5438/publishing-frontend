@@ -86,6 +86,6 @@ export const mockWorks: Work[] = [
     description: 'Ризографическая печать малых тиражей.',
     price_rub: 3500, work_type: 'Печать', unit: 'лист',
     image_url: `${MINIO}/file-1774601879825304000.png`,
-    video_url:  `${MINIO}/print-process.mp4`,
+    video_url:  undefined,
   },
 ]

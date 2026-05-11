@@ -48,26 +48,21 @@ export default function PublishingOrderPage() {
     }
   }
 
-  const handleSaveOrderMeta = async () => {
+  const handleSubmitOrder = async () => {
     if (!selectedOrder?.id) return
     const { bookTitle, circulation } = getDraftMeta()
-    const result = await dispatch(
+
+    const saveResult = await dispatch(
       updateOrderMetaThunk({
         orderId: selectedOrder.id,
         bookTitle,
         circulation,
       }),
     )
-    if (updateOrderMetaThunk.fulfilled.match(result)) {
-      await reloadOrder()
-    }
-  }
+    if (updateOrderMetaThunk.rejected.match(saveResult)) return
 
-  const handleSubmitOrder = async () => {
-    if (!selectedOrder?.id) return
-    await handleSaveOrderMeta()
-    const result = await dispatch(submitOrderThunk(selectedOrder.id))
-    if (submitOrderThunk.fulfilled.match(result)) {
+    const submitResult = await dispatch(submitOrderThunk(selectedOrder.id))
+    if (submitOrderThunk.fulfilled.match(submitResult)) {
       navigate('/profile')
     }
   }
@@ -157,14 +152,19 @@ export default function PublishingOrderPage() {
               key={`circulation-${selectedOrder.id}`}
             />
           </div>
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-            <button className="btn-profile-filter" disabled={!isDraft || mutating} onClick={() => void handleSaveOrderMeta()}>
-              Сохранить заявку
-            </button>
-            <button className="btn-profile-filter" disabled={!isDraft || mutating} onClick={() => void handleSubmitOrder()}>
+          <div className="order-actions-bar">
+            <button
+              className="order-primary-action-btn"
+              disabled={!isDraft || mutating}
+              onClick={() => void handleSubmitOrder()}
+            >
               Отправить на рассмотрение
             </button>
-            <button className="btn-delete-custom" disabled={!isDraft || mutating} onClick={() => void handleDeleteOrder()}>
+            <button
+              className="order-secondary-action-btn"
+              disabled={!isDraft || mutating}
+              onClick={() => void handleDeleteOrder()}
+            >
               Удалить заявку
             </button>
           </div>
@@ -213,14 +213,7 @@ export default function PublishingOrderPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'flex-end' }}>
               <div className="order-item-price">{(item.price_rub * item.quantity).toLocaleString()} ₽</div>
               <button
-                className="btn-detail-custom"
-                disabled={!isDraft || mutating}
-                onClick={() => void handleUpdateWorkQty(item.work_id, item.quantity, item.comment ?? '')}
-              >
-                Обновить позицию
-              </button>
-              <button
-                className="btn-detail-custom"
+                className="order-item-action-btn"
                 disabled={!isDraft || mutating}
                 onClick={() => void handleRemoveWork(item.work_id)}
               >

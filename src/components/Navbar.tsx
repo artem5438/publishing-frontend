@@ -42,7 +42,7 @@ export default function AppNavbar() {
     <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
       <Container fluid className="px-3">
         <Navbar.Brand onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-          МИС∞
+          Folio
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="main-nav" />
         <Navbar.Collapse id="main-nav">
