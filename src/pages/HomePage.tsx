@@ -127,40 +127,31 @@ export default function HomePage() {
 
       <footer className="home-footer">
         <Container className="home-footer-content">
-          <div className="home-footer-contact">
+          <div className="home-footer-main">
             <div className="home-footer-brand">Folio</div>
-            <a href="tel:+78007756741" className="home-footer-phone">8 800 775-67-41</a>
-            <p className="home-footer-note">
-              Бесплатно по России
-              <br />
-              с 9 до 20 по будням
-              <br />
-              с 10 до 19 - в выходные
-            </p>
-            <a href="mailto:support@folio.ru" className="home-footer-mail">support@folio.ru</a>
+            <p className="home-footer-tagline">Издательские услуги</p>
+            <div className="home-footer-contact-row">
+              <a href="tel:+78007756741" className="home-footer-phone">
+                8 800 775-67-41
+              </a>
+              <span className="home-footer-sep" aria-hidden="true">
+                ·
+              </span>
+              <a href="mailto:support@folio.ru" className="home-footer-mail">
+                support@folio.ru
+              </a>
+            </div>
+            <p className="home-footer-note">Пн–Вс, 9:00–20:00</p>
           </div>
 
-          <div className="home-footer-column">
-            <h4>О нас</h4>
-            <a href="#">Вопросы и ответы</a>
-            <a href="#">Дерево знаний</a>
-            <a href="#">Условия доставки</a>
-          </div>
+          <nav className="home-footer-nav" aria-label="Дополнительно">
+            <a href="#">Помощь</a>
+            <a href="#">Для партнёров</a>
+            <a href="#">Правовая информация</a>
+          </nav>
 
-          <div className="home-footer-column">
-            <h4>Партнерам</h4>
-            <a href="#">Стать автором</a>
-            <a href="#">Партнерская программа</a>
-            <a href="#">Дистрибуция</a>
-            <a href="#">Для бизнеса</a>
-          </div>
-
-          <div className="home-footer-column">
-            <h4>Правовая информация</h4>
-            <a href="#">Сведения об организации</a>
-            <a href="#">Пользовательское соглашение</a>
-            <a href="#">Политика конфиденциальности</a>
-            <span className="home-footer-copy">© 2026</span>
+          <div className="home-footer-bottom">
+            <span className="home-footer-copy">© 2026 Folio</span>
           </div>
         </Container>
       </footer>
