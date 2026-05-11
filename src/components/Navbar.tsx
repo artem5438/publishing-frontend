@@ -1,47 +1,41 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Navbar, Nav, Container } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
+import { logoutThunk } from '../store/authSlice'
+import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { fetchCartThunk } from '../store/orderSlice'
+import { resetUserOrdersFilters } from '../store/userOrdersSlice'
+import { resetModeratorFilters } from '../store/moderatorSlice'
+import { resetWorksFilters } from '../store/worksSlice'
 
 export default function AppNavbar() {
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const location = useLocation()
-  const [userLogin, setUserLogin] = useState<string | null>(null)
-  const [cartCount, setCartCount] = useState(0)
-  const [userRole, setUserRole] = useState<string | null>(null)
-  // Получаем корзину из API
-  useEffect(() => {
-    fetch('/api/publishing-orders/cart', { credentials: 'include' })
-      .then((r) => {
-        if (r.status === 401) {
-          setUserLogin(null)
-          setCartCount(0)
-          setUserRole(null)
-          return null
-        }
-        return r.json()
-      })
-      .then((data) => {
-        if (!data) return
-        setUserLogin(data.creator_login ?? 'Пользователь')
-        setCartCount(data.works?.length ?? 0)
-        setUserRole(data.user_role ?? null)
-      })
-      .catch(() => {
-        setUserLogin(null)
-        setCartCount(0)
-        setUserRole(null)
-      })
-  }, [location.pathname])
+  const user = useAppSelector((state) => state.auth.user)
+  const draftOrder = useAppSelector((state) => state.order.draftOrder)
+  const cartCount = draftOrder?.works?.length ?? draftOrder?.works_count ?? 0
 
-  const handleLogout = () => {
-    fetch('/api/auth/logout', { method: 'POST', credentials: 'include' })
-      .finally(() => {
-        setUserLogin(null)
-        setCartCount(0)
-        setUserRole(null)
-        navigate('/login')
-      })
+  useEffect(() => {
+    if (!user) return
+    void dispatch(fetchCartThunk())
+  }, [dispatch, location.pathname, user])
+
+  const handleLogout = async () => {
+    await dispatch(logoutThunk())
+    dispatch(resetUserOrdersFilters())
+    dispatch(resetModeratorFilters())
+    dispatch(resetWorksFilters())
+    navigate('/login')
+  }
+
+  const navigateToDraft = () => {
+    if (draftOrder?.id) {
+      navigate(`/publishing-orders/${draftOrder.id}`)
+      return
+    }
+    navigate('/orders')
   }
 
   return (
@@ -59,32 +53,37 @@ export default function AppNavbar() {
 
             <Button
               className="mis-nav-btn"
-              onClick={() => navigate('/orders')}
-              disabled={!userLogin}
+              onClick={navigateToDraft}
+              disabled={!user}
               style={{ opacity: cartCount > 0 ? 1 : 0.5 }}
             >
               🛒 Корзина {cartCount > 0 && <span className="cart-badge-custom">{cartCount}</span>}
             </Button>
 
-            {userRole === 'moderator' && (
+            {user?.role === 'moderator' && (
               <Button className="mis-nav-btn" onClick={() => navigate('/admin')}>
                 Панель модератора
               </Button>
             )}
 
-            {userLogin ? (
+            {user ? (
               <>
                 <Button className="mis-nav-btn" onClick={() => navigate('/profile')}>
-                  👤 {userLogin}
+                  👤 {user.name || user.login}
                 </Button>
                 <Button className="mis-nav-btn mis-nav-btn-logout" onClick={handleLogout}>
                   Выйти
                 </Button>
               </>
             ) : (
-              <Button className="mis-nav-btn" onClick={() => navigate('/login')}>
-                🔑 Войти
-              </Button>
+              <>
+                <Button className="mis-nav-btn" onClick={() => navigate('/register')}>
+                  Регистрация
+                </Button>
+                <Button className="mis-nav-btn" onClick={() => navigate('/login')}>
+                  🔑 Войти
+                </Button>
+              </>
             )}
           </Nav>
         </Navbar.Collapse>

@@ -28,14 +28,23 @@ export type OrderStatus = 'draft' | 'deleted' | 'formed' | 'completed' | 'reject
 export interface Order {
   id: number
   status: OrderStatus
-  creator_login: string
-  book_title: string
-  circulation: number
+  creator_login?: string
+  book_title?: string
+  circulation?: number
   total_price?: number
   created_at: string
   formed_at?: string
   completed_at?: string
   works?: OrderWork[]
-  filled_works_count: number
+  filled_works_count?: number
   user_role?: string
+  order_id?: number | null
+  works_count?: number
+}
+
+export interface AuthUser {
+  id?: number
+  login: string
+  role: 'creator' | 'moderator' | string
+  name?: string
 }

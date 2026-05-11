@@ -1,81 +1,45 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Container, Spinner } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
 import FilterPanel from '../components/FilterPanel'
 import WorkCard from '../components/WorkCard'
-import { mockWorks } from '../mocks/works'
-import type { Work } from '../types'
-
-interface Filters {
-  search: string
-  minPrice: string
-  maxPrice: string
-  workType: string
-}
+import { fetchWorksThunk, setWorksFilters } from '../store/worksSlice'
+import { useAppDispatch, useAppSelector } from '../store/hooks'
 
 export default function WorksListPage() {
-  const [works, setWorks]     = useState<Work[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError]     = useState('')
+  const dispatch = useAppDispatch()
+  const { items: works, loading, error, filters } = useAppSelector((state) => state.works)
 
-  const [searchInput, setSearchInput]     = useState('')
-  const [minPriceInput, setMinPriceInput] = useState('')
-  const [maxPriceInput, setMaxPriceInput] = useState('')
-  const [workTypeInput, setWorkTypeInput] = useState('')
+  const [searchInput, setSearchInput] = useState(filters.search)
+  const [minPriceInput, setMinPriceInput] = useState(filters.minPrice)
+  const [maxPriceInput, setMaxPriceInput] = useState(filters.maxPrice)
+  const [workTypeInput, setWorkTypeInput] = useState(filters.workType)
 
-  const [filters, setFilters] = useState<Filters>({
-    search: '', minPrice: '', maxPrice: '', workType: ''
-  })
-
-  const workTypes = [...new Set(works.map(w => w.work_type).filter(Boolean))] as string[]
-  // Получаем услуги из API
   useEffect(() => {
-    const params = new URLSearchParams()
-    if (filters.search)   params.append('query',    filters.search)
-    if (filters.minPrice) params.append('minPrice', filters.minPrice)
-    if (filters.maxPrice) params.append('maxPrice', filters.maxPrice)
-    if (filters.workType) params.append('workType', filters.workType)
+    void dispatch(fetchWorksThunk(filters))
+  }, [dispatch, filters])
 
-    const url = `/api/works${params.toString() ? '?' + params.toString() : ''}`
-    // Сохраняем фильтры и mock не падает
-    fetch(url)
-      .then(r => { if (!r.ok) throw new Error('Ошибка сервера'); return r.json() })
-      .then((data: Work[]) => {
-        setWorks(data)
-        setError('')
-        setLoading(false)
-      })
-      .catch(() => {
-        const mocked = mockWorks.filter(w => {
-          const matchSearch = !filters.search   || w.name.toLowerCase().includes(filters.search.toLowerCase())
-          const matchMin    = !filters.minPrice || w.price_rub >= Number(filters.minPrice)
-          const matchMax    = !filters.maxPrice || w.price_rub <= Number(filters.maxPrice)
-          const matchType   = !filters.workType || w.work_type === filters.workType
-          return matchSearch && matchMin && matchMax && matchType
-        })
-        setWorks(mocked)
-        setError('')
-        setLoading(false)
-      })
-  }, [filters])
-  // Применяем фильтры
+  const workTypes = useMemo(
+    () => [...new Set(works.map((work) => work.work_type).filter(Boolean))] as string[],
+    [works],
+  )
+
   const handleApplyFilters = () => {
-    setLoading(true)
-    setFilters({
+    const nextFilters = {
       search:   searchInput,
       minPrice: minPriceInput,
       maxPrice: maxPriceInput,
       workType: workTypeInput,
-    })
+    }
+    dispatch(setWorksFilters(nextFilters))
   }
-  // Сбрасываем фильтры
+
   const handleReset = () => {
-    setLoading(true)
     setSearchInput('')
     setMinPriceInput('')
     setMaxPriceInput('')
     setWorkTypeInput('')
-    setFilters({ search: '', minPrice: '', maxPrice: '', workType: '' })
+    dispatch(setWorksFilters({ search: '', minPrice: '', maxPrice: '', workType: '' }))
   }
 
   return (

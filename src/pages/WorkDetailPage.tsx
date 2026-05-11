@@ -1,85 +1,78 @@
-import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useEffect, useMemo, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
 import WorkCard from '../components/WorkCard'
-import { mockWorks } from '../mocks/works'
 import { getEmbedding, cosineSimilarity } from '../utils/similarity'
 import type { Work } from '../types'
-  // Страница детального просмотра услуги
+import { addWorkToDraftThunk } from '../store/orderSlice'
+import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { fetchWorkByIdThunk, fetchWorksThunk } from '../store/worksSlice'
+
 export default function WorkDetailPage() {
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const { id } = useParams<{ id: string }>()
-  const [work, setWork] = useState<Work | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
+  const user = useAppSelector((state) => state.auth.user)
+  const work = useAppSelector((state) => state.works.currentWork)
+  const works = useAppSelector((state) => state.works.items)
+  const loading = useAppSelector((state) => state.works.detailsLoading)
+  const error = useAppSelector((state) => state.works.error)
   const [addStatus, setAddStatus] = useState<'idle' | 'loading' | 'ok' | 'error'>('idle')
   const [similar, setSimilar] = useState<Work[] | null>(null)
 
-  const similarLoading = work !== null && similar === null
-
-  // Загрузка текущей услуги
   useEffect(() => {
-    fetch(`/api/works/${id}`)
-      .then((r) => { if (!r.ok) throw new Error('Услуга не найдена'); return r.json() })
-      .then((data: Work) => setWork(data))
-      .catch(() => {
-        const found = mockWorks.find((w) => w.id === Number(id))
-        if (found) setWork(found)
-        else setError('Услуга не найдена')
-      })
-      .finally(() => setLoading(false))
-  }, [id])
+    const numericId = Number(id)
+    if (!Number.isFinite(numericId) || numericId <= 0) return
+    void dispatch(fetchWorkByIdThunk(numericId))
+    void dispatch(fetchWorksThunk({ search: '', minPrice: '', maxPrice: '', workType: '' }))
+  }, [dispatch, id])
 
-  // Вычисление похожих услуг через transformer.js 
   useEffect(() => {
     if (!work) return
+    const others = works.filter((item) => item.id !== work.id)
+    if (!others.length) return
 
-    fetch('/api/works')
-      .then(r => r.ok ? r.json() : Promise.reject())
-      .catch(() => mockWorks)
-      .then(async (allWorks: Work[]) => {
-        const others = allWorks.filter(w => w.id !== work.id)
-        const targetText = `${work.name} ${work.description ?? ''}`
-        const targetEmb = await getEmbedding(targetText)
+    let canceled = false
+    const compute = async () => {
+      const targetText = `${work.name} ${work.description ?? ''}`
+      const targetEmb = await getEmbedding(targetText)
 
-        const scored = await Promise.all(
-          others.map(async w => ({
-            work: w,
-            score: cosineSimilarity(
-              targetEmb,
-              await getEmbedding(`${w.name} ${w.description ?? ''}`)
-            ),
-          }))
-        )
+      const scored = await Promise.all(
+        others.map(async (item) => ({
+          work: item,
+          score: cosineSimilarity(
+            targetEmb,
+            await getEmbedding(`${item.name} ${item.description ?? ''}`),
+          ),
+        })),
+      )
 
-        const top3 = scored
-          .sort((a, b) => b.score - a.score)
-          .slice(0, 3)
-          .map(s => s.work)
+      const top3 = scored
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 3)
+        .map((item) => item.work)
 
-        setSimilar(top3)
-      })
-  }, [work])
-  // Добавляем услугу в корзину
-  const handleAddToCart = () => {
+      if (!canceled) setSimilar(top3)
+    }
+
+    void compute()
+    return () => {
+      canceled = true
+    }
+  }, [work, works])
+
+  const similarLoading = useMemo(() => work !== null && similar === null, [similar, work])
+
+  const handleAddToCart = async () => {
     if (!work) return
+    if (!user) {
+      navigate('/login')
+      return
+    }
     setAddStatus('loading')
-    fetch('/api/publishing-orders/cart/works', {
-      method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ work_id: work.id }),
-    })
-      .then((r) => {
-        if (r.status === 409) throw new Error('already')
-        if (!r.ok) throw new Error('error')
-        return r.json()
-      })
-      .then(() => setAddStatus('ok'))
-      .catch((err: Error) => {
-        if (err.message === 'already') setAddStatus('ok')
-        else setAddStatus('error')
-      })
+    const result = await dispatch(addWorkToDraftThunk(work.id))
+    setAddStatus(addWorkToDraftThunk.fulfilled.match(result) ? 'ok' : 'error')
   }
 
   if (loading) return <div className="text-center py-5"><Spinner animation="border" /></div>

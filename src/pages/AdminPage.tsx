@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { Spinner, Button } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
-import type { Order, OrderStatus } from '../types'
+import { fetchModeratorOrdersThunk, moderateOrderThunk, setModeratorFilters } from '../store/moderatorSlice'
+import { useAppDispatch, useAppSelector } from '../store/hooks'
 
 const STATUS_LABELS: Record<string, { label: string; color: string }> = {
   formed:    { label: 'На рассмотрении', color: '#f59e0b' },
@@ -12,94 +13,70 @@ const STATUS_LABELS: Record<string, { label: string; color: string }> = {
 }
 
 export default function AdminPage() {
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const [orders, setOrders] = useState<Order[]>([])
-  const [allOrders, setAllOrders] = useState<Order[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
-  const [moderatingId, setModeratingId] = useState<number | null>(null)
-  const [submittingId, setSubmittingId] = useState<number | null>(null)
+  const user = useAppSelector((state) => state.auth.user)
+  const { items: orders, loading, moderating, error, filters } = useAppSelector((state) => state.moderator)
+
+  const [statusInput, setStatusInput] = useState(filters.status)
+  const [dateFromInput, setDateFromInput] = useState(filters.dateFrom)
+  const [dateToInput, setDateToInput] = useState(filters.dateTo)
+  const [creatorInput, setCreatorInput] = useState(filters.creatorLogin)
+  const [activeModerationOrderId, setActiveModerationOrderId] = useState<number | null>(null)
+
+  const loadOrders = useCallback(
+    () =>
+      dispatch(
+      fetchModeratorOrdersThunk({
+        status: statusInput,
+        dateFrom: dateFromInput,
+        dateTo: dateToInput,
+      }),
+      ),
+    [dateFromInput, dateToInput, dispatch, statusInput],
+  )
 
   useEffect(() => {
-    setLoading(true)
-    setError('')
-    fetch('/api/publishing-orders', { credentials: 'include' })
-      .then((r) => {
-        if (r.status === 403) {
-          navigate('/')
-          return null
-        }
-        if (!r.ok) throw new Error('Ошибка загрузки заказов')
-        return r.json()
-      })
-      .then((data: Order[] | null) => {
-        if (data === null) return
-        setOrders(data)
-      })
-      .catch((err: Error) => setError(err.message))
-      .finally(() => setLoading(false))
-  }, [navigate])
+    if (user?.role !== 'moderator') {
+      navigate('/')
+      return
+    }
+    void loadOrders()
+  }, [loadOrders, navigate, user?.role])
 
   useEffect(() => {
-    fetch('/api/publishing-orders', { credentials: 'include' })
-      .then((r) => {
-        if (r.status === 403) {
-          navigate('/')
-          return null
-        }
-        if (!r.ok) return null
-        return r.json()
-      })
-      .then((data: Order[] | null) => {
-        if (data) setAllOrders(data)
-      })
-      .catch(() => {})
-  }, [navigate])
+    if (user?.role !== 'moderator') return
+    const timer = window.setInterval(() => {
+      void loadOrders()
+    }, 7000)
+    return () => window.clearInterval(timer)
+  }, [loadOrders, user?.role])
 
-  const reloadOrderLists = () =>
-    fetch('/api/publishing-orders', { credentials: 'include' })
-      .then((r) => {
-        if (r.status === 403) {
-          navigate('/')
-          return null
-        }
-        if (!r.ok) throw new Error('Ошибка обновления списка')
-        return r.json()
-      })
-      .then((data: Order[] | null) => {
-        if (data) {
-          setOrders(data)
-          setAllOrders(data)
-        }
-      })
+  const handleApplyFilters = () => {
+    dispatch(
+      setModeratorFilters({
+        status: statusInput,
+        dateFrom: dateFromInput,
+        dateTo: dateToInput,
+        creatorLogin: creatorInput,
+      }),
+    )
+    void loadOrders()
+  }
 
-  const formedOrders = orders.filter((o) => o.status === 'formed')
+  const filteredOrders = useMemo(() => {
+    if (!creatorInput.trim()) return orders
+    const query = creatorInput.toLowerCase()
+    return orders.filter((order) => (order.creator_login ?? '').toLowerCase().includes(query))
+  }, [creatorInput, orders])
 
-  const handleModerate = (orderId: number, action: 'complete' | 'reject') => {
-    setModeratingId(orderId)
-    setError('')
-    fetch(`/api/publishing-orders/${orderId}/moderate`, {
-      method: 'PUT',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action }),
-    })
-      .then((r) => {
-        if (!r.ok) throw new Error('Не удалось выполнить действие')
-        return r.json().catch(() => null) as Promise<Order | null>
-      })
-      .then((updated) => {
-        const nextStatus: OrderStatus = action === 'complete' ? 'completed' : 'rejected'
-        const patch = (o: Order): Order => {
-          if (o.id !== orderId) return o
-          if (updated && typeof updated === 'object' && 'id' in updated) return updated as Order
-          return { ...o, status: nextStatus }
-        }
-        setOrders((prev) => prev.map(patch))
-        setAllOrders((prev) => prev.map(patch))
-      })
-      .catch((err: Error) => setError(err.message))
-      .finally(() => setModeratingId(null))
+  const formedOrders = filteredOrders.filter((order) => order.status === 'formed')
+
+  const handleModerate = async (orderId: number, action: 'complete' | 'reject') => {
+    setActiveModerationOrderId(orderId)
+    await dispatch(moderateOrderThunk({ orderId, action }))
+    setActiveModerationOrderId(null)
+    await loadOrders()
   }
 
   return (
@@ -108,6 +85,39 @@ export default function AdminPage() {
 
       <div className="profile-page-wrapper">
         <h1 className="profile-title">Панель модератора</h1>
+        <div className="profile-filter-panel">
+          <div className="profile-filter-field">
+            <label>Статус</label>
+            <select className="profile-select" value={statusInput} onChange={(e) => setStatusInput(e.target.value)}>
+              <option value="">Все</option>
+              <option value="formed">На рассмотрении</option>
+              <option value="completed">Выполнен</option>
+              <option value="rejected">Отклонён</option>
+            </select>
+          </div>
+          <div className="profile-filter-field">
+            <label>Дата от</label>
+            <input type="date" className="profile-input" value={dateFromInput} onChange={(e) => setDateFromInput(e.target.value)} />
+          </div>
+          <div className="profile-filter-field">
+            <label>Дата до</label>
+            <input type="date" className="profile-input" value={dateToInput} onChange={(e) => setDateToInput(e.target.value)} />
+          </div>
+          <div className="profile-filter-field">
+            <label>Создатель (frontend)</label>
+            <input
+              className="profile-input"
+              placeholder="login"
+              value={creatorInput}
+              onChange={(e) => setCreatorInput(e.target.value)}
+            />
+          </div>
+          <div className="profile-filter-actions">
+            <button className="btn-profile-filter" onClick={handleApplyFilters}>
+              Применить
+            </button>
+          </div>
+        </div>
 
         {loading && (
           <div className="text-center py-5">
@@ -154,16 +164,16 @@ export default function AdminPage() {
                   <Button
                     variant="success"
                     size="sm"
-                    disabled={moderatingId === order.id}
-                    onClick={() => handleModerate(order.id, 'complete')}
+                    disabled={moderating || activeModerationOrderId === order.id}
+                    onClick={() => void handleModerate(order.id, 'complete')}
                   >
                     ✅ Принять
                   </Button>
                   <Button
                     variant="outline-danger"
                     size="sm"
-                    disabled={moderatingId === order.id}
-                    onClick={() => handleModerate(order.id, 'reject')}
+                    disabled={moderating || activeModerationOrderId === order.id}
+                    onClick={() => void handleModerate(order.id, 'reject')}
                   >
                     ❌ Отклонить
                   </Button>
@@ -175,7 +185,7 @@ export default function AdminPage() {
         {!loading && !error && (
           <div style={{ marginTop: 40 }} className="profile-order-card">
             <h3 className="profile-title" style={{ fontSize: '1.25rem', marginBottom: 16 }}>
-              Все заказы в системе (для тестирования)
+              Все заявки по фильтрам
             </h3>
 
             <table className="params-table-custom">
@@ -189,7 +199,7 @@ export default function AdminPage() {
                 </tr>
               </thead>
               <tbody>
-                {allOrders.map((order) => {
+                {filteredOrders.map((order) => {
                   const statusInfo =
                     STATUS_LABELS[order.status] ?? { label: order.status, color: '#999' }
                   const dateRaw =
@@ -203,7 +213,7 @@ export default function AdminPage() {
                   return (
                     <tr key={order.id}>
                       <td>{order.id}</td>
-                      <td>{order.creator_login}</td>
+                      <td>{order.creator_login || '—'}</td>
                       <td>
                         <span
                           className="profile-order-status"
@@ -219,31 +229,9 @@ export default function AdminPage() {
                       </td>
                       <td>{dateStr}</td>
                       <td>
-                        {order.status === 'draft' ? (
-                          <button
-                            type="button"
-                            className="btn-add-custom"
-                            style={{ marginBottom: 0, padding: '8px 12px', fontSize: 13 }}
-                            disabled={submittingId === order.id}
-                            onClick={() => {
-                              setSubmittingId(order.id)
-                              fetch(`/api/publishing-orders/${order.id}/submit`, {
-                                method: 'PUT',
-                                credentials: 'include',
-                              })
-                                .then((r) => {
-                                  if (!r.ok) throw new Error('Не удалось отправить заявку')
-                                })
-                                .then(() => reloadOrderLists())
-                                .catch((err: Error) => setError(err.message))
-                                .finally(() => setSubmittingId(null))
-                            }}
-                          >
-                            Отправить на рассмотрение
-                          </button>
-                        ) : (
-                          <span style={{ color: '#999' }}>—</span>
-                        )}
+                        <Link to={`/publishing-orders/${order.id}`} className="btn-detail-custom">
+                          Открыть
+                        </Link>
                       </td>
                     </tr>
                   )
@@ -251,7 +239,7 @@ export default function AdminPage() {
               </tbody>
             </table>
 
-            {allOrders.length === 0 && (
+            {filteredOrders.length === 0 && (
               <div className="order-empty" style={{ marginTop: 8 }}>
                 Нет заказов в выборке
               </div>
