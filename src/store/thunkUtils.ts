@@ -12,6 +12,7 @@ export const getApiErrorMessage = (error: unknown, fallback: string): string => 
   return fallback
 }
 
+// Функция для выполнения запроса с отображением индикатора загрузки
 export const withUiRequest = async <T>(
   dispatch: (action: unknown) => unknown,
   action: () => Promise<T>,

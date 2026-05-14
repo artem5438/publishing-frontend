@@ -16,7 +16,7 @@ export class AuthService {
     public static postAuthLogin(
         body: any,
     ): CancelablePromise<any> {
-        return __request(OpenAPI, {
+        return __request(OpenAPI, { // выполняем запрос к API
             method: 'POST',
             url: '/auth/login',
             body: body,

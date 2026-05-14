@@ -5,7 +5,7 @@ import worksReducer from './worksSlice'
 import orderReducer from './orderSlice'
 import userOrdersReducer from './userOrdersSlice'
 import moderatorReducer from './moderatorSlice'
-
+// Создаем store для Redux
 export const store = configureStore({
   reducer: {
     auth: authReducer,

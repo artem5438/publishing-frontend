@@ -6,7 +6,7 @@ import type { ApiRequestOptions } from './ApiRequestOptions';
 
 type Resolver<T> = (options: ApiRequestOptions) => Promise<T>;
 type Headers = Record<string, string>;
-
+// Конфигурация для API
 export type OpenAPIConfig = {
     BASE: string;
     VERSION: string;

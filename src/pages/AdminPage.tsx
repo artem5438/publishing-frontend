@@ -43,7 +43,7 @@ export default function AdminPage() {
     }
     void loadOrders()
   }, [loadOrders, navigate, user?.role])
-
+  // Автоматическая перезагрузка заявок каждые 7 секунд
   useEffect(() => {
     if (user?.role !== 'moderator') return
     const timer = window.setInterval(() => {
