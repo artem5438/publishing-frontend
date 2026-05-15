@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { fetchCurrentUser } from '../api/authApi'
 import { AuthService } from '../api/generated'
 import type { AuthUser } from '../types'
 import { getApiErrorMessage, withUiRequest } from './thunkUtils'
@@ -8,6 +9,8 @@ interface AuthState {
   user: AuthUser | null
   loading: boolean
   error: string
+  /** false до первой проверки куки auth_token после загрузки страницы */
+  sessionChecked: boolean
 }
 
 interface AuthResponse {
@@ -18,7 +21,14 @@ const initialState: AuthState = {
   user: null,
   loading: false,
   error: '',
+  sessionChecked: false,
 }
+
+/** Восстановить пользователя из HttpOnly-куки после F5 */
+export const restoreSessionThunk = createAsyncThunk<AuthUser | null, void, { state: RootState }>(
+  'auth/restoreSession',
+  async () => fetchCurrentUser(),
+)
 
 export const loginThunk = createAsyncThunk<
   AuthUser,
@@ -100,6 +110,7 @@ const authSlice = createSlice({
       .addCase(loginThunk.fulfilled, (state, action) => {
         state.user = action.payload
         state.loading = false
+        state.sessionChecked = true
       })
       .addCase(loginThunk.rejected, (state, action) => {
         state.loading = false
@@ -120,7 +131,7 @@ const authSlice = createSlice({
         state.loading = true
         state.error = ''
       })
-      .addCase(logoutThunk.fulfilled, () => initialState)
+      .addCase(logoutThunk.fulfilled, () => ({ ...initialState, sessionChecked: true }))
       .addCase(logoutThunk.rejected, (state, action) => {
         state.loading = false
         state.error = action.payload ?? 'Ошибка выхода'
@@ -136,6 +147,14 @@ const authSlice = createSlice({
       .addCase(updateProfileThunk.rejected, (state, action) => {
         state.loading = false
         state.error = action.payload ?? 'Ошибка обновления профиля'
+      })
+      .addCase(restoreSessionThunk.fulfilled, (state, action) => {
+        state.user = action.payload
+        state.sessionChecked = true
+      })
+      .addCase(restoreSessionThunk.rejected, (state) => {
+        state.user = null
+        state.sessionChecked = true
       })
   },
 })

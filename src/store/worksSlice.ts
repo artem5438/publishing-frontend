@@ -1,15 +1,29 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { fetchWorksWithCacheMeta } from '../api/worksApi'
 import { WorksService } from '../api/generated'
+import {
+  getWorksFromClientCache,
+  hasActiveWorksFilters,
+  invalidateWorksClientCache,
+  saveWorksCacheStatus,
+  setWorksClientCache,
+  type WorksListFilters,
+} from '../cache/worksCache'
 import { mockWorks } from '../mocks/works'
 import type { Work } from '../types'
 import { withUiRequest } from './thunkUtils'
 import type { RootState } from './store'
+import { logoutThunk } from './authSlice'
 
-export interface WorksFilters {
-  search: string
-  minPrice: string
-  maxPrice: string
-  workType: string
+export type WorksFilters = WorksListFilters
+
+export type ClientCacheStatus = 'hit' | 'miss'
+export type ServerCacheStatus = 'HIT' | 'MISS' | 'BYPASS' | null
+
+export interface WorksFetchResult {
+  items: Work[]
+  clientCache: ClientCacheStatus
+  serverCache: ServerCacheStatus
 }
 
 interface WorksState {
@@ -47,23 +61,47 @@ const applyMockFilters = (filters: WorksFilters): Work[] =>
   })
 
 export const fetchWorksThunk = createAsyncThunk<
-  Work[],
+  WorksFetchResult,
   WorksFilters,
   { rejectValue: string; state: RootState }
 >('works/fetchList', async (filters, { dispatch }) => {
+  const useClientCache = !hasActiveWorksFilters(filters)
+
+  if (useClientCache) {
+    const cached = getWorksFromClientCache()
+    if (cached) {
+      saveWorksCacheStatus('hit', null)
+      return { items: cached, clientCache: 'hit', serverCache: null }
+    }
+  }
+
   try {
-    const result = await withUiRequest(dispatch, () =>
-      WorksService.getWorks(
+    const { items, serverCache } = await withUiRequest(dispatch, () =>
+      fetchWorksWithCacheMeta(
         filters.search || undefined,
         filters.minPrice ? Number(filters.minPrice) : undefined,
         filters.maxPrice ? Number(filters.maxPrice) : undefined,
         filters.workType || undefined,
       ),
     )
-    return result as Work[]
+
+    const server = serverCache ?? null
+    if (useClientCache) {
+      setWorksClientCache(items)
+      saveWorksCacheStatus('miss', server)
+    } else {
+      saveWorksCacheStatus('miss', server === null ? 'BYPASS' : server)
+    }
+
+    return {
+      items,
+      clientCache: 'miss',
+      serverCache: server,
+    }
   } catch {
     const mocked = applyMockFilters(filters)
-    return mocked
+    saveWorksCacheStatus('miss', useClientCache ? null : 'BYPASS')
+    return { items: mocked, clientCache: 'miss', serverCache: null }
   }
 })
 
@@ -87,6 +125,9 @@ const worksSlice = createSlice({
   initialState,
   reducers: {
     setWorksFilters(state, action: { payload: WorksFilters }) {
+      if (hasActiveWorksFilters(action.payload)) {
+        invalidateWorksClientCache()
+      }
       state.filters = action.payload
     },
     resetWorksFilters(state) {
@@ -104,7 +145,7 @@ const worksSlice = createSlice({
         state.error = ''
       })
       .addCase(fetchWorksThunk.fulfilled, (state, action) => {
-        state.items = action.payload
+        state.items = action.payload.items
         state.loading = false
       })
       .addCase(fetchWorksThunk.rejected, (state, action) => {
@@ -122,6 +163,9 @@ const worksSlice = createSlice({
       .addCase(fetchWorkByIdThunk.rejected, (state, action) => {
         state.detailsLoading = false
         state.error = action.payload ?? 'Услуга не найдена'
+      })
+      .addCase(logoutThunk.fulfilled, () => {
+        invalidateWorksClientCache()
       })
   },
 })

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './styles.css'
+import AuthBootstrap from './components/AuthBootstrap'
 import AppNavbar from './components/Navbar'
 import HomePage from './pages/HomePage'
 import WorksListPage from './pages/WorksListPage'
@@ -15,8 +16,9 @@ import PublishingOrderPage from './pages/PublishingOrderPage'
 export default function App() {
   return (
     <BrowserRouter>
-      <AppNavbar />
-      <Routes>
+      <AuthBootstrap>
+        <AppNavbar />
+        <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/works" element={<WorksListPage />} />
         <Route path="/works/:id" element={<WorkDetailPage />} />
@@ -26,7 +28,8 @@ export default function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/admin" element={<AdminPage />} />
-      </Routes>
+        </Routes>
+      </AuthBootstrap>
     </BrowserRouter>
   )
 }

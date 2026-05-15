@@ -26,7 +26,7 @@ export default function WorksListPage() {
 
   const handleApplyFilters = () => {
     const nextFilters = {
-      search:   searchInput,
+      search: searchInput,
       minPrice: minPriceInput,
       maxPrice: maxPriceInput,
       workType: workTypeInput,
@@ -65,15 +65,15 @@ export default function WorksListPage() {
             <Spinner animation="border" />
           </div>
         )}
-        {!loading && error && (
-          <div className="mis-error">{error}</div>
-        )}
+        {!loading && error && <div className="mis-error">{error}</div>}
         {!loading && !error && works.length === 0 && (
           <div className="mis-empty">Услуги не найдены. Попробуйте изменить фильтры.</div>
         )}
         {!loading && works.length > 0 && (
           <div className="works-grid-custom">
-            {works.map(work => <WorkCard key={work.id} work={work} />)}
+            {works.map((work) => (
+              <WorkCard key={work.id} work={work} />
+            ))}
           </div>
         )}
       </Container>
