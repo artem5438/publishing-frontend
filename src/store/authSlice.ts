@@ -13,7 +13,7 @@ interface AuthState {
 interface AuthResponse {
   user?: AuthUser
 }
-
+// Инициальное состояние для авторизации
 const initialState: AuthState = {
   user: null,
   loading: false,
