@@ -2,13 +2,17 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Spinner, Button } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
+import AdminWorksTab from '../components/AdminWorksTab'
+import WorkFormModal from '../components/WorkFormModal'
 import {
   fetchModeratorOrdersThunk,
   fetchPendingCountThunk,
   moderateOrderThunk,
   setModeratorFilters,
 } from '../store/moderatorSlice'
+import { fetchAdminWorksThunk } from '../store/worksAdminSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
+import type { Work } from '../types'
 
 const STATUS_LABELS: Record<string, { label: string; color: string }> = {
   formed:    { label: 'На рассмотрении', color: '#f59e0b' },
@@ -22,7 +26,11 @@ export default function AdminPage() {
   const navigate = useNavigate()
   const user = useAppSelector((state) => state.auth.user)
   const { items: orders, loading, moderating, error, filters } = useAppSelector((state) => state.moderator)
+  const pendingCount = useAppSelector((state) => state.moderator.pendingCount)
 
+  const [activeTab, setActiveTab] = useState<'orders' | 'works'>('orders')
+  const [showWorkModal, setShowWorkModal] = useState(false)
+  const [editingWork, setEditingWork] = useState<Work | null>(null)
   const [statusInput, setStatusInput] = useState(filters.status)
   const [dateFromInput, setDateFromInput] = useState(filters.dateFrom)
   const [dateToInput, setDateToInput] = useState(filters.dateTo)
@@ -47,6 +55,11 @@ export default function AdminPage() {
       }),
     )
   }, [dispatch, filters.dateFrom, filters.dateTo, filters.status, user?.role])
+
+  useEffect(() => {
+    if (user?.role !== 'moderator' || activeTab !== 'works') return
+    void dispatch(fetchAdminWorksThunk())
+  }, [activeTab, dispatch, user?.role])
 
   const handleApplyFilters = () => {
     dispatch(
@@ -114,6 +127,27 @@ export default function AdminPage() {
 
       <div className="profile-page-wrapper">
         <h1 className="profile-title">Панель модератора</h1>
+
+        <div className="mis-tab-switcher">
+          <button
+            type="button"
+            className={`mis-tab-btn${activeTab === 'orders' ? ' active' : ''}`}
+            onClick={() => setActiveTab('orders')}
+          >
+            Заказы
+            {pendingCount > 0 && <span className="cart-badge-custom">{pendingCount}</span>}
+          </button>
+          <button
+            type="button"
+            className={`mis-tab-btn${activeTab === 'works' ? ' active' : ''}`}
+            onClick={() => setActiveTab('works')}
+          >
+            Услуги
+          </button>
+        </div>
+
+        {activeTab === 'orders' && (
+          <>
         <div className="profile-filter-panel">
           <div className="profile-filter-field">
             <label>Статус</label>
@@ -316,6 +350,31 @@ export default function AdminPage() {
             )}
           </div>
         )}
+          </>
+        )}
+
+        {activeTab === 'works' && (
+          <AdminWorksTab
+            onAdd={() => {
+              setEditingWork(null)
+              setShowWorkModal(true)
+            }}
+            onEdit={(work) => {
+              setEditingWork(work)
+              setShowWorkModal(true)
+            }}
+          />
+        )}
+
+        <WorkFormModal
+          show={showWorkModal}
+          onHide={() => {
+            setShowWorkModal(false)
+            setEditingWork(null)
+          }}
+          work={editingWork}
+          onSaved={() => void dispatch(fetchAdminWorksThunk())}
+        />
       </div>
     </>
   )

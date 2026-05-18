@@ -5,6 +5,7 @@ import worksReducer from './worksSlice'
 import orderReducer from './orderSlice'
 import userOrdersReducer from './userOrdersSlice'
 import moderatorReducer from './moderatorSlice'
+import worksAdminReducer from './worksAdminSlice'
 // Создаем store для Redux
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     order: orderReducer,
     userOrders: userOrdersReducer,
     moderator: moderatorReducer,
+    worksAdmin: worksAdminReducer,
   },
 })
 
