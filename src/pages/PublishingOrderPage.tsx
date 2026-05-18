@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
@@ -19,44 +19,40 @@ export default function PublishingOrderPage() {
   const dispatch = useAppDispatch()
   const { selectedOrder, loadingOrder, mutating, error } = useAppSelector((state) => state.order)
 
-  const bookTitleRef = useRef<HTMLInputElement | null>(null)
-  const circulationRef = useRef<HTMLInputElement | null>(null)
+  const [bookTitle, setBookTitle] = useState('')
+  const [circulation, setCirculation] = useState(1)
 
   useEffect(() => {
     if (!Number.isFinite(orderId) || orderId <= 0) return
     void dispatch(fetchOrderByIdThunk(orderId))
   }, [dispatch, orderId])
 
+  useEffect(() => {
+    if (!selectedOrder) return
+    setBookTitle(selectedOrder.book_title ?? '')
+    setCirculation(selectedOrder.circulation ?? 1)
+  }, [selectedOrder?.id])
+
   const isDraft = selectedOrder?.status === 'draft'
-  const totalPrice = useMemo(
-    () =>
-      selectedOrder?.works?.reduce((sum, item) => sum + item.price_rub * item.quantity, 0) ?? 0,
+  const sortedWorks = useMemo(
+    () => [...(selectedOrder?.works ?? [])].sort((a, b) => a.work_id - b.work_id),
     [selectedOrder?.works],
   )
-
-  const reloadOrder = async () => {
-    if (!selectedOrder?.id) return
-    await dispatch(fetchOrderByIdThunk(selectedOrder.id))
-  }
-
-  const getDraftMeta = () => {
-    const bookTitle = (bookTitleRef.current?.value ?? selectedOrder?.book_title ?? '').trim()
-    const circulationValue = Number(circulationRef.current?.value ?? selectedOrder?.circulation ?? 1)
-    return {
-      bookTitle,
-      circulation: Math.max(1, Number.isFinite(circulationValue) ? circulationValue : 1),
-    }
-  }
+  const totalPrice = useMemo(
+    () => sortedWorks.reduce((sum, item) => sum + item.price_rub * item.quantity, 0),
+    [sortedWorks],
+  )
 
   const handleSubmitOrder = async () => {
     if (!selectedOrder?.id) return
-    const { bookTitle, circulation } = getDraftMeta()
+    const trimmedTitle = bookTitle.trim()
+    const circulationValue = Math.max(1, Number.isFinite(circulation) ? circulation : 1)
 
     const saveResult = await dispatch(
       updateOrderMetaThunk({
         orderId: selectedOrder.id,
-        bookTitle,
-        circulation,
+        bookTitle: trimmedTitle,
+        circulation: circulationValue,
       }),
     )
     if (updateOrderMetaThunk.rejected.match(saveResult)) return
@@ -78,7 +74,7 @@ export default function PublishingOrderPage() {
 
   const handleUpdateWorkQty = async (workId: number, quantity: number, comment: string) => {
     if (!selectedOrder?.id || quantity < 1) return
-    const result = await dispatch(
+    await dispatch(
       updateOrderWorkThunk({
         orderId: selectedOrder.id,
         workId,
@@ -86,20 +82,14 @@ export default function PublishingOrderPage() {
         comment,
       }),
     )
-    if (updateOrderWorkThunk.fulfilled.match(result)) {
-      await reloadOrder()
-    }
   }
 
   const handleRemoveWork = async (workId: number) => {
     if (!selectedOrder?.id) return
-    const result = await dispatch(removeOrderWorkThunk({ orderId: selectedOrder.id, workId }))
-    if (removeOrderWorkThunk.fulfilled.match(result)) {
-      await reloadOrder()
-    }
+    await dispatch(removeOrderWorkThunk({ orderId: selectedOrder.id, workId }))
   }
 
-  if (loadingOrder) {
+  if (loadingOrder && !selectedOrder) {
     return (
       <div className="text-center py-5">
         <Spinner animation="border" />
@@ -127,16 +117,29 @@ export default function PublishingOrderPage() {
           Статус: <strong>{selectedOrder.status === 'draft' ? 'Черновик' : selectedOrder.status}</strong>
         </p>
 
+        {selectedOrder.status === 'rejected' && selectedOrder.rejection_reason && (
+          <div
+            className="order-result-card mis-error"
+            style={{
+              marginBottom: 16,
+              padding: '12px 16px',
+              borderRadius: 8,
+              background: 'rgba(229, 57, 53, 0.08)',
+            }}
+          >
+            <strong>Причина отклонения:</strong> {selectedOrder.rejection_reason}
+          </div>
+        )}
+
         <div className="order-result-card" style={{ flexDirection: 'column', alignItems: 'stretch', gap: 12 }}>
           <div className="profile-filter-field">
             <label htmlFor="book-title">Название книги</label>
             <input
               id="book-title"
               className="profile-input"
-              ref={bookTitleRef}
               disabled={!isDraft || mutating}
-              defaultValue={selectedOrder.book_title ?? ''}
-              key={`book-${selectedOrder.id}`}
+              value={bookTitle}
+              onChange={(e) => setBookTitle(e.target.value)}
             />
           </div>
           <div className="profile-filter-field">
@@ -146,10 +149,9 @@ export default function PublishingOrderPage() {
               type="number"
               min={1}
               className="profile-input"
-              ref={circulationRef}
               disabled={!isDraft || mutating}
-              defaultValue={selectedOrder.circulation ?? 1}
-              key={`circulation-${selectedOrder.id}`}
+              value={circulation}
+              onChange={(e) => setCirculation(Math.max(1, Number(e.target.value) || 1))}
             />
           </div>
           <div className="order-actions-bar">
@@ -181,7 +183,7 @@ export default function PublishingOrderPage() {
           </div>
         )}
 
-        {selectedOrder.works?.map((item) => (
+        {sortedWorks.map((item) => (
           <div key={item.work_id} className="order-item-card-custom">
             {item.image_url ? (
               <img src={item.image_url} alt={item.work_name} className="order-item-img" />

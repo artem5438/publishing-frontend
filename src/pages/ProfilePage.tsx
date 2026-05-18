@@ -23,7 +23,6 @@ export default function ProfilePage() {
   const [dateFromInput, setDateFromInput] = useState(filters.dateFrom)
   const [dateToInput, setDateToInput] = useState(filters.dateTo)
   const [nameInput, setNameInput] = useState(user?.name ?? '')
-  const [passwordInput, setPasswordInput] = useState('')
   const [profileMessage, setProfileMessage] = useState('')
 
   useEffect(() => {
@@ -53,7 +52,6 @@ export default function ProfilePage() {
     const result = await dispatch(
       updateProfileThunk({
         name: nameInput.trim() || undefined,
-        password: passwordInput.trim() || undefined,
       }),
     )
     if (updateProfileThunk.rejected.match(result)) {
@@ -63,7 +61,6 @@ export default function ProfilePage() {
     if (updateProfileThunk.fulfilled.match(result)) {
       setNameInput(result.payload.name ?? result.payload.login)
     }
-    setPasswordInput('')
     setProfileMessage('Профиль успешно обновлён')
   }
 
@@ -92,16 +89,6 @@ export default function ProfilePage() {
             <div className="profile-filter-field">
               <label>Имя</label>
               <input className="profile-input" value={nameInput} onChange={(e) => setNameInput(e.target.value)} />
-            </div>
-            <div className="profile-filter-field">
-              <label>Новый пароль</label>
-              <input
-                className="profile-input"
-                type="password"
-                value={passwordInput}
-                onChange={(e) => setPasswordInput(e.target.value)}
-                placeholder="Оставьте пустым, если не меняете"
-              />
             </div>
             <div className="profile-filter-actions">
               <button className="btn-profile-filter" disabled={authLoading} onClick={() => void handleProfileSave()}>

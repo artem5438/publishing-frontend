@@ -156,8 +156,10 @@ const orderSlice = createSlice({
         state.loadingCart = false
         state.error = action.payload ?? 'Ошибка загрузки черновика'
       })
-      .addCase(fetchOrderByIdThunk.pending, (state) => {
-        state.loadingOrder = true
+      .addCase(fetchOrderByIdThunk.pending, (state, action) => {
+        if (state.selectedOrder?.id !== action.meta.arg) {
+          state.loadingOrder = true
+        }
         state.error = ''
       })
       .addCase(fetchOrderByIdThunk.fulfilled, (state, action) => {
@@ -228,8 +230,18 @@ const orderSlice = createSlice({
         state.mutating = true
         state.error = ''
       })
-      .addCase(updateOrderWorkThunk.fulfilled, (state) => {
+      .addCase(updateOrderWorkThunk.fulfilled, (state, action) => {
         state.mutating = false
+        const { workId, quantity } = action.meta.arg
+        const patchWorks = (order: Order | null) => {
+          if (!order?.works) return
+          const item = order.works.find((w) => w.work_id === workId)
+          if (item) item.quantity = quantity
+        }
+        patchWorks(state.selectedOrder)
+        if (state.draftOrder?.id === state.selectedOrder?.id) {
+          patchWorks(state.draftOrder)
+        }
       })
       .addCase(updateOrderWorkThunk.rejected, (state, action) => {
         state.mutating = false
@@ -239,8 +251,17 @@ const orderSlice = createSlice({
         state.mutating = true
         state.error = ''
       })
-      .addCase(removeOrderWorkThunk.fulfilled, (state) => {
+      .addCase(removeOrderWorkThunk.fulfilled, (state, action) => {
         state.mutating = false
+        const { workId } = action.meta.arg
+        const removeWork = (order: Order | null) => {
+          if (!order?.works) return
+          order.works = order.works.filter((w) => w.work_id !== workId)
+        }
+        removeWork(state.selectedOrder)
+        if (state.draftOrder?.id === state.selectedOrder?.id) {
+          removeWork(state.draftOrder)
+        }
       })
       .addCase(removeOrderWorkThunk.rejected, (state, action) => {
         state.mutating = false

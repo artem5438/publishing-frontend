@@ -35,6 +35,7 @@ export interface Order {
   created_at: string
   formed_at?: string
   completed_at?: string
+  rejection_reason?: string
   works?: OrderWork[]
   filled_works_count?: number
   user_role?: string

@@ -18,6 +18,7 @@ interface ModeratorState {
   moderating: boolean
   error: string
   filters: ModeratorFilters
+  pendingCount: number
 }
 
 const initialFilters: ModeratorFilters = {
@@ -33,6 +34,7 @@ const initialState: ModeratorState = {
   moderating: false,
   error: '',
   filters: initialFilters,
+  pendingCount: 0,
 }
 
 export const fetchModeratorOrdersThunk = createAsyncThunk<
@@ -50,14 +52,32 @@ export const fetchModeratorOrdersThunk = createAsyncThunk<
   }
 })
 
+export const fetchPendingCountThunk = createAsyncThunk<number, void, { rejectValue: string; state: RootState }>(
+  'moderator/pendingCount',
+  async (_, { dispatch, rejectWithValue }) => {
+    try {
+      const data = await withUiRequest(dispatch, () =>
+        OrdersService.getPublishingOrders('formed', undefined, undefined),
+      )
+      return (data as Order[]).length
+    } catch (error) {
+      return rejectWithValue(getApiErrorMessage(error, 'Не удалось загрузить счётчик заявок'))
+    }
+  },
+)
+
 export const moderateOrderThunk = createAsyncThunk<
   Order,
-  { orderId: number; action: 'complete' | 'reject' },
+  { orderId: number; action: 'complete' | 'reject'; rejectionReason?: string },
   { rejectValue: string; state: RootState }
->('moderator/moderate', async ({ orderId, action }, { dispatch, rejectWithValue }) => {
+>('moderator/moderate', async ({ orderId, action, rejectionReason }, { dispatch, rejectWithValue }) => {
   try {
+    const body: { action: string; rejection_reason?: string } = { action }
+    if (action === 'reject') {
+      body.rejection_reason = rejectionReason
+    }
     const updated = await withUiRequest(dispatch, () =>
-      OrdersService.putPublishingOrdersModerate(orderId, { action }),
+      OrdersService.putPublishingOrdersModerate(orderId, body),
     )
     return updated as Order
   } catch (error) {
@@ -90,6 +110,12 @@ const moderatorSlice = createSlice({
         state.loading = false
         state.error = action.payload ?? 'Ошибка загрузки заявок'
       })
+      .addCase(fetchPendingCountThunk.fulfilled, (state, action) => {
+        state.pendingCount = action.payload
+      })
+      .addCase(fetchPendingCountThunk.rejected, (state) => {
+        state.pendingCount = 0
+      })
       .addCase(moderateOrderThunk.pending, (state) => {
         state.moderating = true
         state.error = ''
@@ -97,6 +123,9 @@ const moderatorSlice = createSlice({
       .addCase(moderateOrderThunk.fulfilled, (state, action) => {
         state.moderating = false
         state.items = state.items.map((order) => (order.id === action.payload.id ? action.payload : order))
+        if (action.payload.status !== 'formed') {
+          state.pendingCount = Math.max(0, state.pendingCount - 1)
+        }
       })
       .addCase(moderateOrderThunk.rejected, (state, action) => {
         state.moderating = false

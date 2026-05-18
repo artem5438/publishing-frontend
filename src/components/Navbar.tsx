@@ -6,7 +6,7 @@ import { logoutThunk } from '../store/authSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { fetchCartThunk } from '../store/orderSlice'
 import { resetUserOrdersFilters } from '../store/userOrdersSlice'
-import { resetModeratorFilters } from '../store/moderatorSlice'
+import { fetchPendingCountThunk, resetModeratorFilters } from '../store/moderatorSlice'
 import { resetWorksFilters } from '../store/worksSlice'
 
 export default function AppNavbar() {
@@ -16,11 +16,17 @@ export default function AppNavbar() {
   const user = useAppSelector((state) => state.auth.user)
   const draftOrder = useAppSelector((state) => state.order.draftOrder)
   const cartCount = draftOrder?.works?.length ?? draftOrder?.works_count ?? 0
+  const pendingCount = useAppSelector((state) => state.moderator.pendingCount)
 
   useEffect(() => {
     if (!user) return
     void dispatch(fetchCartThunk())
   }, [dispatch, location.pathname, user])
+
+  useEffect(() => {
+    if (user?.role !== 'moderator') return
+    void dispatch(fetchPendingCountThunk())
+  }, [dispatch, location.pathname, user?.role])
 
   const handleLogout = async () => {
     await dispatch(logoutThunk())
@@ -48,10 +54,10 @@ export default function AppNavbar() {
         <Navbar.Collapse id="main-nav">
           <Nav className="ms-auto">
             <Button className="mis-nav-btn" onClick={() => navigate('/')}>
-              🏠 Главная
+              Главная
             </Button>
             <Button className="mis-nav-btn" onClick={() => navigate('/works')}>
-              📚 Услуги
+              Услуги
             </Button>
 
             <Button
@@ -60,19 +66,20 @@ export default function AppNavbar() {
               disabled={!user}
               style={{ opacity: cartCount > 0 ? 1 : 0.5 }}
             >
-              🛒 Корзина {cartCount > 0 && <span className="cart-badge-custom">{cartCount}</span>}
+              Корзина {cartCount > 0 && <span className="cart-badge-custom">{cartCount}</span>}
             </Button>
 
             {user?.role === 'moderator' && (
               <Button className="mis-nav-btn" onClick={() => navigate('/admin')}>
                 Панель модератора
+                {pendingCount > 0 && <span className="cart-badge-custom">{pendingCount}</span>}
               </Button>
             )}
 
             {user ? (
               <>
                 <Button className="mis-nav-btn" onClick={() => navigate('/profile')}>
-                  👤 {user.name || user.login}
+                  {user.name || user.login}
                 </Button>
                 <Button className="mis-nav-btn mis-nav-btn-logout" onClick={handleLogout}>
                   Выйти
@@ -84,7 +91,7 @@ export default function AppNavbar() {
                   Регистрация
                 </Button>
                 <Button className="mis-nav-btn" onClick={() => navigate('/login')}>
-                  🔑 Войти
+                  Войти
                 </Button>
               </>
             )}

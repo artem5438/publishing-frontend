@@ -1,8 +1,13 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Spinner, Button } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
-import { fetchModeratorOrdersThunk, moderateOrderThunk, setModeratorFilters } from '../store/moderatorSlice'
+import {
+  fetchModeratorOrdersThunk,
+  fetchPendingCountThunk,
+  moderateOrderThunk,
+  setModeratorFilters,
+} from '../store/moderatorSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 
 const STATUS_LABELS: Record<string, { label: string; color: string }> = {
@@ -23,34 +28,25 @@ export default function AdminPage() {
   const [dateToInput, setDateToInput] = useState(filters.dateTo)
   const [creatorInput, setCreatorInput] = useState(filters.creatorLogin)
   const [activeModerationOrderId, setActiveModerationOrderId] = useState<number | null>(null)
-
-  const loadOrders = useCallback(
-    () =>
-      dispatch(
-      fetchModeratorOrdersThunk({
-        status: statusInput,
-        dateFrom: dateFromInput,
-        dateTo: dateToInput,
-      }),
-      ),
-    [dateFromInput, dateToInput, dispatch, statusInput],
-  )
+  const [rejectOrderId, setRejectOrderId] = useState<number | null>(null)
+  const [rejectReason, setRejectReason] = useState('')
 
   useEffect(() => {
     if (user?.role !== 'moderator') {
       navigate('/')
-      return
     }
-    void loadOrders()
-  }, [loadOrders, navigate, user?.role])
-  // Автоматическая перезагрузка заявок каждые 7 секунд
+  }, [navigate, user?.role])
+
   useEffect(() => {
     if (user?.role !== 'moderator') return
-    const timer = setInterval(() => {
-      void loadOrders()
-    }, 7000)
-    return () => clearInterval(timer)
-  }, [loadOrders, user?.role])
+    void dispatch(
+      fetchModeratorOrdersThunk({
+        status: filters.status,
+        dateFrom: filters.dateFrom,
+        dateTo: filters.dateTo,
+      }),
+    )
+  }, [dispatch, filters.dateFrom, filters.dateTo, filters.status, user?.role])
 
   const handleApplyFilters = () => {
     dispatch(
@@ -61,22 +57,55 @@ export default function AdminPage() {
         creatorLogin: creatorInput,
       }),
     )
-    void loadOrders()
   }
 
-  const filteredOrders = useMemo(() => {
-    if (!creatorInput.trim()) return orders
-    const query = creatorInput.toLowerCase()
+  const filteredOrders = (() => {
+    const query = filters.creatorLogin.trim().toLowerCase()
+    if (!query) return orders
     return orders.filter((order) => (order.creator_login ?? '').toLowerCase().includes(query))
-  }, [creatorInput, orders])
+  })()
 
   const formedOrders = filteredOrders.filter((order) => order.status === 'formed')
 
-  const handleModerate = async (orderId: number, action: 'complete' | 'reject') => {
+  const reloadOrders = async () => {
+    await dispatch(
+      fetchModeratorOrdersThunk({
+        status: filters.status,
+        dateFrom: filters.dateFrom,
+        dateTo: filters.dateTo,
+      }),
+    )
+    void dispatch(fetchPendingCountThunk())
+  }
+
+  const handleAccept = async (orderId: number) => {
+    setRejectOrderId(null)
+    setRejectReason('')
     setActiveModerationOrderId(orderId)
-    await dispatch(moderateOrderThunk({ orderId, action }))
+    await dispatch(moderateOrderThunk({ orderId, action: 'complete' }))
     setActiveModerationOrderId(null)
-    await loadOrders()
+    await reloadOrders()
+  }
+
+  const handleConfirmReject = async () => {
+    if (rejectOrderId == null) return
+    if (!rejectReason.trim()) {
+      return
+    }
+    setActiveModerationOrderId(rejectOrderId)
+    const result = await dispatch(
+      moderateOrderThunk({
+        orderId: rejectOrderId,
+        action: 'reject',
+        rejectionReason: rejectReason.trim(),
+      }),
+    )
+    setActiveModerationOrderId(null)
+    if (moderateOrderThunk.fulfilled.match(result)) {
+      setRejectOrderId(null)
+      setRejectReason('')
+      await reloadOrders()
+    }
   }
 
   return (
@@ -104,7 +133,7 @@ export default function AdminPage() {
             <input type="date" className="profile-input" value={dateToInput} onChange={(e) => setDateToInput(e.target.value)} />
           </div>
           <div className="profile-filter-field">
-            <label>Создатель (frontend)</label>
+            <label>Создатель</label>
             <input
               className="profile-input"
               placeholder="login"
@@ -154,29 +183,70 @@ export default function AdminPage() {
                 </div>
 
                 <div className="profile-order-meta">
-                  <span>👤 {order.creator_login}</span>
-                  <span>📖 {order.book_title || '—'}</span>
-                  <span>💰 {total}</span>
-                  <span>📅 Подана: {formedDate}</span>
+                  <span>Создатель: {order.creator_login}</span>
+                  <span>Книга: {order.book_title || '—'}</span>
+                  <span>Стоимость: {total}</span>
+                  <span>Подана: {formedDate}</span>
                 </div>
 
-                <div className="profile-order-footer d-flex gap-2 flex-wrap align-items-center">
-                  <Button
-                    variant="success"
-                    size="sm"
-                    disabled={moderating || activeModerationOrderId === order.id}
-                    onClick={() => void handleModerate(order.id, 'complete')}
-                  >
-                    ✅ Принять
-                  </Button>
-                  <Button
-                    variant="outline-danger"
-                    size="sm"
-                    disabled={moderating || activeModerationOrderId === order.id}
-                    onClick={() => void handleModerate(order.id, 'reject')}
-                  >
-                    ❌ Отклонить
-                  </Button>
+                <div className="profile-order-footer d-flex flex-column gap-2">
+                  {rejectOrderId === order.id ? (
+                    <>
+                      <label htmlFor={`reject-reason-${order.id}`}>Причина отклонения</label>
+                      <textarea
+                        id={`reject-reason-${order.id}`}
+                        className="profile-input"
+                        style={{ height: 'auto', minHeight: 80 }}
+                        rows={3}
+                        value={rejectReason}
+                        onChange={(e) => setRejectReason(e.target.value)}
+                        placeholder="Укажите причину для создателя"
+                      />
+                      <div className="d-flex gap-2 flex-wrap">
+                        <Button
+                          variant="outline-danger"
+                          size="sm"
+                          disabled={moderating || !rejectReason.trim()}
+                          onClick={() => void handleConfirmReject()}
+                        >
+                          Подтвердить отклонение
+                        </Button>
+                        <Button
+                          variant="outline-secondary"
+                          size="sm"
+                          disabled={moderating}
+                          onClick={() => {
+                            setRejectOrderId(null)
+                            setRejectReason('')
+                          }}
+                        >
+                          Отмена
+                        </Button>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="d-flex gap-2 flex-wrap align-items-center">
+                      <Button
+                        variant="success"
+                        size="sm"
+                        disabled={moderating || activeModerationOrderId === order.id}
+                        onClick={() => void handleAccept(order.id)}
+                      >
+                        Принять
+                      </Button>
+                      <Button
+                        variant="outline-danger"
+                        size="sm"
+                        disabled={moderating || activeModerationOrderId === order.id}
+                        onClick={() => {
+                          setRejectOrderId(order.id)
+                          setRejectReason('')
+                        }}
+                      >
+                        Отклонить
+                      </Button>
+                    </div>
+                  )}
                 </div>
               </div>
             )
