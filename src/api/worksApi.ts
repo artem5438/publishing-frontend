@@ -8,7 +8,7 @@ export interface FetchWorksResult {
   items: Work[]
   serverCache: ServerCacheStatus | null
 }
-
+// Функция для получения данных из сервера с кэш метаданными
 export async function fetchWorksWithCacheMeta(
   query?: string,
   minPrice?: number,

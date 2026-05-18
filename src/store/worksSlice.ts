@@ -60,6 +60,7 @@ const applyMockFilters = (filters: WorksFilters): Work[] =>
     return matchSearch && matchMin && matchMax && matchType
   })
 
+// Функция для получения данных из сервера с кэш метаданными
 export const fetchWorksThunk = createAsyncThunk<
   WorksFetchResult,
   WorksFilters,

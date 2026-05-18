@@ -2,11 +2,12 @@ import { useEffect } from 'react'
 import { Container, Spinner } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import WorkCard from '../components/WorkCard'
+import { MEDIA_BASE_URL } from '../config/env'
 import { fetchWorksThunk } from '../store/worksSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 
 const emptyFilters = { search: '', minPrice: '', maxPrice: '', workType: '' }
-const HERO_VIDEO_URL = 'http://localhost:9000/publishing-media/hero-folio.mp4'
+const HERO_VIDEO_URL = `${MEDIA_BASE_URL}/hero-folio.mp4`
 
 export default function HomePage() {
   const dispatch = useAppDispatch()

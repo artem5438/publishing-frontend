@@ -1,6 +1,7 @@
 import type { Order } from '../types'
+import { MEDIA_BASE_URL } from '../config/env'
 
-const MINIO = 'http://localhost:9000/publishing-media'
+const MINIO = MEDIA_BASE_URL
 
 export const mockCart: Order = {
   id: 17,
