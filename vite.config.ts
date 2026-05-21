@@ -23,6 +23,9 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'icons.svg', 'pwa-192.svg', 'pwa-512.svg'],
+      workbox: {
+        maximumFileSizeToCacheInBytes: 30 * 1024 * 1024,
+      },
       manifest: {
         name: 'Folio Publishing',
         short_name: 'Folio',
