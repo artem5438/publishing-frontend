@@ -8,6 +8,7 @@ import { fetchCartThunk } from '../store/orderSlice'
 import { resetUserOrdersFilters } from '../store/userOrdersSlice'
 import { fetchPendingCountThunk, resetModeratorFilters } from '../store/moderatorSlice'
 import { resetWorksFilters } from '../store/worksSlice'
+import { IS_GUEST_MODE } from '../config/env'
 
 export default function AppNavbar() {
   const dispatch = useAppDispatch()
@@ -60,23 +61,25 @@ export default function AppNavbar() {
               Услуги
             </Button>
 
-            <Button
-              className="mis-nav-btn"
-              onClick={navigateToDraft}
-              disabled={!user}
-              style={{ opacity: cartCount > 0 ? 1 : 0.5 }}
-            >
-              Корзина {cartCount > 0 && <span className="cart-badge-custom">{cartCount}</span>}
-            </Button>
+            {!IS_GUEST_MODE && (
+              <Button
+                className="mis-nav-btn"
+                onClick={navigateToDraft}
+                disabled={!user}
+                style={{ opacity: cartCount > 0 ? 1 : 0.5 }}
+              >
+                Корзина {cartCount > 0 && <span className="cart-badge-custom">{cartCount}</span>}
+              </Button>
+            )}
 
-            {user?.role === 'moderator' && (
+            {!IS_GUEST_MODE && user?.role === 'moderator' && (
               <Button className="mis-nav-btn" onClick={() => navigate('/admin')}>
                 Панель модератора
                 {pendingCount > 0 && <span className="cart-badge-custom">{pendingCount}</span>}
               </Button>
             )}
 
-            {user ? (
+            {!IS_GUEST_MODE && user ? (
               <>
                 <Button className="mis-nav-btn" onClick={() => navigate('/profile')}>
                   {user.name || user.login}
@@ -85,7 +88,7 @@ export default function AppNavbar() {
                   Выйти
                 </Button>
               </>
-            ) : (
+            ) : !IS_GUEST_MODE ? (
               <>
                 <Button className="mis-nav-btn" onClick={() => navigate('/register')}>
                   Регистрация
@@ -94,7 +97,7 @@ export default function AppNavbar() {
                   Войти
                 </Button>
               </>
-            )}
+            ) : null}
           </Nav>
         </Navbar.Collapse>
       </Container>

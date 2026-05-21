@@ -21,7 +21,7 @@ export default function FilterPanel({
 }: FilterPanelProps) {
   return (
     <div className="mis-filter-panel">
-      <div>
+      <div className="mis-filter-field mis-filter-field-search">
         <Form.Label>Поиск</Form.Label>
         <Form.Control
           type="text"
@@ -29,46 +29,42 @@ export default function FilterPanel({
           value={search}
           onChange={e => onSearchChange(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && onApply()}
-          style={{ width: 260 }}
         />
       </div>
-      <div>
+      <div className="mis-filter-field mis-filter-field-price">
         <Form.Label>Цена от</Form.Label>
         <Form.Control
           type="number" min={0} placeholder="0"
           value={minPrice}
           onChange={e => onMinPriceChange(e.target.value)}
-          style={{ width: 120 }}
         />
       </div>
-      <div>
+      <div className="mis-filter-field mis-filter-field-price">
         <Form.Label>Цена до</Form.Label>
         <Form.Control
           type="number" min={0} placeholder="999999"
           value={maxPrice}
           onChange={e => onMaxPriceChange(e.target.value)}
-          style={{ width: 120 }}
         />
       </div>
-      <div>
+      <div className="mis-filter-field mis-filter-field-type">
         <Form.Label>Тип работы</Form.Label>
         <Form.Select
           value={workType}
           onChange={e => onWorkTypeChange(e.target.value)}
-          style={{ width: 200 }}
         >
           <option value="">Все типы</option>
           {workTypes.map(t => <option key={t} value={t}>{t}</option>)}
         </Form.Select>
       </div>
-      <div style={{ display: 'flex', alignItems: 'flex-end', gap: 8 }}>
+      <div className="mis-filter-actions">
         <Button className="btn-reset-filter" onClick={onApply}>
           Найти
         </Button>
         <Button
+          className="btn-clear-filter"
           variant="outline-secondary"
           onClick={onReset}
-          style={{ fontSize: 14, padding: '10px 16px', borderRadius: 4 }}
         >
           Сбросить
         </Button>

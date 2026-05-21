@@ -3,6 +3,7 @@ import type { Work } from '../types'
 import { addWorkToDraftThunk } from '../store/orderSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { useState } from 'react'
+import { IS_GUEST_MODE } from '../config/env'
 
 interface WorkCardProps {
   work: Work
@@ -59,15 +60,17 @@ export default function WorkCard({ work }: WorkCardProps) {
         <div className="card-title">{work.name}</div>
         <div className="work-card-footer-custom">
           <span className="work-card-price">{work.price_rub.toLocaleString()} ₽</span>
-          <button className="btn-detail-custom" onClick={handleAddToDraft}>
-            {addState === 'loading'
-              ? 'Добавляем...'
-              : addState === 'ok'
-                ? 'В заявке'
-                : addState === 'error'
-                  ? 'Ошибка'
-                  : 'Добавить'}
-          </button>
+          {!IS_GUEST_MODE && (
+            <button className="btn-detail-custom" onClick={handleAddToDraft}>
+              {addState === 'loading'
+                ? 'Добавляем...'
+                : addState === 'ok'
+                  ? 'В заявке'
+                  : addState === 'error'
+                    ? 'Ошибка'
+                    : 'Добавить'}
+            </button>
+          )}
           <button
             className="btn-detail-custom"
             onClick={(e) => { e.stopPropagation(); navigate(`/works/${work.id}`) }}

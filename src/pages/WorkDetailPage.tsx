@@ -8,6 +8,7 @@ import type { Work } from '../types'
 import { addWorkToDraftThunk } from '../store/orderSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { fetchWorkByIdThunk, fetchWorksThunk } from '../store/worksSlice'
+import { IS_GUEST_MODE } from '../config/env'
 
 export default function WorkDetailPage() {
   const dispatch = useAppDispatch()
@@ -131,13 +132,15 @@ export default function WorkDetailPage() {
               <span className="price-value">{work.price_rub.toLocaleString()} ₽</span>
             </div>
 
-            <button
-              className="btn-add-custom"
-              onClick={handleAddToCart}
-              disabled={addStatus === 'loading' || addStatus === 'ok'}
-            >
-              {btnLabel}
-            </button>
+            {!IS_GUEST_MODE && (
+              <button
+                className="btn-add-custom"
+                onClick={handleAddToCart}
+                disabled={addStatus === 'loading' || addStatus === 'ok'}
+              >
+                {btnLabel}
+              </button>
+            )}
 
             <table className="params-table-custom">
               <thead>

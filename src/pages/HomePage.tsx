@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { Container, Spinner } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import WorkCard from '../components/WorkCard'
-import { MEDIA_BASE_URL } from '../config/env'
+import { IS_GUEST_MODE, MEDIA_BASE_URL } from '../config/env'
 import { fetchWorksThunk } from '../store/worksSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 
@@ -34,7 +34,7 @@ export default function HomePage() {
             <Link to="/works" className="btn-add-custom home-hero-btn">
               Смотреть услуги
             </Link>
-            {!user && (
+            {!IS_GUEST_MODE && !user && (
               <Link to="/login" className="mis-nav-btn home-login-btn">
                 Войти
               </Link>
@@ -91,7 +91,7 @@ export default function HomePage() {
       </section>
 
       <section className="home-section">
-        <Container fluid className="px-5">
+        <Container fluid className="works-page-container">
           <h2 className="home-section-title">Популярные услуги</h2>
           {loading && (
             <div className="text-center py-4">

@@ -45,7 +45,7 @@ export default function WorksListPage() {
   return (
     <>
       <Breadcrumbs items={[{ label: 'Главная', path: '/' }, { label: 'Каталог услуг' }]} />
-      <Container fluid className="px-5 py-4">
+      <Container fluid className="works-page-container py-4">
         <h1 className="works-page-title">Услуги издательства</h1>
         <FilterPanel
           search={searchInput}
