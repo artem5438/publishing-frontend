@@ -8,7 +8,7 @@ interface BreadcrumbItem {
 interface BreadcrumbsProps {
   items: BreadcrumbItem[]
 }
-
+// навигация по сайту
 export default function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
     <div className="mis-breadcrumbs">

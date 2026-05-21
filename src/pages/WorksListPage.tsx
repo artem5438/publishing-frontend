@@ -1,80 +1,81 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Container, Spinner } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
 import FilterPanel from '../components/FilterPanel'
 import WorkCard from '../components/WorkCard'
-import { mockWorks } from '../mocks/works'
-import type { Work } from '../types'
-
-const USE_MOCK = false
+import { fetchWorksThunk, setWorksFilters } from '../store/worksSlice'
+import { useAppDispatch, useAppSelector } from '../store/hooks'
 
 export default function WorksListPage() {
-  const [works, setWorks] = useState<Work[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
-  const [search, setSearch] = useState('')
-  const [minPrice, setMinPrice] = useState('')
-  const [maxPrice, setMaxPrice] = useState('')
-  const [workType, setWorkType] = useState('')
+  const dispatch = useAppDispatch()
+  const { items: works, loading, error, filters } = useAppSelector((state) => state.works)
+
+  const [searchInput, setSearchInput] = useState(filters.search)
+  const [minPriceInput, setMinPriceInput] = useState(filters.minPrice)
+  const [maxPriceInput, setMaxPriceInput] = useState(filters.maxPrice)
+  const [workTypeInput, setWorkTypeInput] = useState(filters.workType)
 
   useEffect(() => {
-    if (USE_MOCK) {
-      setTimeout(() => { setWorks(mockWorks); setLoading(false) }, 0)
-      return
+    void dispatch(fetchWorksThunk(filters))
+  }, [dispatch, filters])
+
+  const workTypes = useMemo(
+    () => [...new Set(works.map((work) => work.work_type).filter(Boolean))] as string[],
+    [works],
+  )
+
+  const handleApplyFilters = () => {
+    const nextFilters = {
+      search: searchInput,
+      minPrice: minPriceInput,
+      maxPrice: maxPriceInput,
+      workType: workTypeInput,
     }
-    fetch('/api/works')
-      .then((r) => { if (!r.ok) throw new Error('Ошибка загрузки'); return r.json() })
-      .then((data: Work[]) => { setWorks(data); setLoading(false) })
-      .catch((err: Error) => { setError(err.message); setLoading(false) })
-  }, [])
+    dispatch(setWorksFilters(nextFilters))
+  }
 
-  const workTypes = [...new Set(works.map((w) => w.work_type).filter(Boolean))]
-
-  const filtered = works.filter((w) => {
-    const matchSearch = w.name.toLowerCase().includes(search.toLowerCase())
-    const matchMin = minPrice === '' || w.price_rub >= Number(minPrice)
-    const matchMax = maxPrice === '' || w.price_rub <= Number(maxPrice)
-    const matchType = workType === '' || w.work_type === workType
-    return matchSearch && matchMin && matchMax && matchType
-  })
+  const handleReset = () => {
+    setSearchInput('')
+    setMinPriceInput('')
+    setMaxPriceInput('')
+    setWorkTypeInput('')
+    dispatch(setWorksFilters({ search: '', minPrice: '', maxPrice: '', workType: '' }))
+  }
 
   return (
     <>
-      <Breadcrumbs items={[{ label: 'Главная', path: '/' }, { label: 'Услуги' }]} />
-      <Container fluid className="px-5 py-4">
-        <h1 className="works-page-title">Работы издательства</h1>
-
+      <Breadcrumbs items={[{ label: 'Главная', path: '/' }, { label: 'Каталог услуг' }]} />
+      <Container fluid className="works-page-container py-4">
+        <h1 className="works-page-title">Услуги издательства</h1>
         <FilterPanel
-          search={search}
-          minPrice={minPrice}
-          maxPrice={maxPrice}
-          workType={workType}
+          search={searchInput}
+          minPrice={minPriceInput}
+          maxPrice={maxPriceInput}
+          workType={workTypeInput}
           workTypes={workTypes}
-          onSearchChange={setSearch}
-          onMinPriceChange={setMinPrice}
-          onMaxPriceChange={setMaxPrice}
-          onWorkTypeChange={setWorkType}
-          onReset={() => {
-            setSearch('')
-            setMinPrice('')
-            setMaxPrice('')
-            setWorkType('')
-          }}
+          onSearchChange={setSearchInput}
+          onMinPriceChange={setMinPriceInput}
+          onMaxPriceChange={setMaxPriceInput}
+          onWorkTypeChange={setWorkTypeInput}
+          onApply={handleApplyFilters}
+          onReset={handleReset}
         />
-
         {loading && (
-          <div className="text-center py-5"><Spinner animation="border" /></div>
+          <div className="text-center py-5">
+            <Spinner animation="border" />
+          </div>
         )}
-        {error && <div className="mis-error">{error}</div>}
-        {!loading && !error && filtered.length === 0 && (
+        {!loading && error && <div className="mis-error">{error}</div>}
+        {!loading && !error && works.length === 0 && (
           <div className="mis-empty">Услуги не найдены. Попробуйте изменить фильтры.</div>
         )}
-
-        <div className="works-grid-custom">
-          {filtered.map((work) => (
-            <WorkCard key={work.id} work={work} />
-          ))}
-        </div>
+        {!loading && works.length > 0 && (
+          <div className="works-grid-custom">
+            {works.map((work) => (
+              <WorkCard key={work.id} work={work} />
+            ))}
+          </div>
+        )}
       </Container>
     </>
   )

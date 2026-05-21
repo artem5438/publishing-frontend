@@ -1,37 +1,29 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Breadcrumbs from '../components/Breadcrumbs'
+import { fetchCartThunk } from '../store/orderSlice'
+import { loginThunk } from '../store/authSlice'
+import { useAppDispatch, useAppSelector } from '../store/hooks'
 
 export default function LoginPage() {
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const authLoading = useAppSelector((state) => state.auth.loading)
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
-    setLoading(true)
 
-    fetch('/api/auth/login', {
-      method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ login, password }),
-    })
-      .then((r) => {
-        if (r.status === 401) throw new Error('Неверный логин или пароль')
-        if (!r.ok) throw new Error('Ошибка сервера')
-        return r.json()
-      })
-      .then(() => {
-        navigate('/')
-      })
-      .catch((err: Error) => {
-        setError(err.message)
-        setLoading(false)
-      })
+    const result = await dispatch(loginThunk({ login, password }))
+    if (loginThunk.rejected.match(result)) {
+      setError(result.payload ?? 'Неверный логин или пароль')
+      return
+    }
+    await dispatch(fetchCartThunk())
+    navigate('/')
   }
 
   return (
@@ -75,12 +67,15 @@ export default function LoginPage() {
             <button
               type="submit"
               className="btn-add-custom"
-              disabled={loading}
+              disabled={authLoading}
               style={{ marginTop: '8px' }}
             >
-              {loading ? 'Входим...' : 'Войти'}
+              {authLoading ? 'Входим...' : 'Войти'}
             </button>
           </form>
+          <p style={{ marginTop: 12, fontSize: 13 }}>
+            Нет аккаунта? <Link to="/register">Зарегистрироваться</Link>
+          </p>
         </div>
       </div>
     </>

@@ -10,63 +10,63 @@ interface FilterPanelProps {
   onMinPriceChange: (val: string) => void
   onMaxPriceChange: (val: string) => void
   onWorkTypeChange: (val: string) => void
+  onApply: () => void   
   onReset: () => void
 }
-
+  // Фильтры для поиска услуг
 export default function FilterPanel({
   search, minPrice, maxPrice, workType, workTypes,
-  onSearchChange, onMinPriceChange, onMaxPriceChange, onWorkTypeChange, onReset,
+  onSearchChange, onMinPriceChange, onMaxPriceChange, onWorkTypeChange,
+  onApply, onReset
 }: FilterPanelProps) {
   return (
     <div className="mis-filter-panel">
-      <div>
-        <Form.Label>Поиск по названию</Form.Label>
+      <div className="mis-filter-field mis-filter-field-search">
+        <Form.Label>Поиск</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Например: печать..."
+          placeholder="Название услуги..."
           value={search}
-          onChange={(e) => onSearchChange(e.target.value)}
-          style={{ width: 260 }}
+          onChange={e => onSearchChange(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && onApply()}
         />
       </div>
-      <div>
-        <Form.Label>Цена от (₽)</Form.Label>
+      <div className="mis-filter-field mis-filter-field-price">
+        <Form.Label>Цена от</Form.Label>
         <Form.Control
-          type="number"
-          min={0}
-          placeholder="0"
+          type="number" min={0} placeholder="0"
           value={minPrice}
-          onChange={(e) => onMinPriceChange(e.target.value)}
-          style={{ width: 120 }}
+          onChange={e => onMinPriceChange(e.target.value)}
         />
       </div>
-      <div>
-        <Form.Label>Цена до (₽)</Form.Label>
+      <div className="mis-filter-field mis-filter-field-price">
+        <Form.Label>Цена до</Form.Label>
         <Form.Control
-          type="number"
-          min={0}
-          placeholder="999999"
+          type="number" min={0} placeholder="999999"
           value={maxPrice}
-          onChange={(e) => onMaxPriceChange(e.target.value)}
-          style={{ width: 120 }}
+          onChange={e => onMaxPriceChange(e.target.value)}
         />
       </div>
-      <div>
-        <Form.Label>Тип услуги</Form.Label>
+      <div className="mis-filter-field mis-filter-field-type">
+        <Form.Label>Тип работы</Form.Label>
         <Form.Select
           value={workType}
-          onChange={(e) => onWorkTypeChange(e.target.value)}
-          style={{ width: 200 }}
+          onChange={e => onWorkTypeChange(e.target.value)}
         >
           <option value="">Все типы</option>
-          {workTypes.map((t) => (
-            <option key={t} value={t}>{t}</option>
-          ))}
+          {workTypes.map(t => <option key={t} value={t}>{t}</option>)}
         </Form.Select>
       </div>
-      <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-        <Button className="btn-reset-filter" onClick={onReset}>
-          Сброс
+      <div className="mis-filter-actions">
+        <Button className="btn-reset-filter" onClick={onApply}>
+          Найти
+        </Button>
+        <Button
+          className="btn-clear-filter"
+          variant="outline-secondary"
+          onClick={onReset}
+        >
+          Сбросить
         </Button>
       </div>
     </div>

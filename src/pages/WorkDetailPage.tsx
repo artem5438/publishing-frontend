@@ -1,66 +1,86 @@
-import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useEffect, useMemo, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
-import { mockWorks } from '../mocks/works'
+import WorkCard from '../components/WorkCard'
+import { getEmbedding, cosineSimilarity } from '../utils/similarity'
 import type { Work } from '../types'
-
-const USE_MOCK = false
+import { addWorkToDraftThunk } from '../store/orderSlice'
+import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { fetchWorkByIdThunk, fetchWorksThunk } from '../store/worksSlice'
+import { IS_GUEST_MODE } from '../config/env'
 
 export default function WorkDetailPage() {
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const { id } = useParams<{ id: string }>()
-  const [work, setWork] = useState<Work | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
+  const user = useAppSelector((state) => state.auth.user)
+  const work = useAppSelector((state) => state.works.currentWork)
+  const works = useAppSelector((state) => state.works.items)
+  const loading = useAppSelector((state) => state.works.detailsLoading)
+  const error = useAppSelector((state) => state.works.error)
   const [addStatus, setAddStatus] = useState<'idle' | 'loading' | 'ok' | 'error'>('idle')
+  const [similar, setSimilar] = useState<Work[] | null>(null)
 
   useEffect(() => {
-    if (USE_MOCK) {
-      setTimeout(() => {
-        const found = mockWorks.find((w) => w.id === Number(id))
-        if (found) setWork(found)
-        else setError('Услуга не найдена')
-        setLoading(false)
-      }, 0)
+    const numericId = Number(id)
+    if (!Number.isFinite(numericId) || numericId <= 0) return
+    void dispatch(fetchWorkByIdThunk(numericId))
+    void dispatch(fetchWorksThunk({ search: '', minPrice: '', maxPrice: '', workType: '' }))
+  }, [dispatch, id])
+
+  useEffect(() => {
+    if (!work) return
+    const others = works.filter((item) => item.id !== work.id)
+    if (!others.length) return
+
+    let canceled = false
+    const compute = async () => {
+      const targetText = `${work.name} ${work.description ?? ''}`
+      const targetEmb = await getEmbedding(targetText)
+
+      const scored = await Promise.all(
+        others.map(async (item) => ({
+          work: item,
+          score: cosineSimilarity(
+            targetEmb,
+            await getEmbedding(`${item.name} ${item.description ?? ''}`),
+          ),
+        })),
+      )
+
+      const top3 = scored
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 3)
+        .map((item) => item.work)
+
+      if (!canceled) setSimilar(top3)
+    }
+
+    void compute()
+    return () => {
+      canceled = true
+    }
+  }, [work, works])
+
+  const similarLoading = useMemo(() => work !== null && similar === null, [similar, work])
+
+  const handleAddToCart = async () => {
+    if (!work) return
+    if (!user) {
+      navigate('/login')
       return
     }
-    fetch(`/api/works/${id}`)
-      .then((r) => { if (!r.ok) throw new Error('Услуга не найдена'); return r.json() })
-      .then((data: Work) => { setWork(data); setLoading(false) })
-      .catch((err: Error) => { setError(err.message); setLoading(false) })
-  }, [id])
-
-  const handleAddToCart = () => {
-    if (!work) return
     setAddStatus('loading')
-    fetch('/api/publishing-orders/cart/works', {
-      method: 'POST',
-      credentials: 'include',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ work_id: work.id }),
-    })
-      .then((r) => {
-        if (r.status === 409) throw new Error('already')
-        if (!r.ok) throw new Error('error')
-        return r.json()
-      })
-      .then(() => { setAddStatus('ok') })
-      .catch((err: Error) => {
-        if (err.message === 'already') setAddStatus('ok') // уже в корзине — ок
-        else setAddStatus('error')
-      })
+    const result = await dispatch(addWorkToDraftThunk(work.id))
+    setAddStatus(addWorkToDraftThunk.fulfilled.match(result) ? 'ok' : 'error')
   }
 
-  if (loading) {
-    return <div className="text-center py-5"><Spinner animation="border" /></div>
-  }
-  if (error || !work) {
-    return <div className="mis-error py-5">{error || 'Не найдено'}</div>
-  }
+  if (loading) return <div className="text-center py-5"><Spinner animation="border" /></div>
+  if (error || !work) return <div className="mis-error py-5">{error || 'Не найдено'}</div>
 
   const imageUrl = work.image_url || null
   const tags = work.tags ?? []
-
   const btnLabel =
     addStatus === 'loading' ? 'Добавляем...' :
     addStatus === 'ok'      ? '✓ В корзине' :
@@ -71,12 +91,12 @@ export default function WorkDetailPage() {
     <>
       <Breadcrumbs items={[
         { label: 'Главная', path: '/' },
-        { label: 'Услуги', path: '/' },
+        { label: 'Услуги', path: '/works' },
         { label: work.name },
       ]} />
 
       <div className="detail-page-wrapper">
-        <Link to="/" className="back-link">← Все работы</Link>
+        <Link to="/works" className="back-link">← Все работы</Link>
 
         {/* Основная карточка */}
         <div className="detail-card-custom">
@@ -112,21 +132,20 @@ export default function WorkDetailPage() {
               <span className="price-value">{work.price_rub.toLocaleString()} ₽</span>
             </div>
 
-            <button
-              className="btn-add-custom"
-              onClick={handleAddToCart}
-              disabled={addStatus === 'loading' || addStatus === 'ok'}
-            >
-              {btnLabel}
-            </button>
+            {!IS_GUEST_MODE && (
+              <button
+                className="btn-add-custom"
+                onClick={handleAddToCart}
+                disabled={addStatus === 'loading' || addStatus === 'ok'}
+              >
+                {btnLabel}
+              </button>
+            )}
 
             <table className="params-table-custom">
               <thead>
                 <tr>
-                  <th>Срок</th>
-                  <th>Тираж</th>
-                  <th>Единица</th>
-                  <th>Формат</th>
+                  <th>Срок</th><th>Тираж</th><th>Единица</th><th>Формат</th>
                 </tr>
               </thead>
               <tbody>
@@ -147,9 +166,7 @@ export default function WorkDetailPage() {
 
           {tags.length > 0 && (
             <div className="tags-row">
-              {tags.map((tag, i) => (
-                <span key={i} className="tag-item">{tag}</span>
-              ))}
+              {tags.map((tag, i) => <span key={i} className="tag-item">{tag}</span>)}
             </div>
           )}
 
@@ -171,6 +188,23 @@ export default function WorkDetailPage() {
             <div className="video-placeholder">[ВИДЕО: ПРОЦЕСС ПЕЧАТИ]</div>
           )}
         </div>
+
+        {/* Похожие услуги */}
+        <div className="similar-block">
+          <h2>Похожие услуги</h2>
+          {similarLoading && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#999', fontSize: 14, marginBottom: 16 }}>
+              <Spinner animation="border" size="sm" />
+              Вычисляем похожие услуги...
+            </div>
+          )}
+          {!similarLoading && similar && similar.length > 0 && (
+            <div className="works-grid-custom">
+              {similar.map(w => <WorkCard key={w.id} work={w} />)}
+            </div>
+          )}
+        </div>
+
       </div>
     </>
   )

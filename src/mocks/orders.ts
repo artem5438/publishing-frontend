@@ -1,6 +1,7 @@
 import type { Order } from '../types'
+import { MEDIA_BASE_URL } from '../config/env'
 
-const MINIO_URL = 'http://localhost:9000/publishing-media'
+const MINIO = MEDIA_BASE_URL
 
 export const mockCart: Order = {
   id: 17,
@@ -17,7 +18,7 @@ export const mockCart: Order = {
       price_rub: 2500,
       quantity: 1,
       comment: '',
-      image_url: `${MINIO_URL}/hard-cover.jpg`,
+      image_url: `${MINIO}/hard-cover.jpg`,
     },
     {
       work_id: 3,
@@ -25,7 +26,7 @@ export const mockCart: Order = {
       price_rub: 800,
       quantity: 1,
       comment: '',
-      image_url: `${MINIO_URL}/soft-cover.jpg`,
+      image_url: `${MINIO}/soft-cover.jpg`,
     },
   ],
 }
@@ -49,7 +50,7 @@ export const mockOrders: Order[] = [
         price_rub: 5000,
         quantity: 1,
         comment: '',
-        image_url: `${MINIO_URL}/print-digital.jpg`,
+        image_url: `${MINIO}/print-digital.jpg`,
       },
       {
         work_id: 2,
@@ -57,7 +58,7 @@ export const mockOrders: Order[] = [
         price_rub: 15000,
         quantity: 3,
         comment: 'срочный заказ',
-        image_url: `${MINIO_URL}/print-offset.jpg`,
+        image_url: `${MINIO}/print-offset.jpg`,
       },
     ],
   },
