@@ -9,6 +9,7 @@ import { addWorkToDraftThunk } from '../store/orderSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { fetchWorkByIdThunk, fetchWorksThunk } from '../store/worksSlice'
 import { IS_GUEST_MODE } from '../config/env'
+import { resolveSafeImageUrl, resolveSafeVideoUrl } from '../utils/media'
 
 export default function WorkDetailPage() {
   const dispatch = useAppDispatch()
@@ -79,7 +80,8 @@ export default function WorkDetailPage() {
   if (loading) return <div className="text-center py-5"><Spinner animation="border" /></div>
   if (error || !work) return <div className="mis-error py-5">{error || 'Не найдено'}</div>
 
-  const imageUrl = work.image_url || null
+  const imageUrl = resolveSafeImageUrl(work.image_url)
+  const videoUrl = resolveSafeVideoUrl(work.video_url)
   const tags = work.tags ?? []
   const btnLabel =
     addStatus === 'loading' ? 'Добавляем...' :
@@ -101,20 +103,23 @@ export default function WorkDetailPage() {
         {/* Основная карточка */}
         <div className="detail-card-custom">
           <div>
-            {imageUrl ? (
-              <img
-                src={imageUrl}
-                alt={work.name}
-                className="detail-image-custom"
-                onError={(e) => {
-                  const el = e.target as HTMLImageElement
+            <img
+              src={imageUrl}
+              alt={work.name}
+              className="detail-image-custom"
+              onError={(e) => {
+                const el = e.target as HTMLImageElement
+                if (el.src.includes('/mock-media/work-cover.svg')) {
                   el.style.display = 'none'
                   el.nextElementSibling?.removeAttribute('style')
-                }}
-              />
-            ) : (
-              <div className="detail-image-placeholder">фото услуги</div>
-            )}
+                  return
+                }
+                el.src = '/mock-media/work-cover.svg'
+              }}
+            />
+            <div className="detail-image-placeholder" style={{ display: 'none' }}>
+              фото услуги
+            </div>
           </div>
 
           <div className="detail-info">
@@ -180,9 +185,9 @@ export default function WorkDetailPage() {
         {/* Видео */}
         <div className="video-block">
           <h3>Видео о работе</h3>
-          {work.video_url ? (
+          {videoUrl ? (
             <video autoPlay muted loop playsInline>
-              <source src={work.video_url} type="video/mp4" />
+              <source src={videoUrl} type="video/mp4" />
             </video>
           ) : (
             <div className="video-placeholder">[ВИДЕО: ПРОЦЕСС ПЕЧАТИ]</div>

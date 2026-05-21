@@ -5,14 +5,10 @@ import WorkCard from '../components/WorkCard'
 import { IS_GUEST_MODE, MEDIA_BASE_URL } from '../config/env'
 import { fetchWorksThunk } from '../store/worksSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { resolveSafeVideoUrl } from '../utils/media'
 
 const emptyFilters = { search: '', minPrice: '', maxPrice: '', workType: '' }
-const HERO_VIDEO_URL =
-  typeof window !== 'undefined' &&
-  window.location.protocol === 'https:' &&
-  MEDIA_BASE_URL.startsWith('http://')
-    ? 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'
-    : `${MEDIA_BASE_URL}/hero-folio.mp4`
+const HERO_VIDEO_URL = resolveSafeVideoUrl(`${MEDIA_BASE_URL}/hero-folio.mp4`)
 
 export default function HomePage() {
   const dispatch = useAppDispatch()
@@ -28,9 +24,11 @@ export default function HomePage() {
   return (
     <main className="home-page">
       <section className="home-hero">
-        <video className="home-hero-video" autoPlay muted loop playsInline preload="metadata">
-          <source src={HERO_VIDEO_URL} type="video/mp4" />
-        </video>
+        {HERO_VIDEO_URL && (
+          <video className="home-hero-video" autoPlay muted loop playsInline preload="metadata">
+            <source src={HERO_VIDEO_URL} type="video/mp4" />
+          </video>
+        )}
         <div className="home-hero-overlay" aria-hidden="true" />
         <Container className="text-center home-hero-content">
           <h1 className="home-hero-title">Folio</h1>

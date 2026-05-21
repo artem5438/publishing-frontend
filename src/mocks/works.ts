@@ -4,7 +4,6 @@ import { MEDIA_BASE_URL } from '../config/env'
 const isHttpsPage = typeof window !== 'undefined' && window.location.protocol === 'https:'
 const shouldUsePublicFallback = isHttpsPage && MEDIA_BASE_URL.startsWith('http://')
 const FALLBACK_IMAGE_URL = '/mock-media/work-cover.svg'
-const FALLBACK_VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'
 
 const resolveImageUrl = (fileName?: string): string | undefined => {
   if (!fileName) return undefined
@@ -14,7 +13,7 @@ const resolveImageUrl = (fileName?: string): string | undefined => {
 
 const resolveVideoUrl = (fileName?: string): string | undefined => {
   if (!fileName) return undefined
-  if (shouldUsePublicFallback) return FALLBACK_VIDEO_URL
+  if (shouldUsePublicFallback) return undefined
   return `${MEDIA_BASE_URL}/${fileName}`
 }
 

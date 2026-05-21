@@ -4,6 +4,7 @@ import { addWorkToDraftThunk } from '../store/orderSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { useState } from 'react'
 import { IS_GUEST_MODE } from '../config/env'
+import { resolveSafeImageUrl } from '../utils/media'
 
 interface WorkCardProps {
   work: Work
@@ -13,7 +14,7 @@ export default function WorkCard({ work }: WorkCardProps) {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const user = useAppSelector((state) => state.auth.user)
-  const imageUrl = work.image_url || null
+  const imageUrl = resolveSafeImageUrl(work.image_url)
   const [addState, setAddState] = useState<'idle' | 'loading' | 'ok' | 'error'>('idle')
 
   const handleAddToDraft = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -37,22 +38,21 @@ export default function WorkCard({ work }: WorkCardProps) {
       onClick={() => navigate(`/works/${work.id}`)}
       style={{ cursor: 'pointer' }}
     >
-      {imageUrl ? (
-        <img
-          src={imageUrl}
-          alt={work.name}
-          className="card-img-top"
-          onError={(e) => {
-            const el = e.target as HTMLImageElement
+      <img
+        src={imageUrl}
+        alt={work.name}
+        className="card-img-top"
+        onError={(e) => {
+          const el = e.target as HTMLImageElement
+          if (el.src.includes('/mock-media/work-cover.svg')) {
             el.style.display = 'none'
             el.nextElementSibling?.removeAttribute('style')
-          }}
-        />
-      ) : null}
-      <div
-        className="work-card-img-placeholder"
-        style={imageUrl ? { display: 'none' } : {}}
-      >
+            return
+          }
+          el.src = '/mock-media/work-cover.svg'
+        }}
+      />
+      <div className="work-card-img-placeholder" style={{ display: 'none' }}>
         нет фото
       </div>
 
