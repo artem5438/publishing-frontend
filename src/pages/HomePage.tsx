@@ -7,7 +7,12 @@ import { fetchWorksThunk } from '../store/worksSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 
 const emptyFilters = { search: '', minPrice: '', maxPrice: '', workType: '' }
-const HERO_VIDEO_URL = `${MEDIA_BASE_URL}/hero-folio.mp4`
+const HERO_VIDEO_URL =
+  typeof window !== 'undefined' &&
+  window.location.protocol === 'https:' &&
+  MEDIA_BASE_URL.startsWith('http://')
+    ? 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4'
+    : `${MEDIA_BASE_URL}/hero-folio.mp4`
 
 export default function HomePage() {
   const dispatch = useAppDispatch()

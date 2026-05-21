@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600">
+  <rect width="400" height="600" fill="#ececec" />
+  <rect x="28" y="28" width="344" height="544" rx="14" fill="#1c1c1c" />
+  <text x="50%" y="44%" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="42" font-weight="700">
+    Folio
+  </text>
+  <text x="50%" y="54%" text-anchor="middle" fill="#d0d0d0" font-family="Arial, sans-serif" font-size="24">
+    Publishing Service
+  </text>
+</svg>
