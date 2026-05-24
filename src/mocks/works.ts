@@ -91,16 +91,18 @@ export const mockWorks: Work[] = [
     param_deadline: 'до 14 дней', param_quantity: '1 издание', param_unit: 'за издание', param_format: '—',
   },
   {
-    id: 9, name: 'Тестовая услуга',
-    description: '', price_rub: 1000, work_type: 'Тест', unit: 'шт.',
-    image_url: undefined,
-    video_url:  undefined,
-  },
-  {
-    id: 10, name: 'Ризография',
-    description: 'Ризографическая печать малых тиражей.',
-    price_rub: 3500, work_type: 'Печать', unit: 'лист',
+    id: 9, name: 'Ризография',
+    description:
+      'Ризографическая печать малых и средних тиражей с характерной фактурой и насыщенными цветами. Подходит для зинов, плакатов и авторских изданий.',
+    price_rub: 3500,
+    work_type: 'Печать',
+    unit: 'лист',
     image_url: resolveImageUrl('file-1774601879825304000.png'),
-    video_url:  undefined,
+    video_url: undefined,
+    tags: ['Малый тираж', 'Яркие цвета', 'Авторские издания'],
+    param_deadline: 'от 3 дней',
+    param_quantity: 'от 50 листов',
+    param_unit: 'за лист',
+    param_format: 'A3, A4',
   },
 ]
