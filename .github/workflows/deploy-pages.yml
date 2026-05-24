@@ -30,11 +30,29 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Check MinIO media secret
+      - name: Validate MinIO media secret
+        env:
+          VITE_MEDIA_BASE_URL: ${{ secrets.VITE_MEDIA_BASE_URL }}
         run: |
-          if [ -z "${{ secrets.VITE_MEDIA_BASE_URL }}" ]; then
-            echo "::warning::Set repository secret VITE_MEDIA_BASE_URL (HTTPS MinIO URL). See docs/GITHUB_PAGES_MINIO.md"
+          if [ -z "${VITE_MEDIA_BASE_URL}" ]; then
+            echo "::error::Missing repository secret VITE_MEDIA_BASE_URL. See docs/GITHUB_PAGES_MINIO.md"
+            exit 1
           fi
+          case "${VITE_MEDIA_BASE_URL}" in
+            https://*) ;;
+            *)
+              echo "::error::VITE_MEDIA_BASE_URL must start with https:// (GitHub Pages is HTTPS). Got: ${VITE_MEDIA_BASE_URL}"
+              exit 1
+              ;;
+          esac
+          case "${VITE_MEDIA_BASE_URL}" in
+            */publishing-media) ;;
+            *)
+              echo "::error::VITE_MEDIA_BASE_URL must end with /publishing-media. Got: ${VITE_MEDIA_BASE_URL}"
+              exit 1
+              ;;
+          esac
+          echo "VITE_MEDIA_BASE_URL is set (HTTPS, publishing-media path OK)"
 
       - name: Build for GitHub Pages
         run: npm run build:pages

@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { copyRejectedOrder } from '../api/ordersApi'
 import { OrderWorksService, OrdersService } from '../api/generated'
 import type { Order } from '../types'
+import { normalizeOrder } from '../utils/media'
 import { getApiErrorMessage, withUiRequest } from './thunkUtils'
 import type { RootState } from './store'
 import { logoutThunk } from './authSlice'
@@ -31,7 +32,7 @@ export const fetchCartThunk = createAsyncThunk<Order | null, void, { rejectValue
       const result = (await withUiRequest(dispatch, () => OrdersService.getPublishingOrdersCart())) as Order
       const orderId = result.order_id
       if (!orderId && !result.id) return null
-      return result
+      return normalizeOrder(result) ?? result
     } catch (error) {
       return rejectWithValue(getApiErrorMessage(error, 'Не удалось загрузить черновик'))
     }
@@ -43,7 +44,7 @@ export const fetchOrderByIdThunk = createAsyncThunk<Order, number, { rejectValue
   async (id, { dispatch, rejectWithValue }) => {
     try {
       const result = await withUiRequest(dispatch, () => OrdersService.getPublishingOrders1(id))
-      return result as Order
+      return normalizeOrder(result as Order)
     } catch (error) {
       return rejectWithValue(getApiErrorMessage(error, 'Не удалось загрузить заявку'))
     }
@@ -58,7 +59,7 @@ export const addWorkToDraftThunk = createAsyncThunk<
   try {
     await withUiRequest(dispatch, () => OrderWorksService.postPublishingOrdersCartWorks({ work_id: workId }))
     const cart = (await withUiRequest(dispatch, () => OrdersService.getPublishingOrdersCart())) as Order
-    return cart
+    return normalizeOrder(cart)
   } catch (error) {
     return rejectWithValue(getApiErrorMessage(error, 'Не удалось добавить услугу в заявку'))
   }
@@ -76,7 +77,7 @@ export const updateOrderMetaThunk = createAsyncThunk<
         circulation,
       }),
     )
-    return updated as Order
+    return normalizeOrder(updated as Order)
   } catch (error) {
     return rejectWithValue(getApiErrorMessage(error, 'Не удалось обновить заявку'))
   }
@@ -87,7 +88,7 @@ export const submitOrderThunk = createAsyncThunk<Order, number, { rejectValue: s
   async (orderId, { dispatch, rejectWithValue }) => {
     try {
       const submitted = await withUiRequest(dispatch, () => OrdersService.putPublishingOrdersSubmit(orderId))
-      return submitted as Order
+      return normalizeOrder(submitted as Order)
     } catch (error) {
       return rejectWithValue(getApiErrorMessage(error, 'Не удалось сформировать заявку'))
     }
@@ -127,7 +128,7 @@ export const copyOrderToDraftThunk = createAsyncThunk<
 >('order/copyToDraft', async (orderId, { dispatch, rejectWithValue }) => {
   try {
     const draft = await withUiRequest(dispatch, () => copyRejectedOrder(orderId))
-    return draft
+    return normalizeOrder(draft)
   } catch (error) {
     return rejectWithValue(getApiErrorMessage(error, 'Не удалось создать заявку на основе отклонённой'))
   }

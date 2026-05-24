@@ -4,6 +4,7 @@ import { APP_PROFILE, IS_GUEST_MODE } from '../config/env'
 import { mockWorks } from '../mocks/works'
 import type { Work } from '../types'
 import type { WorksListFilters } from '../cache/worksCache'
+import { normalizeWork, normalizeWorks } from '../utils/media'
 
 export type WorksDataSource = 'api' | 'mock'
 
@@ -28,7 +29,7 @@ export function getMockWorks(filters: WorksListFilters): Work[] {
 
 export async function fetchWorksByProfile(filters: WorksListFilters): Promise<WorksRepositoryListResult> {
   if (IS_GUEST_MODE) {
-    return { items: applyMockFilters(filters), serverCache: null, source: 'mock' }
+    return { items: applyMockFilters(filters).map(normalizeWork), serverCache: null, source: 'mock' }
   }
 
   const { items, serverCache } = await fetchWorksWithCacheMeta(
@@ -38,17 +39,17 @@ export async function fetchWorksByProfile(filters: WorksListFilters): Promise<Wo
     filters.workType || undefined,
   )
 
-  return { items, serverCache, source: 'api' }
+  return { items: normalizeWorks(items), serverCache, source: 'api' }
 }
 
 export async function fetchWorkByIdProfile(id: number): Promise<Work> {
   if (IS_GUEST_MODE) {
     const fromMock = mockWorks.find((work) => work.id === id)
-    if (fromMock) return fromMock
+    if (fromMock) return normalizeWork(fromMock)
     throw new Error('Услуга не найдена')
   }
 
-  return (await WorksService.getWorks1(id)) as Work
+  return normalizeWork((await WorksService.getWorks1(id)) as Work)
 }
 
 export const allowMockFallbackOnError = (): boolean => APP_PROFILE === 'local-api'

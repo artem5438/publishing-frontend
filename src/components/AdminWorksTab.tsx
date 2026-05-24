@@ -4,6 +4,7 @@ import {
   fetchAdminWorksThunk,
 } from '../store/worksAdminSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { resolveSafeImageUrl } from '../utils/media'
 import type { Work } from '../types'
 
 interface AdminWorksTabProps {
@@ -48,7 +49,7 @@ export default function AdminWorksTab({ onAdd, onEdit }: AdminWorksTabProps) {
             <div key={work.id} className="profile-order-card admin-work-card">
               <div className="admin-work-card-main">
                 {work.image_url ? (
-                  <img src={work.image_url} alt={work.name} className="admin-work-thumb" />
+                  <img src={resolveSafeImageUrl(work.image_url)} alt={work.name} className="admin-work-thumb" />
                 ) : (
                   <div className="admin-work-thumb-placeholder">нет фото</div>
                 )}

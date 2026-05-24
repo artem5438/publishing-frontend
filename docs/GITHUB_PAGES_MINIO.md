@@ -1,8 +1,20 @@
 # GitHub Pages + MinIO media
 
-Photos and videos on Pages are loaded from MinIO (`VITE_MEDIA_BASE_URL`), not from `public/`.
+Photos and videos on Pages load from MinIO (`VITE_MEDIA_BASE_URL`), not from `public/`.
 
-Pages build profile: `VITE_APP_PROFILE=pages-guest`.
+Profile: `VITE_APP_PROFILE=pages-guest` (mock catalog in [`src/mocks/works.ts`](../src/mocks/works.ts)).
+
+The UI rewrites `.../publishing-media/<file>` to `VITE_MEDIA_BASE_URL` at runtime, but mock URLs are **baked in at build time** from the same secret.
+
+## Quick checklist (before demo)
+
+1. On Mac: `docker compose up -d minio minio-init` in `publishing-backend`
+2. Run tunnel: `./scripts/start-pages-tunnel.sh` (keep terminal open)
+3. Copy printed `VITE_MEDIA_BASE_URL` into GitHub → **Settings → Secrets → Actions**
+4. GitHub → **Actions** → **Deploy Frontend To GitHub Pages** → **Run workflow**
+5. Open https://artem5438.github.io/publishing-frontend/works → DevTools → Network → images **200**
+
+**Important:** Quick Cloudflare tunnel URL **changes every restart**. If photos break after reboot, repeat steps 2–4.
 
 ## 1. MinIO bucket
 
@@ -11,60 +23,68 @@ cd publishing-backend
 docker compose up -d minio minio-init
 ```
 
-This creates bucket `publishing-media`, enables public read, and sets CORS for `https://artem5438.github.io`.
+Bucket `publishing-media` is public read. CORS allows `https://artem5438.github.io`.
 
-## 2. HTTPS URL for MinIO (required)
+## 2. HTTPS tunnel (required)
 
-GitHub Pages is served over HTTPS. Browsers block `http://` media (mixed content).
-
-Choose one:
-
-### A. Tunnel to MinIO (port 9000)
+GitHub Pages is HTTPS. Browsers block `http://` media (mixed content).
 
 ```bash
-# example: cloudflared tunnel --url http://localhost:9000
+cd publishing-frontend
+./scripts/start-pages-tunnel.sh
 ```
 
-Secret value:
-
-```text
-VITE_MEDIA_BASE_URL=https://<tunnel-host>/publishing-media
-```
-
-### B. Tunnel to nginx HTTPS (port 443)
+Or manually:
 
 ```bash
-cd publishing-backend
-docker compose -f docker-compose.yml -f docker-compose.https.yml up -d
-# tunnel to https://localhost:443 — nginx proxies /publishing-media/ → MinIO
+cloudflared tunnel --url http://localhost:9000
 ```
 
-Secret value:
+Use the printed host:
 
 ```text
-VITE_MEDIA_BASE_URL=https://<tunnel-host>/publishing-media
+VITE_MEDIA_BASE_URL=https://xxxx.trycloudflare.com/publishing-media
 ```
+
+Test in browser (tunnel running):
+
+```text
+https://xxxx.trycloudflare.com/publishing-media/print-digital.jpg
+```
+
+Expect JPEG, not 404.
 
 ## 3. GitHub repository secret
 
-Repository → **Settings** → **Secrets and variables** → **Actions** → **New repository secret**
+Repository → **Settings** → **Secrets and variables** → **Actions** → `VITE_MEDIA_BASE_URL`
 
-| Name | Example |
+| Rule | Example |
 |------|---------|
-| `VITE_MEDIA_BASE_URL` | `https://abc.trycloudflare.com/publishing-media` |
+| HTTPS only | `https://abc.trycloudflare.com/publishing-media` |
+| Ends with `/publishing-media` | not `.../publishing-media/` extra slash issues — no trailing path after bucket name except as shown |
+| No `localhost`, no `http://` | |
 
-Set the same URL in backend `MINIO_PUBLIC_URL`.
+CI fails the build if the secret is missing or invalid (see [deploy-pages.yml](../.github/workflows/deploy-pages.yml)).
 
-## 4. GitHub Pages settings
+## 4. Deploy
 
-- **Settings** → **Pages** → **Build and deployment** → Source: **GitHub Actions**
-- Site URL: `https://artem5438.github.io/publishing-frontend/`
+- **Settings → Pages → Source:** GitHub Actions
+- Push to `main` or **Run workflow** on **Deploy Frontend To GitHub Pages**
 
-Push to `main` to deploy.
+## 5. Verify live site
 
-## 5. Verify
+- https://artem5438.github.io/publishing-frontend/works
+- Network: requests to your **current** tunnel host → **200**
+- `blocked:mixed-content` → secret uses `http://`
+- Placeholder “Folio Publishing Service” → secret empty at build or dead tunnel URL in old bundle
 
-- Open Pages URL — no 404 on `/works`
-- DevTools → Network — images return **200** from MinIO host
-- Hero video on Home plays
-- Guest UI only (no auth/cart buttons)
+Hard refresh: **Cmd+Shift+R**.
+
+## Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| Old tunnel in bundle | Update secret + re-run workflow |
+| 404 on images | Start `cloudflared`, match secret URL |
+| CI fails on secret | Set `VITE_MEDIA_BASE_URL` to valid HTTPS URL |
+| Works on Mac, not Pages | Pages cannot use `localhost:9000` — tunnel required |

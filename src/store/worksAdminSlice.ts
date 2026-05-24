@@ -3,6 +3,7 @@ import { WorksService } from '../api/generated'
 import { createWorkMultipart, deleteWorkById, updateWorkMultipart } from '../api/worksApi'
 import { invalidateWorksClientCache } from '../cache/worksCache'
 import type { Work } from '../types'
+import { normalizeWork, normalizeWorks } from '../utils/media'
 import { getApiErrorMessage, withUiRequest } from './thunkUtils'
 import type { RootState } from './store'
 import { logoutThunk } from './authSlice'
@@ -26,7 +27,7 @@ export const fetchAdminWorksThunk = createAsyncThunk<Work[], void, { rejectValue
   async (_, { dispatch, rejectWithValue }) => {
     try {
       const data = await withUiRequest(dispatch, () => WorksService.getWorks())
-      return data as Work[]
+      return normalizeWorks(data as Work[])
     } catch (error) {
       return rejectWithValue(getApiErrorMessage(error, 'Не удалось загрузить услуги'))
     }
@@ -38,7 +39,7 @@ export const createWorkThunk = createAsyncThunk<Work, FormData, { rejectValue: s
   async (formData, { dispatch, rejectWithValue }) => {
     try {
       const work = await withUiRequest(dispatch, () => createWorkMultipart(formData))
-      return work
+      return normalizeWork(work)
     } catch (error) {
       return rejectWithValue(getApiErrorMessage(error, 'Не удалось создать услугу'))
     }
@@ -52,7 +53,7 @@ export const updateWorkThunk = createAsyncThunk<
 >('worksAdmin/update', async ({ id, formData }, { dispatch, rejectWithValue }) => {
   try {
     const work = await withUiRequest(dispatch, () => updateWorkMultipart(id, formData))
-    return work
+    return normalizeWork(work)
   } catch (error) {
     return rejectWithValue(getApiErrorMessage(error, 'Не удалось обновить услугу'))
   }

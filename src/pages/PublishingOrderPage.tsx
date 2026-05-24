@@ -13,6 +13,7 @@ import {
 } from '../store/orderSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { getOrderStatusLabel } from '../utils/orderStatus'
+import { resolveSafeImageUrl } from '../utils/media'
 
 export default function PublishingOrderPage() {
   const { id } = useParams<{ id: string }>()
@@ -219,7 +220,7 @@ export default function PublishingOrderPage() {
         {sortedWorks.map((item) => (
           <div key={item.work_id} className="order-item-card-custom">
             {item.image_url ? (
-              <img src={item.image_url} alt={item.work_name} className="order-item-img" />
+              <img src={resolveSafeImageUrl(item.image_url)} alt={item.work_name} className="order-item-img" />
             ) : (
               <div className="order-item-img-placeholder" />
             )}

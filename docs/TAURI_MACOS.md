@@ -19,7 +19,7 @@ cd publishing-frontend
 export VITE_APP_PROFILE=tauri-api
 export VITE_API_BASE=http://192.168.1.118:8080/api
 export VITE_MEDIA_BASE_URL=http://192.168.1.118:9000/publishing-media
-npm run build:tauri
+npm run build:tauri-api-ui && npm run build:tauri
 ```
 
 На том же Mac можно `127.0.0.1` вместо LAN IP. Альтернатива: скопировать `.env.tauri-api.example` → `.env.production.local` с вашим IP.

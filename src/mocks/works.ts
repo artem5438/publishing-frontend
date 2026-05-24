@@ -1,19 +1,13 @@
 import type { Work } from '../types'
 import { MEDIA_BASE_URL } from '../config/env'
 
-const isHttpsPage = typeof window !== 'undefined' && window.location.protocol === 'https:'
-const shouldUsePublicFallback = isHttpsPage && MEDIA_BASE_URL.startsWith('http://')
-const FALLBACK_IMAGE_URL = `${import.meta.env.BASE_URL}mock-media/work-cover.svg`
-
 const resolveImageUrl = (fileName?: string): string | undefined => {
   if (!fileName) return undefined
-  if (shouldUsePublicFallback) return FALLBACK_IMAGE_URL
   return `${MEDIA_BASE_URL}/${fileName}`
 }
 
 const resolveVideoUrl = (fileName?: string): string | undefined => {
   if (!fileName) return undefined
-  if (shouldUsePublicFallback) return undefined
   return `${MEDIA_BASE_URL}/${fileName}`
 }
 
