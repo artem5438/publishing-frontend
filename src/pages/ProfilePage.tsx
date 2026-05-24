@@ -1,21 +1,18 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
 import { updateProfileThunk } from '../store/authSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { copyOrderToDraftThunk } from '../store/orderSlice'
 import { fetchUserOrdersThunk, setUserOrdersFilters } from '../store/userOrdersSlice'
-
-const STATUS_LABELS: Record<string, { label: string; color: string }> = {
-  formed:    { label: 'На рассмотрении', color: '#f59e0b' },
-  completed: { label: 'Выполнен',        color: '#22c55e' },
-  rejected:  { label: 'Отклонён',        color: '#e53935' },
-  draft:     { label: 'Черновик',        color: '#999'    },
-}
+import { getOrderStatusInfo } from '../utils/orderStatus'
 
 export default function ProfilePage() {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
   const user = useAppSelector((state) => state.auth.user)
+  const orderMutating = useAppSelector((state) => state.order.mutating)
   const authLoading = useAppSelector((state) => state.auth.loading)
   const { items: orders, loading, error, filters } = useAppSelector((state) => state.userOrders)
 
@@ -45,6 +42,13 @@ export default function ProfilePage() {
     setDateFromInput(today)
     setDateToInput(today)
     dispatch(setUserOrdersFilters({ status: statusInput, dateFrom: today, dateTo: today }))
+  }
+
+  const handleCopyRejected = async (orderId: number) => {
+    const result = await dispatch(copyOrderToDraftThunk(orderId))
+    if (copyOrderToDraftThunk.fulfilled.match(result)) {
+      navigate(`/publishing-orders/${result.payload.id}`)
+    }
   }
 
   const handleProfileSave = async () => {
@@ -150,7 +154,7 @@ export default function ProfilePage() {
               </thead>
               <tbody>
                 {sortedOrders.map((order) => {
-                  const statusInfo = STATUS_LABELS[order.status] ?? { label: order.status, color: '#999' }
+                  const statusInfo = getOrderStatusInfo(order.status)
                   const date = order.formed_at
                     ? new Date(order.formed_at).toLocaleDateString('ru-RU')
                     : new Date(order.created_at).toLocaleDateString('ru-RU')
@@ -167,9 +171,21 @@ export default function ProfilePage() {
                       <td>{date}</td>
                       <td>{total}</td>
                       <td>
-                        <Link className="btn-detail-custom" to={`/publishing-orders/${order.id}`}>
-                          Открыть
-                        </Link>
+                        <div className="d-flex flex-wrap gap-2">
+                          <Link className="btn-detail-custom" to={`/publishing-orders/${order.id}`}>
+                            Открыть
+                          </Link>
+                          {order.status === 'rejected' && user?.role !== 'moderator' && (
+                            <button
+                              type="button"
+                              className="btn-detail-custom"
+                              disabled={orderMutating}
+                              onClick={() => void handleCopyRejected(order.id)}
+                            >
+                              Новая на основе этой
+                            </button>
+                          )}
+                        </div>
                       </td>
                     </tr>
                   )

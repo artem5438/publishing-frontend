@@ -12,7 +12,6 @@ export default function RegisterPage() {
   const [login, setLogin] = useState('')
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
-  const [role, setRole] = useState<'creator' | 'moderator'>('creator')
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
 
@@ -21,7 +20,7 @@ export default function RegisterPage() {
     setError('')
     setSuccess('')
 
-    const result = await dispatch(registerThunk({ login, password, name, role }))
+    const result = await dispatch(registerThunk({ login, password, name }))
     if (registerThunk.rejected.match(result)) {
       setError(result.payload ?? 'Не удалось зарегистрироваться')
       return
@@ -38,7 +37,7 @@ export default function RegisterPage() {
       <div className="login-page-wrapper">
         <div className="login-card">
           <h1 className="login-title">Регистрация</h1>
-          <p className="login-subtitle">Создайте аккаунт пользователя или модератора</p>
+          <p className="login-subtitle">Создайте аккаунт заказчика</p>
 
           <form onSubmit={handleSubmit} className="login-form">
             <div className="login-field">
@@ -72,19 +71,6 @@ export default function RegisterPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-            </div>
-
-            <div className="login-field">
-              <label htmlFor="register-role">Роль</label>
-              <select
-                id="register-role"
-                value={role}
-                onChange={(e) => setRole(e.target.value as 'creator' | 'moderator')}
-                className="profile-select"
-              >
-                <option value="creator">Пользователь</option>
-                <option value="moderator">Модератор</option>
-              </select>
             </div>
 
             {error && <div className="login-error">{error}</div>}

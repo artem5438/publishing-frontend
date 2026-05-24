@@ -13,13 +13,7 @@ import {
 import { fetchAdminWorksThunk } from '../store/worksAdminSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import type { Work } from '../types'
-
-const STATUS_LABELS: Record<string, { label: string; color: string }> = {
-  formed:    { label: 'На рассмотрении', color: '#f59e0b' },
-  completed: { label: 'Выполнен',        color: '#22c55e' },
-  rejected:  { label: 'Отклонён',        color: '#e53935' },
-  draft:     { label: 'Черновик',        color: '#999'    },
-}
+import { getOrderStatusInfo } from '../utils/orderStatus'
 
 export default function AdminPage() {
   const dispatch = useAppDispatch()
@@ -197,7 +191,7 @@ export default function AdminPage() {
         {!loading &&
           !error &&
           formedOrders.map((order) => {
-            const statusInfo = STATUS_LABELS[order.status] ?? { label: order.status, color: '#999' }
+            const statusInfo = getOrderStatusInfo(order.status)
             const total =
               order.total_price != null ? `${order.total_price.toLocaleString('ru-RU')} ₽` : '—'
             const formedDate = order.formed_at
@@ -260,6 +254,12 @@ export default function AdminPage() {
                     </>
                   ) : (
                     <div className="d-flex gap-2 flex-wrap align-items-center">
+                      <Link
+                        to={`/publishing-orders/${order.id}`}
+                        className="btn btn-outline-primary btn-sm"
+                      >
+                        Посмотреть состав
+                      </Link>
                       <Button
                         variant="success"
                         size="sm"
@@ -297,6 +297,7 @@ export default function AdminPage() {
                 <tr>
                   <th>ID</th>
                   <th>Автор</th>
+                  <th>Книга</th>
                   <th>Статус</th>
                   <th>Дата</th>
                   <th>Действие</th>
@@ -304,8 +305,7 @@ export default function AdminPage() {
               </thead>
               <tbody>
                 {filteredOrders.map((order) => {
-                  const statusInfo =
-                    STATUS_LABELS[order.status] ?? { label: order.status, color: '#999' }
+                  const statusInfo = getOrderStatusInfo(order.status)
                   const dateRaw =
                     order.status === 'draft'
                       ? order.created_at
@@ -318,6 +318,7 @@ export default function AdminPage() {
                     <tr key={order.id}>
                       <td>{order.id}</td>
                       <td>{order.creator_login || '—'}</td>
+                      <td>{order.book_title || '—'}</td>
                       <td>
                         <span
                           className="profile-order-status"

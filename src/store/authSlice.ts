@@ -49,7 +49,7 @@ export const loginThunk = createAsyncThunk<
 
 export const registerThunk = createAsyncThunk<
   void,
-  { login: string; password: string; name: string; role?: string },
+  { login: string; password: string; name: string },
   { rejectValue: string; state: RootState }
 >('auth/register', async (payload, { dispatch, rejectWithValue }) => {
   try {

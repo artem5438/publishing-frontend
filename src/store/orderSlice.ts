@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { copyRejectedOrder } from '../api/ordersApi'
 import { OrderWorksService, OrdersService } from '../api/generated'
 import type { Order } from '../types'
 import { getApiErrorMessage, withUiRequest } from './thunkUtils'
@@ -116,6 +117,19 @@ export const updateOrderWorkThunk = createAsyncThunk<
     )
   } catch (error) {
     return rejectWithValue(getApiErrorMessage(error, 'Не удалось обновить позицию'))
+  }
+})
+
+export const copyOrderToDraftThunk = createAsyncThunk<
+  Order,
+  number,
+  { rejectValue: string; state: RootState }
+>('order/copyToDraft', async (orderId, { dispatch, rejectWithValue }) => {
+  try {
+    const draft = await withUiRequest(dispatch, () => copyRejectedOrder(orderId))
+    return draft
+  } catch (error) {
+    return rejectWithValue(getApiErrorMessage(error, 'Не удалось создать заявку на основе отклонённой'))
   }
 })
 
@@ -266,6 +280,19 @@ const orderSlice = createSlice({
       .addCase(removeOrderWorkThunk.rejected, (state, action) => {
         state.mutating = false
         state.error = action.payload ?? 'Ошибка удаления позиции'
+      })
+      .addCase(copyOrderToDraftThunk.pending, (state) => {
+        state.mutating = true
+        state.error = ''
+      })
+      .addCase(copyOrderToDraftThunk.fulfilled, (state, action) => {
+        state.mutating = false
+        state.selectedOrder = action.payload
+        state.draftOrder = action.payload
+      })
+      .addCase(copyOrderToDraftThunk.rejected, (state, action) => {
+        state.mutating = false
+        state.error = action.payload ?? 'Ошибка копирования заявки'
       })
       .addCase(logoutThunk.fulfilled, () => initialState)
   },

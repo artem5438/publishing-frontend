@@ -11,7 +11,8 @@ import {
 } from '../cache/worksCache'
 import { mockWorks } from '../mocks/works'
 import type { Work } from '../types'
-import { withUiRequest } from './thunkUtils'
+import { isBackendUnavailable } from '../utils/backendAvailability'
+import { getApiErrorMessage, withUiRequest } from './thunkUtils'
 import type { RootState } from './store'
 import { logoutThunk } from './authSlice'
 
@@ -65,7 +66,7 @@ export const fetchWorksThunk = createAsyncThunk<
   WorksFetchResult,
   WorksFilters,
   { rejectValue: string; state: RootState }
->('works/fetchList', async (filters, { dispatch }) => {
+>('works/fetchList', async (filters, { dispatch, rejectWithValue }) => {
   const useClientCache = !hasActiveWorksFilters(filters)
 
   if (useClientCache) {
@@ -99,10 +100,13 @@ export const fetchWorksThunk = createAsyncThunk<
       clientCache: 'miss',
       serverCache: server,
     }
-  } catch {
-    const mocked = applyMockFilters(filters)
-    saveWorksCacheStatus('miss', useClientCache ? null : 'BYPASS')
-    return { items: mocked, clientCache: 'miss', serverCache: null }
+  } catch (error) {
+    if (isBackendUnavailable(error)) {
+      const mocked = applyMockFilters(filters)
+      saveWorksCacheStatus('miss', useClientCache ? null : 'BYPASS')
+      return { items: mocked, clientCache: 'miss', serverCache: null }
+    }
+    return rejectWithValue(getApiErrorMessage(error, 'Не удалось загрузить каталог услуг'))
   }
 })
 
@@ -114,10 +118,12 @@ export const fetchWorkByIdThunk = createAsyncThunk<
   try {
     const result = await withUiRequest(dispatch, () => WorksService.getWorks1(id))
     return result as Work
-  } catch {
-    const fromMock = mockWorks.find((work) => work.id === id)
-    if (fromMock) return fromMock
-    return rejectWithValue('Услуга не найдена')
+  } catch (error) {
+    if (isBackendUnavailable(error)) {
+      const fromMock = mockWorks.find((work) => work.id === id)
+      if (fromMock) return fromMock
+    }
+    return rejectWithValue(getApiErrorMessage(error, 'Услуга не найдена'))
   }
 })
 

@@ -1,7 +1,15 @@
+import axios from 'axios'
 import { ApiError } from '../api/generated'
 import { requestFinished, requestStarted } from './uiSlice'
 
 export const getApiErrorMessage = (error: unknown, fallback: string): string => {
+  if (axios.isAxiosError(error)) {
+    const body = error.response?.data as { error?: string; message?: string } | undefined
+    if (body?.error) return body.error
+    if (body?.message) return body.message
+    if (error.message) return error.message
+    return fallback
+  }
   if (error instanceof ApiError) {
     const body = error.body as { error?: string; message?: string } | undefined
     if (body?.error) return body.error

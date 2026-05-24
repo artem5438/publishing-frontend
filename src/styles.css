@@ -282,22 +282,18 @@ body {
 }
 
 .works-page-container {
-  padding-left: 48px !important;
-  padding-right: 48px !important;
+  padding-left: 32px !important;
+  padding-right: 32px !important;
 }
 
 /* Filter panel */
 .mis-filter-panel {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-end;
   margin-bottom: 32px;
   gap: 16px;
   flex-wrap: wrap;
-  background: #fff;
-  border: 1px solid #e8e8e8;
-  border-radius: 8px;
-  padding: 16px 18px;
 }
 
 .mis-filter-field {
@@ -307,15 +303,15 @@ body {
 }
 
 .mis-filter-field-search {
-  min-width: 260px;
+  min-width: 240px;
 }
 
 .mis-filter-field-price {
-  min-width: 120px;
+  min-width: 110px;
 }
 
 .mis-filter-field-type {
-  min-width: 200px;
+  min-width: 180px;
 }
 
 .mis-filter-actions {
@@ -346,17 +342,17 @@ body {
 
 .mis-filter-field-search .form-control,
 .mis-filter-field-search .form-select {
-  width: 260px;
+  width: 240px;
 }
 
 .mis-filter-field-price .form-control,
 .mis-filter-field-price .form-select {
-  width: 120px;
+  width: 110px;
 }
 
 .mis-filter-field-type .form-control,
 .mis-filter-field-type .form-select {
-  width: 200px;
+  width: 180px;
 }
 
 .btn-reset-filter {
@@ -380,7 +376,7 @@ body {
 /* Works Grid */
 .works-grid-custom {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 24px;
 }
 
@@ -1330,8 +1326,8 @@ body,
 
 @media (max-width: 1024px) {
   .works-page-container {
-    padding-left: 28px !important;
-    padding-right: 28px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
   }
 
   .works-grid-custom {

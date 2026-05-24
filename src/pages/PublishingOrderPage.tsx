@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
 import {
+  copyOrderToDraftThunk,
   deleteOrderThunk,
   fetchOrderByIdThunk,
   removeOrderWorkThunk,
@@ -11,6 +12,7 @@ import {
   updateOrderWorkThunk,
 } from '../store/orderSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { getOrderStatusLabel } from '../utils/orderStatus'
 
 export default function PublishingOrderPage() {
   const { id } = useParams<{ id: string }>()
@@ -18,6 +20,7 @@ export default function PublishingOrderPage() {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const { selectedOrder, loadingOrder, mutating, error } = useAppSelector((state) => state.order)
+  const user = useAppSelector((state) => state.auth.user)
 
   const [bookTitle, setBookTitle] = useState('')
   const [circulation, setCirculation] = useState(1)
@@ -34,14 +37,23 @@ export default function PublishingOrderPage() {
   }, [selectedOrder?.id])
 
   const isDraft = selectedOrder?.status === 'draft'
+  const isRejected = selectedOrder?.status === 'rejected'
+  const canCopyRejected =
+    isRejected &&
+    user?.role !== 'moderator' &&
+    (!selectedOrder?.creator_login || selectedOrder.creator_login === user?.login)
   const sortedWorks = useMemo(
     () => [...(selectedOrder?.works ?? [])].sort((a, b) => a.work_id - b.work_id),
     [selectedOrder?.works],
   )
-  const totalPrice = useMemo(
+  const servicesSubtotal = useMemo(
     () => sortedWorks.reduce((sum, item) => sum + item.price_rub * item.quantity, 0),
     [sortedWorks],
   )
+  const circulationValue = Math.max(1, Number.isFinite(circulation) ? circulation : 1)
+  const draftGrandTotal = servicesSubtotal * circulationValue
+  const displayTotal =
+    !isDraft && selectedOrder?.total_price != null ? selectedOrder.total_price : draftGrandTotal
 
   const handleSubmitOrder = async () => {
     if (!selectedOrder?.id) return
@@ -69,6 +81,14 @@ export default function PublishingOrderPage() {
     const result = await dispatch(deleteOrderThunk(selectedOrder.id))
     if (deleteOrderThunk.fulfilled.match(result)) {
       navigate('/')
+    }
+  }
+
+  const handleCopyToDraft = async () => {
+    if (!selectedOrder?.id) return
+    const result = await dispatch(copyOrderToDraftThunk(selectedOrder.id))
+    if (copyOrderToDraftThunk.fulfilled.match(result)) {
+      navigate(`/publishing-orders/${result.payload.id}`)
     }
   }
 
@@ -114,7 +134,7 @@ export default function PublishingOrderPage() {
       <div className="order-page-wrapper">
         <h1>Заявка №{selectedOrder.id}</h1>
         <p className="order-meta">
-          Статус: <strong>{selectedOrder.status === 'draft' ? 'Черновик' : selectedOrder.status}</strong>
+          Статус: <strong>{getOrderStatusLabel(selectedOrder.status)}</strong>
         </p>
 
         {selectedOrder.status === 'rejected' && selectedOrder.rejection_reason && (
@@ -128,6 +148,19 @@ export default function PublishingOrderPage() {
             }}
           >
             <strong>Причина отклонения:</strong> {selectedOrder.rejection_reason}
+          </div>
+        )}
+
+        {canCopyRejected && (
+          <div className="order-actions-bar" style={{ marginBottom: 16 }}>
+            <button
+              type="button"
+              className="order-primary-action-btn"
+              disabled={mutating}
+              onClick={() => void handleCopyToDraft()}
+            >
+              Создать новую заявку на основе этой
+            </button>
           </div>
         )}
 
@@ -225,8 +258,26 @@ export default function PublishingOrderPage() {
           </div>
         ))}
 
-        <div className="order-result-card">
-          <span className="order-result-text">Итого: {totalPrice.toLocaleString()} ₽</span>
+        <div className="order-result-card" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: 8 }}>
+          {isDraft ? (
+            <>
+              <span className="order-result-text">
+                Сумма услуг: {servicesSubtotal.toLocaleString('ru-RU')} ₽
+              </span>
+              <span className="order-result-text">Тираж: {circulationValue} экз.</span>
+              <span className="order-result-text">
+                Итого к оплате: {servicesSubtotal.toLocaleString('ru-RU')} × {circulationValue} ={' '}
+                {draftGrandTotal.toLocaleString('ru-RU')} ₽
+              </span>
+            </>
+          ) : (
+            <span className="order-result-text">
+              Итого: {displayTotal.toLocaleString('ru-RU')} ₽
+              {selectedOrder.circulation != null && selectedOrder.circulation > 0
+                ? ` (тираж ${selectedOrder.circulation} экз.)`
+                : ''}
+            </span>
+          )}
           {!isDraft && <span>Режим просмотра: редактирование отключено</span>}
         </div>
 

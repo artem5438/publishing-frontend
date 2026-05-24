@@ -20,13 +20,13 @@ export default defineConfig({
   base: basePath,
   plugins: [
     react(),
-    VitePWA({
+    VitePWA({ // описываем PWA
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'icons.svg', 'pwa-192.svg', 'pwa-512.svg'],
-      workbox: {
+      workbox: { // настраиваем workbox
         maximumFileSizeToCacheInBytes: 30 * 1024 * 1024,
       },
-      manifest: {
+      manifest: { // описываем manifest
         name: 'Folio Publishing',
         short_name: 'Folio',
         description: 'Каталог издательских услуг',
@@ -35,7 +35,7 @@ export default defineConfig({
         display: 'standalone',
         start_url: basePath,
         scope: basePath,
-        icons: [
+        icons: [ // описываем icons
           {
             src: 'pwa-192.svg',
             sizes: '192x192',

@@ -1,5 +1,5 @@
 const trimTrailingSlash = (value: string) => value.replace(/\/+$/, '')
-
+// получаем переменные окружения
 const mediaBaseRaw = import.meta.env.VITE_MEDIA_BASE_URL ?? 'http://localhost:9000/publishing-media'
 const apiBaseRaw = import.meta.env.VITE_API_BASE ?? '/api'
 const guestModeRaw = import.meta.env.VITE_GUEST_MODE ?? 'false'
