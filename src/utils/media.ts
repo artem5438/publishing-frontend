@@ -1,4 +1,5 @@
-const IMAGE_FALLBACK = '/mock-media/work-cover.svg'
+const fallbackBase = import.meta.env.BASE_URL || '/'
+export const IMAGE_FALLBACK = `${fallbackBase}mock-media/work-cover.svg`
 
 const isMixedContent = (url: string) =>
   typeof window !== 'undefined' &&

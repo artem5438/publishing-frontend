@@ -3,7 +3,7 @@ import { MEDIA_BASE_URL } from '../config/env'
 
 const isHttpsPage = typeof window !== 'undefined' && window.location.protocol === 'https:'
 const shouldUsePublicFallback = isHttpsPage && MEDIA_BASE_URL.startsWith('http://')
-const FALLBACK_IMAGE_URL = '/mock-media/work-cover.svg'
+const FALLBACK_IMAGE_URL = `${import.meta.env.BASE_URL}mock-media/work-cover.svg`
 
 const resolveImageUrl = (fileName?: string): string | undefined => {
   if (!fileName) return undefined

@@ -30,13 +30,24 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Check MinIO media secret
+        run: |
+          if [ -z "${{ secrets.VITE_MEDIA_BASE_URL }}" ]; then
+            echo "::warning::Set repository secret VITE_MEDIA_BASE_URL (HTTPS MinIO URL). See docs/GITHUB_PAGES_MINIO.md"
+          fi
+
       - name: Build for GitHub Pages
-        run: npm run build
+        run: npm run build:pages
         env:
+          VITE_APP_PROFILE: pages-guest
           VITE_BASE_PATH: /${{ github.event.repository.name }}/
+          VITE_MEDIA_BASE_URL: ${{ secrets.VITE_MEDIA_BASE_URL }}
 
       - name: Add SPA 404 fallback
         run: cp dist/index.html dist/404.html
+
+      - name: Add .nojekyll for GitHub Pages
+        run: touch dist/.nojekyll
 
       - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3

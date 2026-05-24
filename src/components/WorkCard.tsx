@@ -4,7 +4,7 @@ import { addWorkToDraftThunk } from '../store/orderSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { useState } from 'react'
 import { IS_GUEST_MODE } from '../config/env'
-import { resolveSafeImageUrl } from '../utils/media'
+import { IMAGE_FALLBACK, resolveSafeImageUrl } from '../utils/media'
 
 interface WorkCardProps {
   work: Work
@@ -44,12 +44,12 @@ export default function WorkCard({ work }: WorkCardProps) {
         className="card-img-top"
         onError={(e) => {
           const el = e.target as HTMLImageElement
-          if (el.src.includes('/mock-media/work-cover.svg')) {
+          if (el.src.includes('mock-media/work-cover.svg')) {
             el.style.display = 'none'
             el.nextElementSibling?.removeAttribute('style')
             return
           }
-          el.src = '/mock-media/work-cover.svg'
+          el.src = IMAGE_FALLBACK
         }}
       />
       <div className="work-card-img-placeholder" style={{ display: 'none' }}>

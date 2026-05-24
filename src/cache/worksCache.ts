@@ -60,6 +60,11 @@ export function getWorksFromClientCache(): Work[] | null {
     }
 
     const parsed = JSON.parse(raw) as CachedWorksPayload
+    if (!Array.isArray(parsed.data)) {
+      sessionStorage.removeItem(STORAGE_KEY)
+      console.info('[cache]', { cache_key: STORAGE_KEY, result: 'miss', reason: 'invalid-payload' })
+      return null
+    }
     if (Date.now() - parsed.savedAt > TTL_MS) {
       sessionStorage.removeItem(STORAGE_KEY)
       console.info('[cache]', { cache_key: STORAGE_KEY, result: 'miss', reason: 'expired' })

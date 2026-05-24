@@ -1,3 +1,21 @@
+# Folio Publishing — frontend
+
+## GitHub Pages
+
+- Enable **Settings → Pages → Source: GitHub Actions**
+- Add secret `VITE_MEDIA_BASE_URL` (HTTPS MinIO URL) — see [docs/GITHUB_PAGES_MINIO.md](docs/GITHUB_PAGES_MINIO.md)
+- Site URL: `https://artem5438.github.io/publishing-frontend/`
+
+## Tauri (macOS guest app)
+
+```bash
+npm run build:tauri
+```
+
+`.app` path: `src-tauri/target/release/bundle/macos/Folio Guest.app` — see [docs/TAURI_MACOS.md](docs/TAURI_MACOS.md)
+
+---
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

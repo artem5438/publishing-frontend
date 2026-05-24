@@ -5,10 +5,12 @@ import FilterPanel from '../components/FilterPanel'
 import WorkCard from '../components/WorkCard'
 import { fetchWorksThunk, setWorksFilters } from '../store/worksSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { IS_DEBUG } from '../config/env'
 
 export default function WorksListPage() {
   const dispatch = useAppDispatch()
-  const { items: works, loading, error, filters } = useAppSelector((state) => state.works)
+  const { items: works, loading, error, filters, source } = useAppSelector((state) => state.works)
+  const worksList = useMemo(() => (Array.isArray(works) ? works : []), [works])
 
   const [searchInput, setSearchInput] = useState(filters.search)
   const [minPriceInput, setMinPriceInput] = useState(filters.minPrice)
@@ -20,8 +22,8 @@ export default function WorksListPage() {
   }, [dispatch, filters])
 
   const workTypes = useMemo(
-    () => [...new Set(works.map((work) => work.work_type).filter(Boolean))] as string[],
-    [works],
+    () => [...new Set(worksList.map((work) => work.work_type).filter(Boolean))] as string[],
+    [worksList],
   )
 
   const handleApplyFilters = () => {
@@ -66,14 +68,19 @@ export default function WorksListPage() {
           </div>
         )}
         {!loading && error && <div className="mis-error">{error}</div>}
-        {!loading && !error && works.length === 0 && (
+        {!loading && !error && worksList.length === 0 && (
           <div className="mis-empty">Услуги не найдены. Попробуйте изменить фильтры.</div>
         )}
-        {!loading && works.length > 0 && (
+        {!loading && worksList.length > 0 && (
           <div className="works-grid-custom">
-            {works.map((work) => (
+            {worksList.map((work) => (
               <WorkCard key={work.id} work={work} />
             ))}
+          </div>
+        )}
+        {IS_DEBUG && (
+          <div className="mt-3 text-muted" style={{ fontSize: 12 }}>
+            Debug: source={source}, filters={JSON.stringify(filters)}, shown={worksList.length}
           </div>
         )}
       </Container>

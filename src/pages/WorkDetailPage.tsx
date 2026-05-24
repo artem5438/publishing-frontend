@@ -3,13 +3,12 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
 import WorkCard from '../components/WorkCard'
-import { getEmbedding, cosineSimilarity } from '../utils/similarity'
 import type { Work } from '../types'
 import { addWorkToDraftThunk } from '../store/orderSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { fetchWorkByIdThunk, fetchWorksThunk } from '../store/worksSlice'
 import { IS_GUEST_MODE } from '../config/env'
-import { resolveSafeImageUrl, resolveSafeVideoUrl } from '../utils/media'
+import { IMAGE_FALLBACK, resolveSafeImageUrl, resolveSafeVideoUrl } from '../utils/media'
 
 export default function WorkDetailPage() {
   const dispatch = useAppDispatch()
@@ -37,25 +36,31 @@ export default function WorkDetailPage() {
 
     let canceled = false
     const compute = async () => {
-      const targetText = `${work.name} ${work.description ?? ''}`
-      const targetEmb = await getEmbedding(targetText)
+      try {
+        const similarity = await import('../utils/similarity')
+        const targetText = `${work.name} ${work.description ?? ''}`
+        const targetEmb = await similarity.getEmbedding(targetText)
 
-      const scored = await Promise.all(
-        others.map(async (item) => ({
-          work: item,
-          score: cosineSimilarity(
-            targetEmb,
-            await getEmbedding(`${item.name} ${item.description ?? ''}`),
-          ),
-        })),
-      )
+        const scored = await Promise.all(
+          others.map(async (item) => ({
+            work: item,
+            score: similarity.cosineSimilarity(
+              targetEmb,
+              await similarity.getEmbedding(`${item.name} ${item.description ?? ''}`),
+            ),
+          })),
+        )
 
-      const top3 = scored
-        .sort((a, b) => b.score - a.score)
-        .slice(0, 3)
-        .map((item) => item.work)
+        const top3 = scored
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 3)
+          .map((item) => item.work)
 
-      if (!canceled) setSimilar(top3)
+        if (!canceled) setSimilar(top3)
+      } catch {
+        // In desktop WebView environments ML model init can fail; keep UI usable.
+        if (!canceled) setSimilar(others.slice(0, 3))
+      }
     }
 
     void compute()
@@ -109,12 +114,12 @@ export default function WorkDetailPage() {
               className="detail-image-custom"
               onError={(e) => {
                 const el = e.target as HTMLImageElement
-                if (el.src.includes('/mock-media/work-cover.svg')) {
+                if (el.src.includes('mock-media/work-cover.svg')) {
                   el.style.display = 'none'
                   el.nextElementSibling?.removeAttribute('style')
                   return
                 }
-                el.src = '/mock-media/work-cover.svg'
+                el.src = IMAGE_FALLBACK
               }}
             />
             <div className="detail-image-placeholder" style={{ display: 'none' }}>

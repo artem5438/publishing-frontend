@@ -1,6 +1,4 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { fetchWorksWithCacheMeta } from '../api/worksApi'
-import { WorksService } from '../api/generated'
 import {
   getWorksFromClientCache,
   hasActiveWorksFilters,
@@ -9,9 +7,16 @@ import {
   setWorksClientCache,
   type WorksListFilters,
 } from '../cache/worksCache'
-import { mockWorks } from '../mocks/works'
 import type { Work } from '../types'
 import { isBackendUnavailable } from '../utils/backendAvailability'
+import { APP_PROFILE } from '../config/env'
+import {
+  allowMockFallbackOnError,
+  fetchWorkByIdProfile,
+  fetchWorksByProfile,
+  getMockWorks,
+  type WorksDataSource,
+} from '../data/worksRepository'
 import { getApiErrorMessage, withUiRequest } from './thunkUtils'
 import type { RootState } from './store'
 import { logoutThunk } from './authSlice'
@@ -25,6 +30,7 @@ export interface WorksFetchResult {
   items: Work[]
   clientCache: ClientCacheStatus
   serverCache: ServerCacheStatus
+  source: WorksDataSource
 }
 
 interface WorksState {
@@ -34,6 +40,7 @@ interface WorksState {
   detailsLoading: boolean
   error: string
   filters: WorksFilters
+  source: WorksDataSource
 }
 
 const emptyFilters: WorksFilters = {
@@ -50,16 +57,8 @@ const initialState: WorksState = {
   detailsLoading: false,
   error: '',
   filters: emptyFilters,
+  source: 'api',
 }
-
-const applyMockFilters = (filters: WorksFilters): Work[] =>
-  mockWorks.filter((work) => {
-    const matchSearch = !filters.search || work.name.toLowerCase().includes(filters.search.toLowerCase())
-    const matchMin = !filters.minPrice || work.price_rub >= Number(filters.minPrice)
-    const matchMax = !filters.maxPrice || work.price_rub <= Number(filters.maxPrice)
-    const matchType = !filters.workType || work.work_type === filters.workType
-    return matchSearch && matchMin && matchMax && matchType
-  })
 
 // Функция для получения данных из сервера с кэш метаданными
 export const fetchWorksThunk = createAsyncThunk<
@@ -67,25 +66,22 @@ export const fetchWorksThunk = createAsyncThunk<
   WorksFilters,
   { rejectValue: string; state: RootState }
 >('works/fetchList', async (filters, { dispatch, rejectWithValue }) => {
+  if (APP_PROFILE === 'pages-guest' || APP_PROFILE === 'tauri-guest') {
+    return { items: getMockWorks(filters), clientCache: 'miss', serverCache: null, source: 'mock' }
+  }
+
   const useClientCache = !hasActiveWorksFilters(filters)
 
   if (useClientCache) {
     const cached = getWorksFromClientCache()
     if (cached) {
       saveWorksCacheStatus('hit', null)
-      return { items: cached, clientCache: 'hit', serverCache: null }
+      return { items: cached, clientCache: 'hit', serverCache: null, source: 'api' }
     }
   }
 
   try {
-    const { items, serverCache } = await withUiRequest(dispatch, () =>
-      fetchWorksWithCacheMeta(
-        filters.search || undefined,
-        filters.minPrice ? Number(filters.minPrice) : undefined,
-        filters.maxPrice ? Number(filters.maxPrice) : undefined,
-        filters.workType || undefined,
-      ),
-    )
+    const { items, serverCache, source } = await withUiRequest(dispatch, () => fetchWorksByProfile(filters))
 
     const server = serverCache ?? null
     if (useClientCache) {
@@ -99,12 +95,13 @@ export const fetchWorksThunk = createAsyncThunk<
       items,
       clientCache: 'miss',
       serverCache: server,
+      source,
     }
   } catch (error) {
-    if (isBackendUnavailable(error)) {
-      const mocked = applyMockFilters(filters)
+    if (allowMockFallbackOnError() && isBackendUnavailable(error)) {
+      const mocked = getMockWorks(filters)
       saveWorksCacheStatus('miss', useClientCache ? null : 'BYPASS')
-      return { items: mocked, clientCache: 'miss', serverCache: null }
+      return { items: mocked, clientCache: 'miss', serverCache: null, source: 'mock' }
     }
     return rejectWithValue(getApiErrorMessage(error, 'Не удалось загрузить каталог услуг'))
   }
@@ -116,11 +113,10 @@ export const fetchWorkByIdThunk = createAsyncThunk<
   { rejectValue: string; state: RootState }
 >('works/fetchById', async (id, { dispatch, rejectWithValue }) => {
   try {
-    const result = await withUiRequest(dispatch, () => WorksService.getWorks1(id))
-    return result as Work
+    return await withUiRequest(dispatch, () => fetchWorkByIdProfile(id))
   } catch (error) {
-    if (isBackendUnavailable(error)) {
-      const fromMock = mockWorks.find((work) => work.id === id)
+    if (allowMockFallbackOnError() && isBackendUnavailable(error)) {
+      const fromMock = getMockWorks(emptyFilters).find((work) => work.id === id)
       if (fromMock) return fromMock
     }
     return rejectWithValue(getApiErrorMessage(error, 'Услуга не найдена'))
@@ -152,8 +148,9 @@ const worksSlice = createSlice({
         state.error = ''
       })
       .addCase(fetchWorksThunk.fulfilled, (state, action) => {
-        state.items = action.payload.items
+        state.items = Array.isArray(action.payload.items) ? action.payload.items : []
         state.loading = false
+        state.source = action.payload.source
       })
       .addCase(fetchWorksThunk.rejected, (state, action) => {
         state.loading = false

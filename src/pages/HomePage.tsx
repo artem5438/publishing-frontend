@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { Container, Spinner } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import WorkCard from '../components/WorkCard'
@@ -14,12 +14,13 @@ export default function HomePage() {
   const dispatch = useAppDispatch()
   const user = useAppSelector((state) => state.auth.user)
   const { items: works, loading, error } = useAppSelector((state) => state.works)
-  const popularWorks = works.slice(0, 3)
+  const worksList = useMemo(() => (Array.isArray(works) ? works : []), [works])
+  const popularWorks = worksList.slice(0, 3)
 
   useEffect(() => {
-    if (works.length > 0) return
+    if (worksList.length > 0) return
     void dispatch(fetchWorksThunk(emptyFilters))
-  }, [dispatch, works.length])
+  }, [dispatch, worksList.length])
 
   return (
     <main className="home-page">
