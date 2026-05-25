@@ -12,13 +12,13 @@ The React app rewrites them at runtime with `VITE_MEDIA_BASE_URL` ([`src/utils/m
 | Kind Ingress | `http://folio.local:8088/publishing-media` | `http://folio.local:8088/publishing-media` in `etc/app.env.k8s` | Same host for API + media |
 | Tauri guest (LAN) | `http://<LAN-IP>:9000/publishing-media` | N/A (mock catalog) | MinIO on Mac, port 9000 |
 | Tauri guest + Kind | `http://<LAN-IP>:8088/publishing-media` | `/publishing-media` | Ingress on 8088 |
-| GitHub Pages | GitHub secret `https://<stable-host>/publishing-media` | N/A (mock) | HTTPS required; see [GITHUB_PAGES_MINIO.md](./GITHUB_PAGES_MINIO.md) |
+| GitHub Pages | `https://<owner>.github.io/<repo>/publishing-media` (CI, from `public/publishing-media/`) | N/A (mock) | No tunnel; see [GITHUB_PAGES_MINIO.md](./GITHUB_PAGES_MINIO.md) |
 
 ## Rules
 
 1. Never put `host.docker.internal` in API responses — browsers cannot reach it.
-2. Pages secret is baked at **CI build**; changing the secret requires re-running the deploy workflow.
-3. Prefer a **named Cloudflare tunnel** for Pages so the secret stays valid across reboots.
+2. Pages media URL is baked at **CI build** from repo name; add files under `public/publishing-media/` and redeploy.
+3. MinIO tunnel for Pages is optional legacy only (default is static files on github.io).
 
 ## Smoke checks
 

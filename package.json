@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "VITE_APP_PROFILE=local-api vite",
-    "dev:guest": "VITE_APP_PROFILE=pages-guest vite",
+    "dev:guest": "VITE_APP_PROFILE=pages-guest VITE_MEDIA_BASE_URL=http://localhost:5173/publishing-media vite",
     "dev:https": "VITE_DEV_HTTPS=true vite",
     "dev:tauri-ui": "VITE_APP_PROFILE=tauri-guest VITE_TAURI_BUILD=true vite",
     "dev:tauri": "tauri dev",

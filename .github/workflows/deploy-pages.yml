@@ -30,36 +30,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Validate MinIO media secret
-        env:
-          VITE_MEDIA_BASE_URL: ${{ secrets.VITE_MEDIA_BASE_URL }}
+      - name: Validate static media for Pages
         run: |
-          if [ -z "${VITE_MEDIA_BASE_URL}" ]; then
-            echo "::error::Missing repository secret VITE_MEDIA_BASE_URL. See docs/GITHUB_PAGES_MINIO.md"
+          if ! compgen -G "public/publishing-media/*.jpg" > /dev/null; then
+            echo "::error::Missing public/publishing-media/*.jpg — add mock media files before deploy."
             exit 1
           fi
-          case "${VITE_MEDIA_BASE_URL}" in
-            https://*) ;;
-            *)
-              echo "::error::VITE_MEDIA_BASE_URL must start with https:// (GitHub Pages is HTTPS). Got: ${VITE_MEDIA_BASE_URL}"
-              exit 1
-              ;;
-          esac
-          case "${VITE_MEDIA_BASE_URL}" in
-            */publishing-media) ;;
-            *)
-              echo "::error::VITE_MEDIA_BASE_URL must end with /publishing-media. Got: ${VITE_MEDIA_BASE_URL}"
-              exit 1
-              ;;
-          esac
-          echo "VITE_MEDIA_BASE_URL is set (HTTPS, publishing-media path OK)"
+          echo "Static media OK ($(ls public/publishing-media | wc -l | tr -d ' ') files)"
 
       - name: Build for GitHub Pages
         run: npm run build:pages
         env:
           VITE_APP_PROFILE: pages-guest
           VITE_BASE_PATH: /${{ github.event.repository.name }}/
-          VITE_MEDIA_BASE_URL: ${{ secrets.VITE_MEDIA_BASE_URL }}
+          VITE_MEDIA_BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/publishing-media
 
       - name: Add SPA 404 fallback
         run: cp dist/index.html dist/404.html
