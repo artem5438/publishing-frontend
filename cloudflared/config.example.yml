@@ -1,0 +1,15 @@
+# Named Cloudflare Tunnel (stable hostname for GitHub Pages media).
+# One-time setup: https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/
+#
+# 1. cloudflared tunnel create folio-minio
+# 2. cloudflared tunnel route dns folio-minio media.yourdomain.example.com
+# 3. Copy this file to config.yml and set tunnel + credentials-file paths
+# 4. ./scripts/start-pages-named-tunnel.sh
+
+tunnel: folio-minio
+credentials-file: /absolute/path/to/.cloudflared/<tunnel-id>.json
+
+ingress:
+  - hostname: media.yourdomain.example.com
+    service: http://127.0.0.1:9000
+  - service: http_status:404

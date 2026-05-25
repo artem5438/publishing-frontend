@@ -11,6 +11,7 @@ echo "==> Ensuring MinIO is up (${BACKEND_DIR})"
 
 echo ""
 echo "==> Starting Cloudflare quick tunnel to http://127.0.0.1:9000"
+echo "    URL changes every restart. For a stable host use: ./scripts/start-pages-named-tunnel.sh"
 echo "    After the URL appears, set GitHub secret VITE_MEDIA_BASE_URL to:"
 echo "    https://<host>/publishing-media"
 echo "    Then re-run Actions: Deploy Frontend To GitHub Pages"

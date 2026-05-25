@@ -4,17 +4,28 @@ Photos and videos on Pages load from MinIO (`VITE_MEDIA_BASE_URL`), not from `pu
 
 Profile: `VITE_APP_PROFILE=pages-guest` (mock catalog in [`src/mocks/works.ts`](../src/mocks/works.ts)).
 
-The UI rewrites `.../publishing-media/<file>` to `VITE_MEDIA_BASE_URL` at runtime, but mock URLs are **baked in at build time** from the same secret.
+Mock catalog uses relative paths `/publishing-media/<file>`; the UI rewrites them to `VITE_MEDIA_BASE_URL` at runtime. The secret is still required at **CI build** (Vite inlines `MEDIA_BASE_URL`).
+
+See also [MEDIA_ENV.md](./MEDIA_ENV.md).
+
+## Stable tunnel (recommended)
+
+Use a **named Cloudflare Tunnel** so the GitHub secret does not change after every reboot:
+
+1. `cp cloudflared/config.example.yml cloudflared/config.yml` — set `tunnel`, `credentials-file`, and `hostname`
+2. One-time: `cloudflared tunnel create folio-minio` and DNS route (see [Cloudflare docs](https://developers.cloudflare.com/cloudflare-one/connections/connect-apps/))
+3. `./scripts/start-pages-named-tunnel.sh` — prints fixed `https://<hostname>/publishing-media`
+4. Set GitHub secret **once**, run **Deploy Frontend To GitHub Pages** once
 
 ## Quick checklist (before demo)
 
-1. On Mac: `docker compose up -d minio minio-init` in `publishing-backend`
-2. Run tunnel: `./scripts/start-pages-tunnel.sh` (keep terminal open)
-3. Copy printed `VITE_MEDIA_BASE_URL` into GitHub → **Settings → Secrets → Actions**
+1. On Mac: `docker compose up -d minio minio-init` in `publishing-backend` (and `scripts/seed-mock-media.sh` if images 404)
+2. Tunnel: `./scripts/start-pages-named-tunnel.sh` **or** `./scripts/start-pages-tunnel.sh` (quick — URL changes each run)
+3. Copy `VITE_MEDIA_BASE_URL` into GitHub → **Settings → Secrets → Actions**
 4. GitHub → **Actions** → **Deploy Frontend To GitHub Pages** → **Run workflow**
 5. Open https://artem5438.github.io/publishing-frontend/works → DevTools → Network → images **200**
 
-**Important:** Quick Cloudflare tunnel URL **changes every restart**. If photos break after reboot, repeat steps 2–4.
+**Quick tunnel only:** URL changes every restart → update secret + re-run workflow (steps 2–4).
 
 ## 1. MinIO bucket
 

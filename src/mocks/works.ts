@@ -1,14 +1,16 @@
 import type { Work } from '../types'
-import { MEDIA_BASE_URL } from '../config/env'
+
+/** Relative paths; runtime rewrite via normalizeMediaUrl + VITE_MEDIA_BASE_URL */
+const MEDIA_PREFIX = '/publishing-media'
 
 const resolveImageUrl = (fileName?: string): string | undefined => {
   if (!fileName) return undefined
-  return `${MEDIA_BASE_URL}/${fileName}`
+  return `${MEDIA_PREFIX}/${fileName}`
 }
 
 const resolveVideoUrl = (fileName?: string): string | undefined => {
   if (!fileName) return undefined
-  return `${MEDIA_BASE_URL}/${fileName}`
+  return `${MEDIA_PREFIX}/${fileName}`
 }
 
 export const mockWorks: Work[] = [

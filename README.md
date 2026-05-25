@@ -3,7 +3,8 @@
 ## GitHub Pages
 
 - Enable **Settings → Pages → Source: GitHub Actions**
-- Add secret `VITE_MEDIA_BASE_URL` (HTTPS MinIO URL) — see [docs/GITHUB_PAGES_MINIO.md](docs/GITHUB_PAGES_MINIO.md)
+- Add secret `VITE_MEDIA_BASE_URL` (HTTPS MinIO URL) — see [docs/GITHUB_PAGES_MINIO.md](docs/GITHUB_PAGES_MINIO.md) (prefer **named tunnel**)
+- Media/env matrix: [docs/MEDIA_ENV.md](docs/MEDIA_ENV.md)
 - Site URL: `https://artem5438.github.io/publishing-frontend/`
 
 ## Tauri (macOS guest app)

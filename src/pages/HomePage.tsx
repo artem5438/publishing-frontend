@@ -2,13 +2,13 @@ import { useEffect, useMemo } from 'react'
 import { Container, Spinner } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import WorkCard from '../components/WorkCard'
-import { IS_GUEST_MODE, MEDIA_BASE_URL } from '../config/env'
+import { IS_GUEST_MODE } from '../config/env'
 import { fetchWorksThunk } from '../store/worksSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { resolveSafeVideoUrl } from '../utils/media'
 
 const emptyFilters = { search: '', minPrice: '', maxPrice: '', workType: '' }
-const HERO_VIDEO_URL = resolveSafeVideoUrl(`${MEDIA_BASE_URL}/hero-folio.mp4`)
+const HERO_VIDEO_URL = resolveSafeVideoUrl('/publishing-media/hero-folio.mp4')
 
 export default function HomePage() {
   const dispatch = useAppDispatch()
