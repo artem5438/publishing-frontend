@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Modal, Button, Form, Spinner } from 'react-bootstrap'
+import ErrorAlert from './ErrorAlert'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { createWorkThunk, updateWorkThunk } from '../store/worksAdminSlice'
 import type { Work } from '../types'
@@ -287,7 +288,7 @@ export default function WorkFormModal({ show, onHide, work, onSaved }: WorkFormM
               }}
             />
           </Form.Group>
-          {error && <div className="mis-error">{error}</div>}
+          {error && <ErrorAlert message={error} />}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="outline-secondary" onClick={onHide} disabled={mutating}>

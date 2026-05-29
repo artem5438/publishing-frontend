@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Container, Spinner } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
+import ErrorAlert from '../components/ErrorAlert'
 import FilterPanel from '../components/FilterPanel'
 import WorkCard from '../components/WorkCard'
 import { fetchWorksThunk, setWorksFilters } from '../store/worksSlice'
@@ -67,7 +68,7 @@ export default function WorksListPage() {
             <Spinner animation="border" />
           </div>
         )}
-        {!loading && error && <div className="mis-error">{error}</div>}
+        {!loading && error && <ErrorAlert message={error} className="mb-3" />}
         {!loading && !error && worksList.length === 0 && (
           <div className="mis-empty">Услуги не найдены. Попробуйте изменить фильтры.</div>
         )}

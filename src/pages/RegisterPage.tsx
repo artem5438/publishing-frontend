@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Breadcrumbs from '../components/Breadcrumbs'
+import ErrorAlert from '../components/ErrorAlert'
 import { registerThunk } from '../store/authSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 
@@ -73,7 +74,7 @@ export default function RegisterPage() {
               />
             </div>
 
-            {error && <div className="login-error">{error}</div>}
+            {error && <ErrorAlert message={error} />}
             {success && <div style={{ color: '#166534', fontSize: 13 }}>{success}</div>}
 
             <button type="submit" className="btn-add-custom" disabled={authLoading}>

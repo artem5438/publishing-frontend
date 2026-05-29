@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
+import ErrorAlert from '../components/ErrorAlert'
 import { updateProfileThunk } from '../store/authSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { copyOrderToDraftThunk } from '../store/orderSlice'
@@ -134,64 +135,56 @@ export default function ProfilePage() {
         </div>
 
         {loading && <div className="text-center py-5"><Spinner animation="border" /></div>}
-        {!loading && error && <div className="mis-error py-4">{error}</div>}
+        {!loading && error && <ErrorAlert message={error} className="mb-3" />}
         {!loading && !error && orders.length === 0 && (
           <div className="order-empty">Заказов не найдено</div>
         )}
 
         {!loading && !error && sortedOrders.length > 0 && (
-          <div className="profile-order-card">
-            <table className="params-table-custom">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Статус</th>
-                  <th>Книга</th>
-                  <th>Дата</th>
-                  <th>Сумма</th>
-                  <th>Действие</th>
-                </tr>
-              </thead>
-              <tbody>
-                {sortedOrders.map((order) => {
-                  const statusInfo = getOrderStatusInfo(order.status)
-                  const date = order.formed_at
-                    ? new Date(order.formed_at).toLocaleDateString('ru-RU')
-                    : new Date(order.created_at).toLocaleDateString('ru-RU')
-                  const total = order.total_price ? `${order.total_price.toLocaleString()} ₽` : '—'
-                  return (
-                    <tr key={order.id}>
-                      <td>{order.id}</td>
-                      <td>
-                        <span className="profile-order-status" style={{ color: statusInfo.color, borderColor: statusInfo.color }}>
-                          {statusInfo.label}
-                        </span>
-                      </td>
-                      <td>{order.book_title || '—'}</td>
-                      <td>{date}</td>
-                      <td>{total}</td>
-                      <td>
-                        <div className="d-flex flex-wrap gap-2">
-                          <Link className="btn-detail-custom" to={`/publishing-orders/${order.id}`}>
-                            Открыть
-                          </Link>
-                          {order.status === 'rejected' && user?.role !== 'moderator' && (
-                            <button
-                              type="button"
-                              className="btn-detail-custom"
-                              disabled={orderMutating}
-                              onClick={() => void handleCopyRejected(order.id)}
-                            >
-                              Новая на основе этой
-                            </button>
-                          )}
-                        </div>
-                      </td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
+          <div className="profile-orders-list">
+            {sortedOrders.map((order) => {
+              const statusInfo = getOrderStatusInfo(order.status)
+              const date = order.formed_at
+                ? new Date(order.formed_at).toLocaleDateString('ru-RU')
+                : new Date(order.created_at).toLocaleDateString('ru-RU')
+              const total = order.total_price ? `${order.total_price.toLocaleString()} ₽` : '—'
+              return (
+                <article key={order.id} className="profile-order-card">
+                  <div className="profile-order-header">
+                    <span className="profile-order-id">№ {order.id}</span>
+                    <span
+                      className="profile-order-status"
+                      style={{ color: statusInfo.color, borderColor: statusInfo.color }}
+                    >
+                      {statusInfo.label}
+                    </span>
+                  </div>
+                  <div className="profile-order-meta">
+                    <span>{order.book_title || '—'}</span>
+                    <span>{date}</span>
+                    <span className="profile-order-total">{total}</span>
+                  </div>
+                  <div className="profile-order-footer">
+                    <Link
+                      className="mis-action-btn mis-action-btn--block"
+                      to={`/publishing-orders/${order.id}`}
+                    >
+                      Открыть
+                    </Link>
+                    {order.status === 'rejected' && user?.role !== 'moderator' && (
+                      <button
+                        type="button"
+                        className="mis-action-btn mis-action-btn--block mis-action-btn--secondary"
+                        disabled={orderMutating}
+                        onClick={() => void handleCopyRejected(order.id)}
+                      >
+                        Новая на основе этой
+                      </button>
+                    )}
+                  </div>
+                </article>
+              )
+            })}
           </div>
         )}
       </div>

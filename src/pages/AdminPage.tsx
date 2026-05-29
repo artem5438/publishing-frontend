@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Spinner, Button } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
+import ErrorAlert from '../components/ErrorAlert'
 import AdminWorksTab from '../components/AdminWorksTab'
 import WorkFormModal from '../components/WorkFormModal'
 import {
@@ -182,7 +183,7 @@ export default function AdminPage() {
           </div>
         )}
 
-        {!loading && error && <div className="mis-error py-4">{error}</div>}
+        {!loading && error && <ErrorAlert message={error} className="mb-3" />}
 
         {!loading && !error && formedOrders.length === 0 && (
           <div className="order-empty">Нет заявок на рассмотрении</div>
@@ -287,23 +288,19 @@ export default function AdminPage() {
           })}
 
         {!loading && !error && (
-          <div style={{ marginTop: 40 }} className="profile-order-card">
+          <div style={{ marginTop: 40 }}>
             <h3 className="profile-title" style={{ fontSize: '1.25rem', marginBottom: 16 }}>
               Все заявки по фильтрам
             </h3>
 
-            <table className="params-table-custom">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Автор</th>
-                  <th>Книга</th>
-                  <th>Статус</th>
-                  <th>Дата</th>
-                  <th>Действие</th>
-                </tr>
-              </thead>
-              <tbody>
+            {filteredOrders.length === 0 && (
+              <div className="order-empty" style={{ marginTop: 8 }}>
+                Нет заказов в выборке
+              </div>
+            )}
+
+            {filteredOrders.length > 0 && (
+              <div className="profile-orders-list">
                 {filteredOrders.map((order) => {
                   const statusInfo = getOrderStatusInfo(order.status)
                   const dateRaw =
@@ -311,42 +308,41 @@ export default function AdminPage() {
                       ? order.created_at
                       : order.formed_at ?? order.created_at
                   const dateStr = dateRaw
-                    ? new Date(dateRaw).toLocaleString('ru-RU')
+                    ? new Date(dateRaw).toLocaleDateString('ru-RU')
                     : '—'
+                  const total =
+                    order.total_price != null
+                      ? `${order.total_price.toLocaleString('ru-RU')} ₽`
+                      : '—'
 
                   return (
-                    <tr key={order.id}>
-                      <td>{order.id}</td>
-                      <td>{order.creator_login || '—'}</td>
-                      <td>{order.book_title || '—'}</td>
-                      <td>
+                    <article key={order.id} className="profile-order-card">
+                      <div className="profile-order-header">
+                        <span className="profile-order-id">№ {order.id}</span>
                         <span
                           className="profile-order-status"
-                          style={{
-                            color: statusInfo.color,
-                            borderColor: statusInfo.color,
-                            display: 'inline-block',
-                            margin: 0,
-                          }}
+                          style={{ color: statusInfo.color, borderColor: statusInfo.color }}
                         >
                           {statusInfo.label}
                         </span>
-                      </td>
-                      <td>{dateStr}</td>
-                      <td>
-                        <Link to={`/publishing-orders/${order.id}`} className="btn-detail-custom">
+                      </div>
+                      <div className="profile-order-meta">
+                        <span>Автор: {order.creator_login || '—'}</span>
+                        <span>{order.book_title || '—'}</span>
+                        <span>{dateStr}</span>
+                        <span className="profile-order-total">{total}</span>
+                      </div>
+                      <div className="profile-order-footer">
+                        <Link
+                          className="mis-action-btn mis-action-btn--block"
+                          to={`/publishing-orders/${order.id}`}
+                        >
                           Открыть
                         </Link>
-                      </td>
-                    </tr>
+                      </div>
+                    </article>
                   )
                 })}
-              </tbody>
-            </table>
-
-            {filteredOrders.length === 0 && (
-              <div className="order-empty" style={{ marginTop: 8 }}>
-                Нет заказов в выборке
               </div>
             )}
           </div>

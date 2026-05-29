@@ -1,4 +1,5 @@
 import { Spinner } from 'react-bootstrap'
+import ErrorAlert from './ErrorAlert'
 import {
   deleteWorkThunk,
   fetchAdminWorksThunk,
@@ -37,7 +38,7 @@ export default function AdminWorksTab({ onAdd, onEdit }: AdminWorksTabProps) {
         </div>
       )}
 
-      {!worksLoading && worksError && <div className="mis-error py-4">{worksError}</div>}
+      {!worksLoading && worksError && <ErrorAlert message={worksError} className="mb-3" />}
 
       {!worksLoading && !worksError && adminWorks.length === 0 && (
         <div className="mis-empty">Нет услуг. Добавьте первую услугу в каталог.</div>
@@ -49,7 +50,12 @@ export default function AdminWorksTab({ onAdd, onEdit }: AdminWorksTabProps) {
             <div key={work.id} className="profile-order-card admin-work-card">
               <div className="admin-work-card-main">
                 {work.image_url ? (
-                  <img src={resolveSafeImageUrl(work.image_url)} alt={work.name} className="admin-work-thumb" />
+                  <img
+                    src={resolveSafeImageUrl(work.image_url)}
+                    alt={work.name}
+                    className="admin-work-thumb"
+                    loading="lazy"
+                  />
                 ) : (
                   <div className="admin-work-thumb-placeholder">нет фото</div>
                 )}
@@ -78,7 +84,7 @@ export default function AdminWorksTab({ onAdd, onEdit }: AdminWorksTabProps) {
               <div className="profile-order-footer">
                 <button
                   type="button"
-                  className="btn-profile-reset"
+                  className="mis-action-btn mis-action-btn--block mis-action-btn--secondary"
                   disabled={worksMutating}
                   onClick={() => onEdit(work)}
                 >
@@ -86,7 +92,7 @@ export default function AdminWorksTab({ onAdd, onEdit }: AdminWorksTabProps) {
                 </button>
                 <button
                   type="button"
-                  className="btn-profile-danger"
+                  className="mis-action-btn mis-action-btn--block mis-action-btn--danger"
                   disabled={worksMutating}
                   onClick={() => {
                     if (!window.confirm(`Удалить услугу «${work.name}»?`)) return

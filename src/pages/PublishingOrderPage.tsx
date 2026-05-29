@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
+import ErrorAlert from '../components/ErrorAlert'
 import {
   copyOrderToDraftThunk,
   deleteOrderThunk,
@@ -119,7 +120,7 @@ export default function PublishingOrderPage() {
   }
 
   if (!selectedOrder || !Number.isFinite(orderId) || orderId <= 0) {
-    return <div className="mis-error py-5">Заявка не найдена</div>
+    return <ErrorAlert variant="page" message="Заявка не найдена" />
   }
 
   return (
@@ -139,24 +140,18 @@ export default function PublishingOrderPage() {
         </p>
 
         {selectedOrder.status === 'rejected' && selectedOrder.rejection_reason && (
-          <div
-            className="order-result-card mis-error"
-            style={{
-              marginBottom: 16,
-              padding: '12px 16px',
-              borderRadius: 8,
-              background: 'rgba(229, 57, 53, 0.08)',
-            }}
-          >
-            <strong>Причина отклонения:</strong> {selectedOrder.rejection_reason}
-          </div>
+          <ErrorAlert
+            className="mb-3"
+            title="Причина отклонения:"
+            message={selectedOrder.rejection_reason}
+          />
         )}
 
         {canCopyRejected && (
           <div className="order-actions-bar" style={{ marginBottom: 16 }}>
             <button
               type="button"
-              className="order-primary-action-btn"
+              className="mis-action-btn mis-action-btn--block mis-action-btn--secondary"
               disabled={mutating}
               onClick={() => void handleCopyToDraft()}
             >
@@ -190,20 +185,23 @@ export default function PublishingOrderPage() {
           </div>
           <div className="order-actions-bar">
             <button
-              className="order-primary-action-btn"
+              type="button"
+              className="mis-action-btn mis-action-btn--lg"
               disabled={!isDraft || mutating}
               onClick={() => void handleSubmitOrder()}
             >
               Отправить на рассмотрение
             </button>
             <button
-              className="order-secondary-action-btn"
+              type="button"
+              className="mis-action-btn mis-action-btn--lg mis-action-btn--danger"
               disabled={!isDraft || mutating}
               onClick={() => void handleDeleteOrder()}
             >
               Удалить заявку
             </button>
           </div>
+          {error && <ErrorAlert message={error} />}
         </div>
 
         {!selectedOrder.works?.length && (
@@ -211,7 +209,7 @@ export default function PublishingOrderPage() {
             В заявке нет услуг.
             <br />
             <br />
-            <Link to="/works" className="btn-detail-custom">
+            <Link to="/works" className="mis-action-btn mis-action-btn--block">
               Добавить услуги →
             </Link>
           </div>
@@ -220,7 +218,12 @@ export default function PublishingOrderPage() {
         {sortedWorks.map((item) => (
           <div key={item.work_id} className="order-item-card-custom">
             {item.image_url ? (
-              <img src={resolveSafeImageUrl(item.image_url)} alt={item.work_name} className="order-item-img" />
+              <img
+                src={resolveSafeImageUrl(item.image_url)}
+                alt={item.work_name}
+                className="order-item-img"
+                loading="lazy"
+              />
             ) : (
               <div className="order-item-img-placeholder" />
             )}
@@ -229,7 +232,8 @@ export default function PublishingOrderPage() {
               <div className="order-item-name">{item.work_name}</div>
               <div className="order-item-qty">
                 <button
-                  className="qty-btn-custom"
+                  type="button"
+                  className="mis-action-btn mis-action-btn--icon"
                   disabled={!isDraft || mutating || item.quantity <= 1}
                   onClick={() => void handleUpdateWorkQty(item.work_id, item.quantity - 1, item.comment ?? '')}
                 >
@@ -237,7 +241,8 @@ export default function PublishingOrderPage() {
                 </button>
                 <span className="qty-value">{item.quantity}</span>
                 <button
-                  className="qty-btn-custom"
+                  type="button"
+                  className="mis-action-btn mis-action-btn--icon"
                   disabled={!isDraft || mutating}
                   onClick={() => void handleUpdateWorkQty(item.work_id, item.quantity + 1, item.comment ?? '')}
                 >
@@ -249,7 +254,8 @@ export default function PublishingOrderPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'flex-end' }}>
               <div className="order-item-price">{(item.price_rub * item.quantity).toLocaleString()} ₽</div>
               <button
-                className="order-item-action-btn"
+                type="button"
+                className="mis-action-btn mis-action-btn--danger"
                 disabled={!isDraft || mutating}
                 onClick={() => void handleRemoveWork(item.work_id)}
               >
@@ -281,8 +287,6 @@ export default function PublishingOrderPage() {
           )}
           {!isDraft && <span>Режим просмотра: редактирование отключено</span>}
         </div>
-
-        {error && <div className="mis-error">{error}</div>}
       </div>
     </>
   )

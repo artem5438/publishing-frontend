@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
+import ErrorAlert from '../components/ErrorAlert'
 import { fetchCartThunk } from '../store/orderSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 
@@ -30,11 +31,7 @@ export default function OrdersPage() {
             <Spinner animation="border" />
           </div>
         )}
-        {error && (
-          <div className="order-empty">
-            {error}
-          </div>
-        )}
+        {error && <ErrorAlert message={error} className="mb-3" />}
         {!loadingCart && !error && !draftOrder && (
           <div className="order-empty">
             Черновик заявки пока не создан.<br />

@@ -3,7 +3,9 @@ import { copyRejectedOrder } from '../api/ordersApi'
 import { OrderWorksService, OrdersService } from '../api/generated'
 import type { Order } from '../types'
 import { normalizeOrder } from '../utils/media'
-import { getApiErrorMessage, withUiRequest } from './thunkUtils'
+import { ALREADY_IN_DRAFT, getApiErrorMessage, isAlreadyInDraftError, withUiRequest } from './thunkUtils'
+
+export { ALREADY_IN_DRAFT }
 import type { RootState } from './store'
 import { logoutThunk } from './authSlice'
 
@@ -61,6 +63,9 @@ export const addWorkToDraftThunk = createAsyncThunk<
     const cart = (await withUiRequest(dispatch, () => OrdersService.getPublishingOrdersCart())) as Order
     return normalizeOrder(cart)
   } catch (error) {
+    if (isAlreadyInDraftError(error)) {
+      return rejectWithValue(ALREADY_IN_DRAFT)
+    }
     return rejectWithValue(getApiErrorMessage(error, 'Не удалось добавить услугу в заявку'))
   }
 })
@@ -198,7 +203,9 @@ const orderSlice = createSlice({
       })
       .addCase(addWorkToDraftThunk.rejected, (state, action) => {
         state.mutating = false
-        state.error = action.payload ?? 'Ошибка добавления услуги'
+        if (action.payload !== ALREADY_IN_DRAFT) {
+          state.error = action.payload ?? 'Ошибка добавления услуги'
+        }
       })
       .addCase(updateOrderMetaThunk.pending, (state) => {
         state.mutating = true

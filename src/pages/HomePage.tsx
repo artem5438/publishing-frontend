@@ -2,6 +2,7 @@ import { useEffect, useMemo } from 'react'
 import { Container, Spinner } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import WorkCard from '../components/WorkCard'
+import ErrorAlert from '../components/ErrorAlert'
 import { IS_GUEST_MODE } from '../config/env'
 import { fetchWorksThunk } from '../store/worksSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
@@ -102,7 +103,7 @@ export default function HomePage() {
               <Spinner animation="border" />
             </div>
           )}
-          {!loading && error && <div className="mis-error">{error}</div>}
+          {!loading && error && <ErrorAlert message={error} className="mb-3" />}
           {!loading && !error && popularWorks.length === 0 && (
             <div className="mis-empty">Пока нет услуг для отображения.</div>
           )}

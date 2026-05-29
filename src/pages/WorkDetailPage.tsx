@@ -2,9 +2,10 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Spinner } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
+import ErrorAlert from '../components/ErrorAlert'
 import WorkCard from '../components/WorkCard'
 import type { Work } from '../types'
-import { addWorkToDraftThunk } from '../store/orderSlice'
+import { addWorkToDraftThunk, ALREADY_IN_DRAFT } from '../store/orderSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { fetchWorkByIdThunk, fetchWorksThunk } from '../store/worksSlice'
 import { IS_GUEST_MODE } from '../config/env'
@@ -15,11 +16,12 @@ export default function WorkDetailPage() {
   const navigate = useNavigate()
   const { id } = useParams<{ id: string }>()
   const user = useAppSelector((state) => state.auth.user)
+  const draftOrder = useAppSelector((state) => state.order.draftOrder)
   const work = useAppSelector((state) => state.works.currentWork)
   const works = useAppSelector((state) => state.works.items)
   const loading = useAppSelector((state) => state.works.detailsLoading)
   const error = useAppSelector((state) => state.works.error)
-  const [addStatus, setAddStatus] = useState<'idle' | 'loading' | 'ok' | 'error'>('idle')
+  const [addStatus, setAddStatus] = useState<'idle' | 'loading' | 'in_draft' | 'error'>('idle')
   const [similar, setSimilar] = useState<Work[] | null>(null)
 
   useEffect(() => {
@@ -71,27 +73,42 @@ export default function WorkDetailPage() {
 
   const similarLoading = useMemo(() => work !== null && similar === null, [similar, work])
 
+  const isInDraftFromStore =
+    work != null && (draftOrder?.works?.some((item) => item.work_id === work.id) ?? false)
+  const showInCart = isInDraftFromStore || addStatus === 'in_draft'
+
   const handleAddToCart = async () => {
     if (!work) return
     if (!user) {
       navigate('/login')
       return
     }
+    if (showInCart) return
     setAddStatus('loading')
     const result = await dispatch(addWorkToDraftThunk(work.id))
-    setAddStatus(addWorkToDraftThunk.fulfilled.match(result) ? 'ok' : 'error')
+    if (addWorkToDraftThunk.fulfilled.match(result)) {
+      setAddStatus('in_draft')
+      return
+    }
+    if (addWorkToDraftThunk.rejected.match(result) && result.payload === ALREADY_IN_DRAFT) {
+      setAddStatus('in_draft')
+      return
+    }
+    setAddStatus('error')
   }
 
   if (loading) return <div className="text-center py-5"><Spinner animation="border" /></div>
-  if (error || !work) return <div className="mis-error py-5">{error || 'Не найдено'}</div>
+  if (error || !work) {
+    return <ErrorAlert variant="page" message={error || 'Не найдено'} />
+  }
 
   const imageUrl = resolveSafeImageUrl(work.image_url)
   const videoUrl = resolveSafeVideoUrl(work.video_url)
   const tags = work.tags ?? []
   const btnLabel =
     addStatus === 'loading' ? 'Добавляем...' :
-    addStatus === 'ok'      ? '✓ В корзине' :
-    addStatus === 'error'   ? 'Ошибка, повторите' :
+    showInCart              ? '✓ В корзине' :
+    addStatus === 'error'   ? 'Не удалось добавить' :
     'Добавить в корзину'
 
   return (
@@ -112,6 +129,7 @@ export default function WorkDetailPage() {
               src={imageUrl}
               alt={work.name}
               className="detail-image-custom"
+              loading="lazy"
               onError={(e) => {
                 const el = e.target as HTMLImageElement
                 if (el.src.includes('mock-media/work-cover.svg')) {
@@ -146,7 +164,7 @@ export default function WorkDetailPage() {
               <button
                 className="btn-add-custom"
                 onClick={handleAddToCart}
-                disabled={addStatus === 'loading' || addStatus === 'ok'}
+                disabled={addStatus === 'loading' || showInCart}
               >
                 {btnLabel}
               </button>
@@ -160,10 +178,10 @@ export default function WorkDetailPage() {
               </thead>
               <tbody>
                 <tr>
-                  <td>{work.param_deadline || '—'}</td>
-                  <td>{work.param_quantity || '—'}</td>
-                  <td>{work.param_unit || '—'}</td>
-                  <td>{work.param_format || '—'}</td>
+                  <td data-label="Срок">{work.param_deadline || '—'}</td>
+                  <td data-label="Тираж">{work.param_quantity || '—'}</td>
+                  <td data-label="Единица">{work.param_unit || '—'}</td>
+                  <td data-label="Формат">{work.param_format || '—'}</td>
                 </tr>
               </tbody>
             </table>
@@ -191,7 +209,7 @@ export default function WorkDetailPage() {
         <div className="video-block">
           <h3>Видео о работе</h3>
           {videoUrl ? (
-            <video autoPlay muted loop playsInline>
+            <video autoPlay muted loop playsInline preload="metadata" poster={imageUrl}>
               <source src={videoUrl} type="video/mp4" />
             </video>
           ) : (

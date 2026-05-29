@@ -27,6 +27,22 @@ const pwaPlugin = VitePWA({
   includeAssets: ['favicon.svg', 'icons.svg', 'pwa-192.svg', 'pwa-512.svg'],
   workbox: {
     maximumFileSizeToCacheInBytes: 30 * 1024 * 1024,
+    runtimeCaching: [
+      {
+        urlPattern: /\/publishing-media\/.+/i,
+        handler: 'CacheFirst',
+        options: {
+          cacheName: 'folio-media',
+          expiration: {
+            maxEntries: 64,
+            maxAgeSeconds: 7 * 24 * 60 * 60,
+          },
+          cacheableResponse: {
+            statuses: [0, 200],
+          },
+        },
+      },
+    ],
   },
   manifest: {
     name: 'Folio Publishing',

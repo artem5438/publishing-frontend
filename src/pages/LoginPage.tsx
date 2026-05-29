@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Breadcrumbs from '../components/Breadcrumbs'
+import ErrorAlert from '../components/ErrorAlert'
 import { fetchCartThunk } from '../store/orderSlice'
 import { loginThunk } from '../store/authSlice'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
@@ -62,7 +63,7 @@ export default function LoginPage() {
               />
             </div>
 
-            {error && <div className="login-error">{error}</div>}
+            {error && <ErrorAlert message={error} />}
 
             <button
               type="submit"
