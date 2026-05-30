@@ -53,17 +53,14 @@ export default function HomePage() {
           <h2 className="home-section-title">Как это работает</h2>
           <div className="home-steps-grid">
             <article className="home-info-card">
-              <div className="home-info-icon">📚</div>
               <h3>Выбери услуги</h3>
               <p>Просматривай каталог и добавляй нужное в заявку</p>
             </article>
             <article className="home-info-card">
-              <div className="home-info-icon">📝</div>
               <h3>Оформи заявку</h3>
               <p>Укажи название книги и тираж, подтверди заказ</p>
             </article>
             <article className="home-info-card">
-              <div className="home-info-icon">📈</div>
               <h3>Следи за статусом</h3>
               <p>Отслеживай заявку в личном кабинете</p>
             </article>
@@ -123,11 +120,13 @@ export default function HomePage() {
       </section>
 
       <section className="home-cta-section">
-        <Container className="text-center home-cta-content">
-          <h2>Готовы начать?</h2>
-          <Link to="/works" className="btn-add-custom home-cta-btn">
-            Создать заявку
-          </Link>
+        <Container>
+          <div className="home-cta-content text-center">
+            <h2>Готовы начать?</h2>
+            <Link to="/works" className="btn-add-custom home-cta-btn">
+              Создать заявку
+            </Link>
+          </div>
         </Container>
       </section>
 

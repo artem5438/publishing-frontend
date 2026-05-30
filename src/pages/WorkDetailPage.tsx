@@ -170,21 +170,23 @@ export default function WorkDetailPage() {
               </button>
             )}
 
-            <table className="params-table-custom">
-              <thead>
-                <tr>
-                  <th>Срок</th><th>Тираж</th><th>Единица</th><th>Формат</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td data-label="Срок">{work.param_deadline || '—'}</td>
-                  <td data-label="Тираж">{work.param_quantity || '—'}</td>
-                  <td data-label="Единица">{work.param_unit || '—'}</td>
-                  <td data-label="Формат">{work.param_format || '—'}</td>
-                </tr>
-              </tbody>
-            </table>
+            <div className="params-table-scroll">
+              <table className="params-table-custom">
+                <thead>
+                  <tr>
+                    <th>Срок</th><th>Тираж</th><th>Единица</th><th>Формат</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{work.param_deadline || '—'}</td>
+                    <td>{work.param_quantity || '—'}</td>
+                    <td>{work.param_unit || '—'}</td>
+                    <td>{work.param_format || '—'}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 

@@ -10,6 +10,15 @@
     <title>Folio</title>
   </head>
   <body>
+    <script>
+      try {
+        var density = localStorage.getItem('folio-catalog-density');
+        document.documentElement.dataset.catalogDensity =
+          density === 'compact' ? 'compact' : 'comfortable';
+      } catch (e) {
+        document.documentElement.dataset.catalogDensity = 'comfortable';
+      }
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

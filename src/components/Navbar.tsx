@@ -9,6 +9,7 @@ import { resetUserOrdersFilters } from '../store/userOrdersSlice'
 import { fetchPendingCountThunk, resetModeratorFilters } from '../store/moderatorSlice'
 import { resetWorksFilters } from '../store/worksSlice'
 import { IS_GUEST_MODE } from '../config/env'
+import CatalogDensityToggle from './CatalogDensityToggle'
 
 export default function AppNavbar() {
   const dispatch = useAppDispatch()
@@ -73,7 +74,10 @@ export default function AppNavbar() {
         <Navbar.Brand onClick={() => go('/')} style={{ cursor: 'pointer' }}>
           Folio
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="main-nav" aria-label="Открыть меню" />
+        <div className="mis-navbar-mobile-actions ms-auto d-flex d-lg-none align-items-center">
+          <CatalogDensityToggle />
+          <Navbar.Toggle aria-controls="main-nav" aria-label="Открыть меню" />
+        </div>
         <Nav className="ms-auto d-none d-lg-flex align-items-center mis-navbar-desktop">
           <Button className="mis-nav-btn" onClick={() => navigate('/')}>
             Главная
