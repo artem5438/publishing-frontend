@@ -21,9 +21,9 @@
     "codegen": "openapi --input \"/Users/artem/Documents/6 semestr/publishing-backend/docs/swagger.yaml\" --output \"src/api/generated\" --client axios"
   },
   "dependencies": {
-    "@tauri-apps/api": "^2.8.0",
     "@huggingface/transformers": "^4.0.1",
     "@reduxjs/toolkit": "^2.11.2",
+    "@tauri-apps/api": "^2.8.0",
     "axios": "^1.16.0",
     "bootstrap": "^5.3.8",
     "react": "^19.2.4",
@@ -31,15 +31,16 @@
     "react-dom": "^19.2.4",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.14.0",
+    "recharts": "^3.8.1",
     "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
+    "@tauri-apps/cli": "^2.9.1",
     "@types/node": "^24.12.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
-    "@tauri-apps/cli": "^2.9.1",
     "eslint": "^9.39.4",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
@@ -47,7 +48,7 @@
     "openapi-typescript-codegen": "^0.30.0",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.0",
-    "vite": "^8.0.4",
+    "vite": "^8.0.14",
     "vite-plugin-pwa": "^1.1.0"
   }
 }

@@ -7,7 +7,7 @@ export const mockCart: Order = {
   status: 'draft',
   creator_login: 'artem',
   book_title: '',
-  circulation: 0,
+  circulation: 1,
   created_at: '2026-04-07T08:34:35Z',
   filled_works_count: 0,
   works: [

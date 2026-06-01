@@ -103,14 +103,16 @@ echo ""
 echo "==> Waiting for public HTTPS (optional)"
 REMOTE_OK=0
 for _ in $(seq 1 15); do
-  if curl -sf -o /dev/null "${TUNNEL_URL}/login"; then
+  if curl -sf -o /dev/null "${TUNNEL_URL}/login" && curl -sf -o /dev/null "${TUNNEL_URL}/works"; then
     REMOTE_OK=1
     break
   fi
   sleep 2
 done
 if [[ "${REMOTE_OK}" -eq 0 ]]; then
-  echo "    WARN: ${TUNNEL_URL}/login not ready yet — wait a few seconds and retry"
+  echo "    WARN: ${TUNNEL_URL} not ready yet — wait a few seconds and retry"
+  echo "    If the page is blank: keep this terminal open (tunnel dies on Ctrl+C)"
+  echo "    and hard-refresh / open in a private window after rebuild."
 fi
 
 echo ""

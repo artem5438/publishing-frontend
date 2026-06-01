@@ -13,6 +13,7 @@ export class OrdersService {
      * @param status Статус (formed/completed/rejected)
      * @param from Дата от (2006-01-02)
      * @param to Дата до (2006-01-02)
+     * @param includeWorks Модератор: true/1 — включить состав услуг в каждой заявке
      * @returns api_OrderResponse OK
      * @throws ApiError
      */
@@ -20,6 +21,7 @@ export class OrdersService {
         status?: string,
         from?: string,
         to?: string,
+        includeWorks?: string,
     ): CancelablePromise<Array<api_OrderResponse>> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -28,6 +30,7 @@ export class OrdersService {
                 'status': status,
                 'from': from,
                 'to': to,
+                'include_works': includeWorks,
             },
             errors: {
                 401: `Unauthorized`,

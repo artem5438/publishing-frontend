@@ -1,5 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { Spinner } from 'react-bootstrap'
 import { PersistGate } from 'redux-persist/integration/react'
 import { Provider } from 'react-redux'
 import { registerSW } from 'virtual:pwa-register'
@@ -9,9 +10,24 @@ import './api/httpClient'
 import { persistor, store } from './store/store'
 import { IS_DEBUG, IS_TAURI_PROFILE } from './config/env'
 
-if (!IS_TAURI_PROFILE) {
-  registerSW({ immediate: true })
+const disablePwa = import.meta.env.VITE_DISABLE_PWA === 'true'
+
+if (!IS_TAURI_PROFILE && !disablePwa) {
+  registerSW({
+    immediate: true,
+    onRegisteredSW(_swUrl, registration) {
+      if (registration) {
+        void registration.update()
+      }
+    },
+  })
 }
+
+const persistLoading = (
+  <div className="d-flex justify-content-center align-items-center py-5" style={{ minHeight: '40vh' }}>
+    <Spinner animation="border" />
+  </div>
+)
 
 const showFatalOverlay = (title: string, details: string) => {
   const root = document.getElementById('root')
@@ -55,7 +71,7 @@ if (IS_DEBUG) {
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate loading={persistLoading} persistor={persistor}>
         <App />
       </PersistGate>
     </Provider>

@@ -1,5 +1,12 @@
 # Folio Publishing — frontend
 
+Folio — frontend учебной системы книжного издательства. Приложение показывает каталог издательских услуг, карточку услуги, оформление заявки на издание книги, список заявок и панель модератора.
+
+- GitHub Pages: https://artem5438.github.io/publishing-frontend/
+- Frontend repository: https://github.com/artem5438/publishing-frontend
+- Backend repository: https://github.com/artem5438/publishing-backend
+- Backend / CI on MosHub: `folio-backend`
+
 ## GitHub Pages
 
 - Enable **Settings → Pages → Source: GitHub Actions**

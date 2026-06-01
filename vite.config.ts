@@ -8,6 +8,7 @@ const appProfile = process.env.VITE_APP_PROFILE ?? (isTauriBuild ? 'tauri-guest'
 const isGuestProfile = appProfile === 'pages-guest' || appProfile === 'tauri-guest'
 const isTauriProfile = appProfile === 'tauri-guest' || appProfile === 'tauri-api'
 const isDebug = process.env.VITE_DEBUG === 'true'
+const disablePwa = process.env.VITE_DISABLE_PWA === 'true'
 const basePath = isTauriProfile ? './' : (process.env.VITE_BASE_PATH ?? '/')
 const enableHttps = process.env.VITE_DEV_HTTPS === 'true'
 const httpsKeyPath = process.env.VITE_HTTPS_KEY_PATH
@@ -22,7 +23,7 @@ const httpsOptions =
     : undefined
 
 const pwaPlugin = VitePWA({
-  disable: isTauriProfile,
+  disable: isTauriProfile || disablePwa,
   registerType: 'autoUpdate',
   includeAssets: ['favicon.svg', 'icons.svg', 'pwa-192.svg', 'pwa-512.svg'],
   workbox: {

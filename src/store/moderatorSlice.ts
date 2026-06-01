@@ -37,20 +37,32 @@ const initialState: ModeratorState = {
   pendingCount: 0,
 }
 
+export interface FetchModeratorOrdersParams extends Omit<ModeratorFilters, 'creatorLogin'> {
+  includeWorks?: boolean
+}
+
 export const fetchModeratorOrdersThunk = createAsyncThunk<
   Order[],
-  Omit<ModeratorFilters, 'creatorLogin'>,
+  FetchModeratorOrdersParams,
   { rejectValue: string; state: RootState }
->('moderator/fetch', async ({ status, dateFrom, dateTo }, { dispatch, rejectWithValue }) => {
-  try {
-    const data = await withUiRequest(dispatch, () =>
-      OrdersService.getPublishingOrders(status || undefined, dateFrom || undefined, dateTo || undefined),
-    )
-    return data as Order[]
-  } catch (error) {
-    return rejectWithValue(getApiErrorMessage(error, 'Не удалось загрузить заявки модератора'))
-  }
-})
+>(
+  'moderator/fetch',
+  async ({ status, dateFrom, dateTo, includeWorks }, { dispatch, rejectWithValue }) => {
+    try {
+      const data = await withUiRequest(dispatch, () =>
+        OrdersService.getPublishingOrders(
+          status || undefined,
+          dateFrom || undefined,
+          dateTo || undefined,
+          includeWorks ? 'true' : undefined,
+        ),
+      )
+      return data as Order[]
+    } catch (error) {
+      return rejectWithValue(getApiErrorMessage(error, 'Не удалось загрузить заявки модератора'))
+    }
+  },
+)
 
 export const fetchPendingCountThunk = createAsyncThunk<number, void, { rejectValue: string; state: RootState }>(
   'moderator/pendingCount',

@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Spinner, Button } from 'react-bootstrap'
 import Breadcrumbs from '../components/Breadcrumbs'
 import ErrorAlert from '../components/ErrorAlert'
+import StatisticsErrorBoundary from '../components/StatisticsErrorBoundary'
 import AdminWorksTab from '../components/AdminWorksTab'
 import WorkFormModal from '../components/WorkFormModal'
 import {
@@ -16,14 +17,27 @@ import { useAppDispatch, useAppSelector } from '../store/hooks'
 import type { Work } from '../types'
 import { getOrderStatusInfo } from '../utils/orderStatus'
 
+const AdminStatisticsTab = lazy(() => import('../components/AdminStatisticsTab'))
+
+const statisticsTabFallback = (
+  <div className="text-center py-5">
+    <Spinner animation="border" />
+  </div>
+)
+
 export default function AdminPage() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const user = useAppSelector((state) => state.auth.user)
   const { items: orders, loading, moderating, error, filters } = useAppSelector((state) => state.moderator)
   const pendingCount = useAppSelector((state) => state.moderator.pendingCount)
+  const {
+    works: adminWorks,
+    loading: worksLoading,
+    error: worksError,
+  } = useAppSelector((state) => state.worksAdmin)
 
-  const [activeTab, setActiveTab] = useState<'orders' | 'works'>('orders')
+  const [activeTab, setActiveTab] = useState<'orders' | 'works' | 'statistics'>('orders')
   const [showWorkModal, setShowWorkModal] = useState(false)
   const [editingWork, setEditingWork] = useState<Work | null>(null)
   const [statusInput, setStatusInput] = useState(filters.status)
@@ -40,8 +54,9 @@ export default function AdminPage() {
     }
   }, [navigate, user?.role])
 
+  // «Заказы»: список без works[] — меньше трафика; фильтры с сервера.
   useEffect(() => {
-    if (user?.role !== 'moderator') return
+    if (user?.role !== 'moderator' || activeTab === 'statistics') return
     void dispatch(
       fetchModeratorOrdersThunk({
         status: filters.status,
@@ -49,7 +64,21 @@ export default function AdminPage() {
         dateTo: filters.dateTo,
       }),
     )
-  }, [dispatch, filters.dateFrom, filters.dateTo, filters.status, user?.role])
+  }, [activeTab, dispatch, filters.dateFrom, filters.dateTo, filters.status, user?.role])
+
+  // «Статистика»: полный состав заявок (include_works) для топ-3 услуг; период — на клиенте.
+  useEffect(() => {
+    if (user?.role !== 'moderator' || activeTab !== 'statistics') return
+    void dispatch(
+      fetchModeratorOrdersThunk({
+        status: '',
+        dateFrom: '',
+        dateTo: '',
+        includeWorks: true,
+      }),
+    )
+    void dispatch(fetchAdminWorksThunk())
+  }, [activeTab, dispatch, user?.role])
 
   useEffect(() => {
     if (user?.role !== 'moderator' || activeTab !== 'works') return
@@ -138,6 +167,13 @@ export default function AdminPage() {
             onClick={() => setActiveTab('works')}
           >
             Услуги
+          </button>
+          <button
+            type="button"
+            className={`mis-tab-btn${activeTab === 'statistics' ? ' active' : ''}`}
+            onClick={() => setActiveTab('statistics')}
+          >
+            Статистика
           </button>
         </div>
 
@@ -361,6 +397,19 @@ export default function AdminPage() {
               setShowWorkModal(true)
             }}
           />
+        )}
+
+        {activeTab === 'statistics' && (
+          <StatisticsErrorBoundary>
+            <Suspense fallback={statisticsTabFallback}>
+              <AdminStatisticsTab
+                orders={orders}
+                works={adminWorks}
+                loading={loading || worksLoading}
+                error={error || worksError}
+              />
+            </Suspense>
+          </StatisticsErrorBoundary>
         )}
 
         <WorkFormModal

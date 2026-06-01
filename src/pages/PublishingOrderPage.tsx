@@ -25,7 +25,7 @@ export default function PublishingOrderPage() {
   const user = useAppSelector((state) => state.auth.user)
 
   const [bookTitle, setBookTitle] = useState('')
-  const [circulation, setCirculation] = useState(1)
+  const [circulationInput, setCirculationInput] = useState('1')
 
   useEffect(() => {
     if (!Number.isFinite(orderId) || orderId <= 0) return
@@ -35,7 +35,11 @@ export default function PublishingOrderPage() {
   useEffect(() => {
     if (!selectedOrder) return
     setBookTitle(selectedOrder.book_title ?? '')
-    setCirculation(selectedOrder.circulation ?? 1)
+    setCirculationInput(
+      selectedOrder.circulation != null && selectedOrder.circulation > 0
+        ? String(selectedOrder.circulation)
+        : '1',
+    )
   }, [selectedOrder?.id])
 
   const isDraft = selectedOrder?.status === 'draft'
@@ -52,7 +56,7 @@ export default function PublishingOrderPage() {
     () => sortedWorks.reduce((sum, item) => sum + item.price_rub * item.quantity, 0),
     [sortedWorks],
   )
-  const circulationValue = Math.max(1, Number.isFinite(circulation) ? circulation : 1)
+  const circulationValue = Math.max(1, parseInt(circulationInput, 10) || 1)
   const draftGrandTotal = servicesSubtotal * circulationValue
   const displayTotal =
     !isDraft && selectedOrder?.total_price != null ? selectedOrder.total_price : draftGrandTotal
@@ -60,7 +64,7 @@ export default function PublishingOrderPage() {
   const handleSubmitOrder = async () => {
     if (!selectedOrder?.id) return
     const trimmedTitle = bookTitle.trim()
-    const circulationValue = Math.max(1, Number.isFinite(circulation) ? circulation : 1)
+    const circulationValue = Math.max(1, parseInt(circulationInput, 10) || 1)
 
     const saveResult = await dispatch(
       updateOrderMetaThunk({
@@ -177,10 +181,18 @@ export default function PublishingOrderPage() {
               id="circulation"
               type="number"
               min={1}
+              inputMode="numeric"
               className="profile-input"
               disabled={!isDraft || mutating}
-              value={circulation}
-              onChange={(e) => setCirculation(Math.max(1, Number(e.target.value) || 1))}
+              value={circulationInput}
+              onChange={(e) => {
+                const raw = e.target.value
+                if (raw === '' || /^\d+$/.test(raw)) setCirculationInput(raw)
+              }}
+              onBlur={() => {
+                const n = parseInt(circulationInput, 10)
+                setCirculationInput(String(Number.isFinite(n) && n >= 1 ? n : 1))
+              }}
             />
           </div>
           <div className="order-actions-bar">
