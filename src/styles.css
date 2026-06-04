@@ -313,15 +313,16 @@ body {
 
 .stats-chart-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 12px;
 }
 
 .stats-chart-header-text {
-  flex: 1 1 0;
-  min-width: 0;
+  flex: 1 1 auto;
+  min-width: 120px;
 }
 
 .stats-chart-header .stats-chart-title {
@@ -336,6 +337,24 @@ body {
   line-height: 1.4;
 }
 
+.stats-chart-header-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex: 0 0 auto;
+  max-width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .stats-chart-header-controls {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+.stats-chart-header .stats-chart-header-select,
 .stats-chart-header .stats-chart-type-select {
   width: auto;
   max-width: 130px;
@@ -347,7 +366,14 @@ body {
   font-size: 13px;
 }
 
+.stats-catalog-note {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #999;
+}
+
 @media (min-width: 769px) {
+  .stats-chart-header .stats-chart-header-select,
   .stats-chart-header .stats-chart-type-select {
     min-width: 0;
     max-width: 130px;
@@ -402,10 +428,16 @@ body {
     flex-wrap: wrap;
   }
 
+  .stats-chart-header-controls {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .stats-chart-header .stats-chart-header-select,
   .stats-chart-header .stats-chart-type-select {
     width: 100%;
     max-width: 100%;
-    margin-top: 8px;
+    margin-top: 0;
   }
 }
 

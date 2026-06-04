@@ -2,21 +2,28 @@ import { useMemo, useState } from 'react'
 import { Spinner } from 'react-bootstrap'
 import ErrorAlert from './ErrorAlert'
 import StatsChartCard from './StatsChartCard'
+import StatsStatusChartCard from './StatsStatusChartCard'
 import type { Order, Work } from '../types'
 import {
-  STATS_CHART_COLORS,
-  TOP_WORK_COLORS,
+  STATS_PERIOD_PRESET_LABELS,
+  STATS_STATUS_FILTER_LABELS,
   computeKpis,
-  filterOrdersByPeriod,
-  formatPeriodLabel,
+  filterOrdersForStats,
+  formatStatsContextLabel,
+  getDistinctChartColor,
   getWorkTypeColor,
+  groupAvgCheckByMonth,
   groupCirculationByMonth,
   groupOrdersByMonth,
   groupRevenueByMonth,
-  statusBreakdown,
+  isStatsDateRangeInvalid,
+  resolvePeriodPreset,
+  statsCompletedMetricsBlocked,
   topWorksByQuantity,
   workTypeBreakdown,
-  type StatsDateRange,
+  type StatsFilters,
+  type StatsPeriodPreset,
+  type StatsStatusFilter,
 } from '../utils/moderatorStats'
 
 interface AdminStatisticsTabProps {
@@ -26,59 +33,99 @@ interface AdminStatisticsTabProps {
   error: string
 }
 
+const EMPTY_COMPLETED_STATUS = 'Нет завершённых заявок при выбранном статусе'
+
+const defaultFilters: StatsFilters = {
+  dateFrom: '',
+  dateTo: '',
+  preset: 'all',
+  status: '',
+  creatorLogin: '',
+}
+
+const TIME_SERIES_TYPES = ['bar', 'line', 'area', 'pie'] as const
+
 export default function AdminStatisticsTab({ orders, works, loading, error }: AdminStatisticsTabProps) {
+  const [presetInput, setPresetInput] = useState<StatsPeriodPreset>('all')
   const [dateFromInput, setDateFromInput] = useState('')
   const [dateToInput, setDateToInput] = useState('')
-  const [appliedRange, setAppliedRange] = useState<StatsDateRange>({ dateFrom: '', dateTo: '' })
+  const [statusInput, setStatusInput] = useState<StatsStatusFilter>('')
+  const [creatorInput, setCreatorInput] = useState('')
+  const [appliedFilters, setAppliedFilters] = useState<StatsFilters>(defaultFilters)
+  const [filterError, setFilterError] = useState('')
+  const [chartResetKey, setChartResetKey] = useState(0)
+  const [topWorksLimit, setTopWorksLimit] = useState(3)
+
+  const datesDisabled = presetInput !== 'custom'
 
   const filteredOrders = useMemo(
-    () => filterOrdersByPeriod(orders, appliedRange),
-    [orders, appliedRange],
+    () => filterOrdersForStats(orders, appliedFilters),
+    [orders, appliedFilters],
   )
+
+  const completedBlocked = statsCompletedMetricsBlocked(appliedFilters)
 
   const kpis = useMemo(() => computeKpis(filteredOrders, works), [filteredOrders, works])
-  const periodLabel = useMemo(() => formatPeriodLabel(appliedRange), [appliedRange])
+  const contextLabel = useMemo(() => formatStatsContextLabel(appliedFilters), [appliedFilters])
 
-  const ordersByMonth = useMemo(() => groupOrdersByMonth(filteredOrders), [filteredOrders])
-  const circulationByMonth = useMemo(() => groupCirculationByMonth(filteredOrders), [filteredOrders])
-  const revenueByMonth = useMemo(() => groupRevenueByMonth(filteredOrders), [filteredOrders])
-  const statusSlices = useMemo(() => statusBreakdown(filteredOrders), [filteredOrders])
   const workTypes = useMemo(() => workTypeBreakdown(works), [works])
-  const topWorks = useMemo(() => topWorksByQuantity(filteredOrders, 3), [filteredOrders])
-
-  const statusPieData = useMemo(
-    () => statusSlices.filter((s) => s.count > 0).map((s) => ({ label: s.label, count: s.count, color: s.color })),
-    [statusSlices],
+  const topWorks = useMemo(
+    () => topWorksByQuantity(filteredOrders, topWorksLimit),
+    [filteredOrders, topWorksLimit],
   )
+
   const workTypeChartData = useMemo(
     () => workTypes.map((w) => ({ name: w.name, value: w.count })),
     [workTypes],
-  )
-  const ordersMonthData = useMemo(
-    () => ordersByMonth.map((p) => ({ label: p.label, value: p.value })),
-    [ordersByMonth],
-  )
-  const circulationMonthData = useMemo(
-    () => circulationByMonth.map((p) => ({ label: p.label, value: p.value })),
-    [circulationByMonth],
-  )
-  const revenueMonthData = useMemo(
-    () => revenueByMonth.map((p) => ({ label: p.label, value: p.value })),
-    [revenueByMonth],
   )
   const topWorksData = useMemo(
     () => topWorks.map((w) => ({ name: w.name, count: w.count })),
     [topWorks],
   )
 
-  const handleApplyPeriod = () => {
-    setAppliedRange({ dateFrom: dateFromInput, dateTo: dateToInput })
+  const periodFill = (_entry: { label?: string; value?: number }, index: number) =>
+    getDistinctChartColor(index)
+
+  const handlePresetChange = (preset: StatsPeriodPreset) => {
+    setPresetInput(preset)
+    if (preset !== 'custom') {
+      const range = resolvePeriodPreset(preset)
+      setDateFromInput(range.dateFrom)
+      setDateToInput(range.dateTo)
+    }
   }
 
-  const handleResetPeriod = () => {
+  const handleDateManualChange = (which: 'from' | 'to', value: string) => {
+    setPresetInput('custom')
+    if (which === 'from') setDateFromInput(value)
+    else setDateToInput(value)
+  }
+
+  const handleApplyFilters = () => {
+    if (isStatsDateRangeInvalid(dateFromInput, dateToInput)) {
+      setFilterError('Дата «от» не может быть позже даты «до»')
+      return
+    }
+    setFilterError('')
+    setAppliedFilters({
+      dateFrom: dateFromInput,
+      dateTo: dateToInput,
+      preset: presetInput,
+      status: statusInput,
+      creatorLogin: creatorInput,
+    })
+  }
+
+  const handleResetFilters = () => {
+    setPresetInput('all')
     setDateFromInput('')
     setDateToInput('')
-    setAppliedRange({ dateFrom: '', dateTo: '' })
+    setStatusInput('')
+    setCreatorInput('')
+    setFilterError('')
+    setAppliedFilters(defaultFilters)
+    setTopWorksLimit(3)
+    setChartResetKey((k) => k + 1)
   }
 
   if (loading) {
@@ -100,18 +147,18 @@ export default function AdminStatisticsTab({ orders, works, loading, error }: Ad
     { label: 'Отклонено', value: String(kpis.rejectedCount) },
     {
       label: 'Суммарный тираж',
-      value: kpis.totalCirculation.toLocaleString('ru-RU'),
-      hint: 'по завершённым',
+      value: completedBlocked ? '—' : kpis.totalCirculation.toLocaleString('ru-RU'),
+      hint: completedBlocked ? EMPTY_COMPLETED_STATUS : 'по завершённым',
     },
     {
       label: 'Суммарная выручка',
-      value: `${kpis.totalRevenue.toLocaleString('ru-RU')} ₽`,
-      hint: 'по завершённым',
+      value: completedBlocked ? '—' : `${kpis.totalRevenue.toLocaleString('ru-RU')} ₽`,
+      hint: completedBlocked ? EMPTY_COMPLETED_STATUS : 'по завершённым',
     },
     {
       label: 'Средний тираж',
-      value: kpis.avgCirculation.toLocaleString('ru-RU'),
-      hint: 'по завершённым',
+      value: completedBlocked ? '—' : kpis.avgCirculation.toLocaleString('ru-RU'),
+      hint: completedBlocked ? EMPTY_COMPLETED_STATUS : 'по завершённым',
     },
     { label: 'Активных услуг', value: String(kpis.activeWorksCount) },
     {
@@ -121,16 +168,34 @@ export default function AdminStatisticsTab({ orders, works, loading, error }: Ad
     },
   ]
 
+  const completedEmpty = completedBlocked ? EMPTY_COMPLETED_STATUS : 'Нет данных'
+  const timeSeriesKey = chartResetKey
+
   return (
     <div className="admin-stats-section">
       <div className="profile-filter-panel">
+        <div className="profile-filter-field">
+          <label>Период</label>
+          <select
+            className="profile-select"
+            value={presetInput}
+            onChange={(e) => handlePresetChange(e.target.value as StatsPeriodPreset)}
+          >
+            {(Object.keys(STATS_PERIOD_PRESET_LABELS) as StatsPeriodPreset[]).map((p) => (
+              <option key={p} value={p}>
+                {STATS_PERIOD_PRESET_LABELS[p]}
+              </option>
+            ))}
+          </select>
+        </div>
         <div className="profile-filter-field">
           <label>Дата от</label>
           <input
             type="date"
             className="profile-input"
             value={dateFromInput}
-            onChange={(e) => setDateFromInput(e.target.value)}
+            disabled={datesDisabled}
+            onChange={(e) => handleDateManualChange('from', e.target.value)}
           />
         </div>
         <div className="profile-filter-field">
@@ -139,28 +204,56 @@ export default function AdminStatisticsTab({ orders, works, loading, error }: Ad
             type="date"
             className="profile-input"
             value={dateToInput}
-            onChange={(e) => setDateToInput(e.target.value)}
+            disabled={datesDisabled}
+            onChange={(e) => handleDateManualChange('to', e.target.value)}
+          />
+        </div>
+        <div className="profile-filter-field">
+          <label>Статус</label>
+          <select
+            className="profile-select"
+            value={statusInput}
+            onChange={(e) => setStatusInput(e.target.value as StatsStatusFilter)}
+          >
+            {(Object.keys(STATS_STATUS_FILTER_LABELS) as StatsStatusFilter[]).map((s) => (
+              <option key={s || 'all'} value={s}>
+                {STATS_STATUS_FILTER_LABELS[s]}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="profile-filter-field">
+          <label>Создатель</label>
+          <input
+            type="text"
+            className="profile-input"
+            placeholder="login"
+            value={creatorInput}
+            onChange={(e) => setCreatorInput(e.target.value)}
           />
         </div>
         <div className="profile-filter-actions">
-          <button type="button" className="btn-profile-filter" onClick={handleApplyPeriod}>
+          <button type="button" className="btn-profile-filter" onClick={handleApplyFilters}>
             Применить
           </button>
-          <button type="button" className="btn-profile-reset" onClick={handleResetPeriod}>
+          <button type="button" className="btn-profile-reset" onClick={handleResetFilters}>
             Сбросить
           </button>
         </div>
       </div>
 
+      {filterError && <ErrorAlert message={filterError} className="mb-3" />}
+
       <div className="admin-works-toolbar admin-stats-toolbar">
         <div>
           <p className="admin-works-toolbar-title">Показатели</p>
-          <p className="admin-works-toolbar-meta">Период: {periodLabel}</p>
+          <p className="admin-works-toolbar-meta">Фильтр: {contextLabel}</p>
+          <p className="admin-works-toolbar-meta stats-catalog-note">Каталог «Услуги по типу» — без фильтра заявок</p>
         </div>
       </div>
 
       {filteredOrders.length === 0 && (
-        <div className="mis-empty mb-3">Нет заявок за выбранный период</div>
+        <div className="mis-empty mb-3">Нет заявок за выбранный период и фильтры</div>
       )}
 
       <div className="stats-kpi-grid">
@@ -174,64 +267,98 @@ export default function AdminStatisticsTab({ orders, works, loading, error }: Ad
       </div>
 
       <div className="stats-charts-grid">
+        <StatsStatusChartCard
+          key={`status-${timeSeriesKey}`}
+          orders={filteredOrders}
+          emptyMessage="Нет данных"
+        />
+
         <StatsChartCard
-          title="Заявки по статусам"
-          data={statusPieData}
+          key={`orders-period-${timeSeriesKey}`}
+          title="Заявки по периодам"
+          timeSeries={{ orders: filteredOrders, aggregate: groupOrdersByMonth }}
           nameKey="label"
-          valueKey="count"
-          allowedTypes={['pie', 'bar']}
-          defaultType="pie"
-          pieInnerRadius={50}
-          getFill={(entry) => String(entry.color ?? STATS_CHART_COLORS.neutral)}
+          valueKey="value"
+          seriesLabel="Заявок"
+          allowedTypes={[...TIME_SERIES_TYPES]}
+          defaultType="bar"
+          getFill={periodFill}
           valueFormatter={(v) => `${v} заявок`}
-          emptyMessage="Нет данных"
+          showPiePercent
         />
 
         <StatsChartCard
-          title="Заявки по месяцам"
-          data={ordersMonthData}
+          key={`circulation-${timeSeriesKey}`}
+          title="Тираж по периодам (завершённые)"
+          timeSeries={{ orders: filteredOrders, aggregate: groupCirculationByMonth }}
           nameKey="label"
           valueKey="value"
-          allowedTypes={['bar', 'line']}
+          seriesLabel="Тираж"
+          allowedTypes={[...TIME_SERIES_TYPES]}
           defaultType="bar"
-        />
-
-        <StatsChartCard
-          title="Тираж по месяцам (завершённые)"
-          data={circulationMonthData}
-          nameKey="label"
-          valueKey="value"
-          allowedTypes={['bar']}
-          defaultType="bar"
-          getFill={() => STATS_CHART_COLORS.neutralAlt}
+          getFill={periodFill}
           valueFormatter={(v) => `${v.toLocaleString('ru-RU')} экз.`}
-          emptyMessage="Нет данных"
+          showPiePercent
+          emptyMessage={completedEmpty}
         />
 
         <StatsChartCard
-          title="Выручка по месяцам (завершённые)"
-          subtitle="Сумма по завершённым заявкам за календарный месяц (не накопительно)"
-          data={revenueMonthData}
+          key={`revenue-${timeSeriesKey}`}
+          title="Выручка по периодам (завершённые)"
+          timeSeries={{ orders: filteredOrders, aggregate: groupRevenueByMonth }}
           nameKey="label"
           valueKey="value"
-          allowedTypes={['bar']}
+          seriesLabel="Выручка"
+          allowedTypes={[...TIME_SERIES_TYPES]}
           defaultType="bar"
+          getFill={periodFill}
           valueFormatter={(v) => `${v.toLocaleString('ru-RU')} ₽`}
-          showMonthDelta={revenueMonthData.length >= 2}
-          emptyMessage="Нет данных"
+          enableMonthDelta={!completedBlocked}
+          showPiePercent
+          emptyMessage={completedEmpty}
         />
 
         <StatsChartCard
-          title="Топ-3 услуги в заявках"
+          key={`avg-check-${timeSeriesKey}`}
+          title="Средний чек по периодам (завершённые)"
+          timeSeries={{ orders: filteredOrders, aggregate: groupAvgCheckByMonth }}
+          nameKey="label"
+          valueKey="value"
+          seriesLabel="Средний чек"
+          allowedTypes={[...TIME_SERIES_TYPES]}
+          defaultType="bar"
+          getFill={periodFill}
+          valueFormatter={(v) => `${v.toLocaleString('ru-RU')} ₽`}
+          showPiePercent
+          emptyMessage={completedEmpty}
+        />
+
+        <StatsChartCard
+          title="Топ услуги в заявках"
           data={topWorksData}
           nameKey="name"
           valueKey="count"
+          seriesLabel="В заявках"
           allowedTypes={['bar', 'pie']}
           defaultType="bar"
           layout="vertical"
           categoryAxisWidth={140}
-          getFill={(_entry, index) => TOP_WORK_COLORS[index % TOP_WORK_COLORS.length]}
+          getFill={(_entry, index) => getDistinctChartColor(index)}
           emptyMessage="Нет позиций в заявках за выбранный период"
+          headerExtra={
+            <select
+              className="profile-select stats-chart-header-select"
+              value={topWorksLimit}
+              onChange={(e) => setTopWorksLimit(Number(e.target.value))}
+              aria-label="Количество услуг в топе"
+            >
+              {[3, 5, 10].map((n) => (
+                <option key={n} value={n}>
+                  {`Топ-${n}`}
+                </option>
+              ))}
+            </select>
+          }
         />
 
         <StatsChartCard
@@ -239,24 +366,13 @@ export default function AdminStatisticsTab({ orders, works, loading, error }: Ad
           data={workTypeChartData}
           nameKey="name"
           valueKey="value"
+          seriesLabel="Услуг"
           allowedTypes={['pie', 'bar']}
           defaultType="pie"
           getFill={(entry, index) => getWorkTypeColor(String(entry.name ?? ''), index)}
           emptyMessage="Нет услуг в каталоге"
         />
       </div>
-
-      {(kpis.rejectedCount > 0 || kpis.rejectionRatePercent != null) && (
-        <div className="admin-works-toolbar admin-stats-rejection-summary">
-          <div>
-            <p className="admin-works-toolbar-title">Отказы</p>
-            <p className="admin-works-toolbar-meta">
-              Отклонено: {kpis.rejectedCount}
-              {kpis.rejectionRatePercent != null ? ` · ${kpis.rejectionRatePercent}% от обработанных` : ''}
-            </p>
-          </div>
-        </div>
-      )}
     </div>
   )
 }

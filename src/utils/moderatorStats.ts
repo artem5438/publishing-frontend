@@ -6,6 +6,35 @@ export interface StatsDateRange {
   dateTo: string
 }
 
+export type StatsPeriodPreset = 'all' | 'last30' | 'thisMonth' | 'lastMonth' | 'custom'
+
+export type StatsTimeGranularity = 'month' | 'week'
+
+export interface StatsFilters {
+  dateFrom: string
+  dateTo: string
+  preset: StatsPeriodPreset
+  status: StatsStatusFilter
+  creatorLogin: string
+}
+
+export const STATS_PERIOD_PRESET_LABELS: Record<StatsPeriodPreset, string> = {
+  all: 'За всё время',
+  last30: 'Последние 30 дней',
+  thisMonth: 'Этот месяц',
+  lastMonth: 'Прошлый месяц',
+  custom: 'Произвольный',
+}
+
+export type StatsStatusFilter = '' | 'formed' | 'completed' | 'rejected'
+
+export const STATS_STATUS_FILTER_LABELS: Record<StatsStatusFilter, string> = {
+  '': 'Все',
+  formed: 'На рассмотрении',
+  completed: 'Выполнен',
+  rejected: 'Отклонён',
+}
+
 export interface KpiMetrics {
   totalOrders: number
   formedCount: number
@@ -36,6 +65,14 @@ export interface NamedCount {
   count: number
 }
 
+export interface StatusByMonthRow {
+  label: string
+  periodKey: string
+  formed: number
+  completed: number
+  rejected: number
+}
+
 const CHART_NEUTRAL = '#1C1C1C'
 const CHART_NEUTRAL_ALT = '#666666'
 
@@ -53,6 +90,36 @@ export const TOP_WORK_COLORS = ['#1C1C1C', '#f59e0b', '#6366f1']
 
 export function getWorkTypeColor(name: string, index: number): string {
   return WORK_TYPE_COLORS[name] ?? CHART_PALETTE[index % CHART_PALETTE.length]
+}
+
+/** Уникальный цвет для каждого элемента на одной диаграмме (без циклического повтора). */
+export function getDistinctChartColor(index: number): string {
+  if (index >= 0 && index < CHART_PALETTE.length) return CHART_PALETTE[index]
+  const hue = (index * 47) % 360
+  return `hsl(${hue}, 55%, 42%)`
+}
+
+export type StatusGroupMode = 'all' | StatsTimeGranularity
+
+export const STATUS_GROUP_LABELS: Record<StatusGroupMode, string> = {
+  all: 'Всего',
+  month: 'По месяцам',
+  week: 'По неделям',
+}
+
+function orderPeriodKey(order: Order, granularity: StatsTimeGranularity): string | null {
+  const ref = getOrderReferenceDate(order)
+  if (!ref) return null
+  return periodKeyFromDate(ref, granularity)
+}
+
+export function filterOrdersByStatsPeriod(
+  orders: Order[],
+  periodKey: string,
+  granularity: StatsTimeGranularity,
+): Order[] {
+  if (!periodKey) return []
+  return orders.filter((o) => orderPeriodKey(o, granularity) === periodKey)
 }
 
 export const STATS_CHART_COLORS = {
@@ -83,6 +150,42 @@ function parseDateInput(value: string, endOfDay: boolean): Date | null {
   return d
 }
 
+function toIsoDate(d: Date): string {
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${y}-${m}-${day}`
+}
+
+export function resolvePeriodPreset(preset: StatsPeriodPreset): StatsDateRange {
+  const now = new Date()
+  if (preset === 'all') return { dateFrom: '', dateTo: '' }
+  if (preset === 'last30') {
+    const from = new Date(now)
+    from.setDate(from.getDate() - 29)
+    from.setHours(0, 0, 0, 0)
+    return { dateFrom: toIsoDate(from), dateTo: toIsoDate(now) }
+  }
+  if (preset === 'thisMonth') {
+    const from = new Date(now.getFullYear(), now.getMonth(), 1)
+    return { dateFrom: toIsoDate(from), dateTo: toIsoDate(now) }
+  }
+  if (preset === 'lastMonth') {
+    const from = new Date(now.getFullYear(), now.getMonth() - 1, 1)
+    const to = new Date(now.getFullYear(), now.getMonth(), 0)
+    return { dateFrom: toIsoDate(from), dateTo: toIsoDate(to) }
+  }
+  return { dateFrom: '', dateTo: '' }
+}
+
+export function isStatsDateRangeInvalid(dateFrom: string, dateTo: string): boolean {
+  if (!dateFrom.trim() || !dateTo.trim()) return false
+  const from = parseDateInput(dateFrom, false)
+  const to = parseDateInput(dateTo, true)
+  if (!from || !to) return false
+  return from > to
+}
+
 export function filterOrdersByPeriod(orders: Order[], range: StatsDateRange): Order[] {
   const from = parseDateInput(range.dateFrom, false)
   const to = parseDateInput(range.dateTo, true)
@@ -97,6 +200,26 @@ export function filterOrdersByPeriod(orders: Order[], range: StatsDateRange): Or
   })
 }
 
+export function filterOrdersForStats(orders: Order[], filters: StatsFilters): Order[] {
+  let result = filterOrdersByPeriod(orders, {
+    dateFrom: filters.dateFrom,
+    dateTo: filters.dateTo,
+  })
+  if (filters.status) {
+    result = result.filter((o) => o.status === filters.status)
+  }
+  const login = filters.creatorLogin.trim().toLowerCase()
+  if (login) {
+    result = result.filter((o) => (o.creator_login ?? '').toLowerCase().includes(login))
+  }
+  return result
+}
+
+/** Завершённые метрики недоступны при фильтре только formed/rejected */
+export function statsCompletedMetricsBlocked(filters: StatsFilters): boolean {
+  return filters.status === 'formed' || filters.status === 'rejected'
+}
+
 export function formatPeriodLabel(range: StatsDateRange): string {
   if (range.dateFrom && range.dateTo) {
     return `${formatRuDate(range.dateFrom)} — ${formatRuDate(range.dateTo)}`
@@ -104,6 +227,21 @@ export function formatPeriodLabel(range: StatsDateRange): string {
   if (range.dateFrom) return `с ${formatRuDate(range.dateFrom)}`
   if (range.dateTo) return `по ${formatRuDate(range.dateTo)}`
   return 'за всё время'
+}
+
+export function formatStatsContextLabel(filters: StatsFilters): string {
+  const parts: string[] = []
+  if (filters.preset !== 'custom' && filters.preset !== 'all') {
+    parts.push(STATS_PERIOD_PRESET_LABELS[filters.preset])
+  } else {
+    parts.push(formatPeriodLabel({ dateFrom: filters.dateFrom, dateTo: filters.dateTo }))
+  }
+  if (filters.status) {
+    parts.push(STATS_STATUS_FILTER_LABELS[filters.status])
+  }
+  const login = filters.creatorLogin.trim()
+  if (login) parts.push(`создатель: ${login}`)
+  return parts.join(' · ')
 }
 
 function formatRuDate(isoDate: string): string {
@@ -146,6 +284,15 @@ function monthKeyFromDate(d: Date): string {
   return `${y}-${m}`
 }
 
+function weekKeyFromDate(d: Date): string {
+  const copy = new Date(d)
+  copy.setHours(0, 0, 0, 0)
+  const day = copy.getDay()
+  const diff = day === 0 ? -6 : 1 - day
+  copy.setDate(copy.getDate() + diff)
+  return toIsoDate(copy)
+}
+
 function monthLabelFromKey(key: string): string {
   const [y, m] = key.split('-')
   const monthNames = [
@@ -166,38 +313,90 @@ function monthLabelFromKey(key: string): string {
   return `${monthNames[idx] ?? m} ${y}`
 }
 
-function aggregateByMonth(
+function weekLabelFromKey(key: string): string {
+  const start = new Date(key)
+  if (Number.isNaN(start.getTime())) return key
+  const end = new Date(start)
+  end.setDate(end.getDate() + 6)
+  const fmt = (d: Date) =>
+    d.toLocaleDateString('ru-RU', { day: 'numeric', month: 'short' })
+  return `${fmt(start)} — ${fmt(end)}`
+}
+
+function periodKeyFromDate(d: Date, granularity: StatsTimeGranularity): string {
+  return granularity === 'week' ? weekKeyFromDate(d) : monthKeyFromDate(d)
+}
+
+function periodLabelFromKey(key: string, granularity: StatsTimeGranularity): string {
+  return granularity === 'week' ? weekLabelFromKey(key) : monthLabelFromKey(key)
+}
+
+function aggregateByPeriod(
   orders: Order[],
   valueFn: (order: Order) => number,
+  granularity: StatsTimeGranularity,
 ): MonthPoint[] {
   const map = new Map<string, number>()
   for (const order of orders) {
     const ref = getOrderReferenceDate(order)
     if (!ref) continue
-    const key = monthKeyFromDate(ref)
+    const key = periodKeyFromDate(ref, granularity)
     map.set(key, (map.get(key) ?? 0) + valueFn(order))
   }
   return [...map.entries()]
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([monthKey, value]) => ({
-      monthKey,
-      label: monthLabelFromKey(monthKey),
+    .map(([periodKey, value]) => ({
+      monthKey: periodKey,
+      label: periodLabelFromKey(periodKey, granularity),
       value,
     }))
 }
 
-export function groupOrdersByMonth(orders: Order[]): MonthPoint[] {
-  return aggregateByMonth(orders, () => 1)
+export function groupOrdersByMonth(orders: Order[], granularity: StatsTimeGranularity = 'month'): MonthPoint[] {
+  return aggregateByPeriod(orders, () => 1, granularity)
 }
 
-export function groupCirculationByMonth(orders: Order[]): MonthPoint[] {
+export function groupCirculationByMonth(
+  orders: Order[],
+  granularity: StatsTimeGranularity = 'month',
+): MonthPoint[] {
   const completed = orders.filter((o) => o.status === 'completed')
-  return aggregateByMonth(completed, (o) => o.circulation ?? 0)
+  return aggregateByPeriod(completed, (o) => o.circulation ?? 0, granularity)
 }
 
-export function groupRevenueByMonth(orders: Order[]): MonthPoint[] {
+export function groupRevenueByMonth(
+  orders: Order[],
+  granularity: StatsTimeGranularity = 'month',
+): MonthPoint[] {
   const completed = orders.filter((o) => o.status === 'completed')
-  return aggregateByMonth(completed, (o) => o.total_price ?? 0)
+  return aggregateByPeriod(completed, (o) => o.total_price ?? 0, granularity)
+}
+
+export function groupAvgCheckByMonth(
+  orders: Order[],
+  granularity: StatsTimeGranularity = 'month',
+): MonthPoint[] {
+  const completed = orders.filter((o) => o.status === 'completed')
+  const revenueMap = new Map<string, number>()
+  const countMap = new Map<string, number>()
+  for (const order of completed) {
+    const ref = getOrderReferenceDate(order)
+    if (!ref) continue
+    const key = periodKeyFromDate(ref, granularity)
+    revenueMap.set(key, (revenueMap.get(key) ?? 0) + (order.total_price ?? 0))
+    countMap.set(key, (countMap.get(key) ?? 0) + 1)
+  }
+  const keys = [...new Set([...revenueMap.keys(), ...countMap.keys()])].sort()
+  return keys.map((periodKey) => {
+    const rev = revenueMap.get(periodKey) ?? 0
+    const cnt = countMap.get(periodKey) ?? 0
+    const value = cnt > 0 ? Math.round(rev / cnt) : 0
+    return {
+      monthKey: periodKey,
+      label: periodLabelFromKey(periodKey, granularity),
+      value,
+    }
+  })
 }
 
 export function statusBreakdown(orders: Order[]): StatusSlice[] {
@@ -211,6 +410,35 @@ export function statusBreakdown(orders: Order[]): StatusSlice[] {
       color: info.color,
     }
   })
+}
+
+export function statusByMonthBreakdown(
+  orders: Order[],
+  granularity: StatsTimeGranularity = 'month',
+): StatusByMonthRow[] {
+  const map = new Map<string, StatusByMonthRow>()
+  const statuses = ['formed', 'completed', 'rejected'] as const
+
+  for (const order of orders) {
+    const ref = getOrderReferenceDate(order)
+    if (!ref || !statuses.includes(order.status as (typeof statuses)[number])) continue
+    const key = periodKeyFromDate(ref, granularity)
+    if (!map.has(key)) {
+      map.set(key, {
+        periodKey: key,
+        label: periodLabelFromKey(key, granularity),
+        formed: 0,
+        completed: 0,
+        rejected: 0,
+      })
+    }
+    const row = map.get(key)!
+    if (order.status === 'formed') row.formed += 1
+    else if (order.status === 'completed') row.completed += 1
+    else if (order.status === 'rejected') row.rejected += 1
+  }
+
+  return [...map.values()].sort((a, b) => a.periodKey.localeCompare(b.periodKey))
 }
 
 export function workTypeBreakdown(works: Work[]): NamedCount[] {
@@ -242,6 +470,24 @@ export function topWorksByQuantity(orders: Order[], limit = 3): NamedCount[] {
     .map(([name, count]) => ({ name, count }))
 }
 
+export function topCreatorsByOrders(orders: Order[], limit = 5): NamedCount[] {
+  const map = new Map<string, number>()
+  for (const order of orders) {
+    const login = order.creator_login?.trim() || 'Без логина'
+    map.set(login, (map.get(login) ?? 0) + 1)
+  }
+  return [...map.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, limit)
+    .map(([name, count]) => ({ name, count }))
+}
+
 export function ordersHaveWorksDetail(orders: Order[]): boolean {
   return orders.some((o) => (o.works?.length ?? 0) > 0)
 }
+
+export const STATUS_STACK_SERIES = [
+  { key: 'formed' as const, label: 'На рассмотрении', color: getOrderStatusInfo('formed').color },
+  { key: 'completed' as const, label: 'Выполнен', color: getOrderStatusInfo('completed').color },
+  { key: 'rejected' as const, label: 'Отклонён', color: getOrderStatusInfo('rejected').color },
+]
