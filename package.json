@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "packageManager": "npm@10.8.2",
   "scripts": {
     "dev": "VITE_APP_PROFILE=local-api vite",
     "dev:guest": "VITE_APP_PROFILE=pages-guest VITE_MEDIA_BASE_URL=http://localhost:5173/publishing-media vite",
