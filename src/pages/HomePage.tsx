@@ -41,7 +41,7 @@ export default function HomePage() {
             </Link>
             {IS_GUEST_MODE && (
               <Link to="/demo/statistics" className="mis-nav-btn home-login-btn">
-                Демо аналитики
+                Статистика
               </Link>
             )}
             {!IS_GUEST_MODE && !user && (

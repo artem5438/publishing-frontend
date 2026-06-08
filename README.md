@@ -14,7 +14,7 @@ Folio — frontend учебной системы книжного издател
 - Push to `main` or run workflow **Deploy Frontend To GitHub Pages**
 - Media/env matrix: [docs/MEDIA_ENV.md](docs/MEDIA_ENV.md)
 - Site URL: `https://artem5438.github.io/publishing-frontend/`
-- **Демо аналитики (QR для презентации):** `https://artem5438.github.io/publishing-frontend/demo/statistics`
+- **Статистика (QR для презентации):** `https://artem5438.github.io/publishing-frontend/demo/statistics`
 - Данные: `public/demo-stats/orders.json` + `works.json` (снимок для guest-режима)
 - Перегенерация: `npm run generate:demo-stats`
 

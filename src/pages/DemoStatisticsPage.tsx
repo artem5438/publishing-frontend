@@ -64,15 +64,8 @@ export default function DemoStatisticsPage() {
 
   return (
     <Container className="py-4">
-      <Breadcrumbs items={[{ label: 'Главная', path: '/' }, { label: 'Демо аналитики' }]} />
-      <div className="admin-works-toolbar admin-stats-toolbar mb-3">
-        <div>
-          <p className="admin-works-toolbar-title">Демонстрация аналитики Folio</p>
-          <p className="admin-works-toolbar-meta">
-            Вкладка «Статистика» панели модератора · демо-стенд GitHub Pages
-          </p>
-        </div>
-      </div>
+      <Breadcrumbs items={[{ label: 'Главная', path: '/' }, { label: 'Статистика' }]} />
+      <h1 className="profile-title">Статистика</h1>
 
       {error && <ErrorAlert message={error} className="mb-3" />}
 

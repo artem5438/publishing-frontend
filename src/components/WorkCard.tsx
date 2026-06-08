@@ -61,6 +61,11 @@ export default function WorkCard({ work }: WorkCardProps) {
           ? 'Не удалось'
           : 'Добавить'
 
+  const handleGuestDetails = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation()
+    navigate(`/works/${work.id}`)
+  }
+
   // Отображаем карточку услуги
   return (
     <div
@@ -91,7 +96,15 @@ export default function WorkCard({ work }: WorkCardProps) {
         <div className="card-title">{work.name}</div>
         <div className="work-card-footer-custom">
           <span className="work-card-price">{work.price_rub.toLocaleString()} ₽</span>
-          {!IS_GUEST_MODE && (
+          {IS_GUEST_MODE ? (
+            <button
+              type="button"
+              className="mis-action-btn mis-action-btn--block"
+              onClick={handleGuestDetails}
+            >
+              Подробнее
+            </button>
+          ) : (
             <button
               type="button"
               className={addBtnClass}

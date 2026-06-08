@@ -86,6 +86,15 @@ export default function AppNavbar() {
             Услуги
           </Button>
 
+          {IS_GUEST_MODE && (
+            <Button
+              className={`mis-nav-btn${location.pathname === '/demo/statistics' ? ' active' : ''}`}
+              onClick={() => navigate('/demo/statistics')}
+            >
+              Статистика
+            </Button>
+          )}
+
           {!IS_GUEST_MODE && (
             <Button
               className="mis-nav-btn"
@@ -142,6 +151,15 @@ export default function AppNavbar() {
               <Nav.Link className="mis-nav-link" onClick={() => go('/works')}>
                 Услуги
               </Nav.Link>
+
+              {IS_GUEST_MODE && (
+                <Nav.Link
+                  className={`mis-nav-link${location.pathname === '/demo/statistics' ? ' active' : ''}`}
+                  onClick={() => go('/demo/statistics')}
+                >
+                  Статистика
+                </Nav.Link>
+              )}
 
               {!IS_GUEST_MODE && (
                 <Nav.Link
