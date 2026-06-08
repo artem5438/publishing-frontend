@@ -39,6 +39,11 @@ export default function HomePage() {
             <Link to="/works" className="btn-add-custom home-hero-btn">
               Смотреть услуги
             </Link>
+            {IS_GUEST_MODE && (
+              <Link to="/demo/statistics" className="mis-nav-btn home-login-btn">
+                Демо аналитики
+              </Link>
+            )}
             {!IS_GUEST_MODE && !user && (
               <Link to="/login" className="mis-nav-btn home-login-btn">
                 Войти

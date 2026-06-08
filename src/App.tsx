@@ -17,6 +17,7 @@ import PublishingOrderPage from './pages/PublishingOrderPage'
 import { IS_GUEST_MODE, IS_TAURI_PROFILE } from './config/env'
 
 const AdminPage = lazy(() => import('./pages/AdminPage'))
+const DemoStatisticsPage = lazy(() => import('./pages/DemoStatisticsPage'))
 
 const routeFallback = (
   <div className="d-flex justify-content-center align-items-center py-5" style={{ minHeight: '30vh' }}>
@@ -40,6 +41,14 @@ function AppRoutes() {
         <Route path="/" element={<HomePage />} />
         <Route path="/works" element={<WorksListPage />} />
         <Route path="/works/:id" element={<WorkDetailPage />} />
+        <Route
+          path="/demo/statistics"
+          element={
+            <Suspense fallback={routeFallback}>
+              <DemoStatisticsPage />
+            </Suspense>
+          }
+        />
         <Route
           path="/publishing-orders/:id"
           element={IS_GUEST_MODE ? fallback : <PublishingOrderPage />}

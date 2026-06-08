@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Цифровая печать",
+    "description": "",
+    "price_rub": 5000,
+    "work_type": "Печать",
+    "unit": "экз."
+  },
+  {
+    "id": 2,
+    "name": "Офсетная печать",
+    "description": "",
+    "price_rub": 15000,
+    "work_type": "Печать",
+    "unit": "экз."
+  },
+  {
+    "id": 3,
+    "name": "Мягкий переплёт",
+    "description": "",
+    "price_rub": 800,
+    "work_type": "Переплёт",
+    "unit": "экз."
+  },
+  {
+    "id": 4,
+    "name": "Твёрдый переплёт",
+    "description": "",
+    "price_rub": 2500,
+    "work_type": "Переплёт",
+    "unit": "экз."
+  },
+  {
+    "id": 5,
+    "name": "Вёрстка",
+    "description": "",
+    "price_rub": 3000,
+    "work_type": "Допечать",
+    "unit": "стр."
+  },
+  {
+    "id": 6,
+    "name": "Корректура",
+    "description": "",
+    "price_rub": 1500,
+    "work_type": "Допечать",
+    "unit": "стр."
+  },
+  {
+    "id": 7,
+    "name": "Дизайн обложки",
+    "description": "",
+    "price_rub": 4000,
+    "work_type": "Дизайн",
+    "unit": "шт."
+  },
+  {
+    "id": 8,
+    "name": "Присвоение ISBN",
+    "description": "",
+    "price_rub": 1000,
+    "work_type": "Оформление",
+    "unit": "шт."
+  },
+  {
+    "id": 9,
+    "name": "Ризография",
+    "description": "",
+    "price_rub": 3500,
+    "work_type": "Печать",
+    "unit": "лист"
+  }
+]

@@ -18,7 +18,8 @@
     "build:tauri-bin": "tauri build --no-bundle",
     "lint": "eslint .",
     "preview": "vite preview",
-    "codegen": "openapi --input \"/Users/artem/Documents/6 semestr/publishing-backend/docs/swagger.yaml\" --output \"src/api/generated\" --client axios"
+    "codegen": "openapi --input \"/Users/artem/Documents/6 semestr/publishing-backend/docs/swagger.yaml\" --output \"src/api/generated\" --client axios",
+    "generate:demo-stats": "python3 scripts/generate-demo-stats-json.py"
   },
   "dependencies": {
     "@huggingface/transformers": "^4.0.1",

@@ -1,0 +1,7856 @@
+[
+  {
+    "id": 1,
+    "status": "completed",
+    "creator_login": "creator_demo_06",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 2,
+    "total_price": 4000,
+    "created_at": "2026-06-01T19:01:20Z",
+    "formed_at": "2026-06-02T10:01:20Z",
+    "completed_at": "2026-06-11T10:01:20Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 2,
+    "status": "completed",
+    "creator_login": "creator_demo_18",
+    "book_title": "Сибирские тетради",
+    "circulation": 3,
+    "total_price": 30500,
+    "created_at": "2026-05-28T22:35:19Z",
+    "formed_at": "2026-05-29T09:35:19Z",
+    "completed_at": "2026-06-10T09:35:19Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 3,
+    "status": "completed",
+    "creator_login": "creator_demo_07",
+    "book_title": "Городские этюды",
+    "circulation": 2,
+    "total_price": 4000,
+    "created_at": "2026-05-11T15:17:46Z",
+    "formed_at": "2026-05-12T14:17:46Z",
+    "completed_at": "2026-05-22T14:17:46Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 4,
+    "status": "completed",
+    "creator_login": "creator_demo_18",
+    "book_title": "Практикум по типографике",
+    "circulation": 2,
+    "total_price": 1000,
+    "created_at": "2026-04-25T16:46:41Z",
+    "formed_at": "2026-04-27T09:46:41Z",
+    "completed_at": "2026-05-11T09:46:41Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 5,
+    "status": "completed",
+    "creator_login": "creator_demo_41",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 50000,
+    "created_at": "2026-05-05T00:23:14Z",
+    "formed_at": "2026-05-06T11:23:14Z",
+    "completed_at": "2026-05-18T11:23:14Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 6,
+    "status": "completed",
+    "creator_login": "creator_demo_18",
+    "book_title": "Сибирские тетради",
+    "circulation": 2,
+    "total_price": 13200,
+    "created_at": "2026-04-24T21:29:02Z",
+    "formed_at": "2026-04-25T11:29:02Z",
+    "completed_at": "2026-05-05T11:29:02Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 7,
+    "status": "completed",
+    "creator_login": "creator_demo_06",
+    "book_title": "Сибирские тетради",
+    "circulation": 2,
+    "total_price": 15800,
+    "created_at": "2026-05-01T04:41:09Z",
+    "formed_at": "2026-05-01T12:41:09Z",
+    "completed_at": "2026-05-04T12:41:09Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 8,
+    "status": "completed",
+    "creator_login": "creator_demo_44",
+    "book_title": "Очерки о типографах",
+    "circulation": 2,
+    "total_price": 108000,
+    "created_at": "2026-06-01T03:50:18Z",
+    "formed_at": "2026-06-01T11:50:18Z",
+    "completed_at": "2026-06-12T11:50:18Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 9,
+    "status": "completed",
+    "creator_login": "creator_demo_47",
+    "book_title": "Городские этюды",
+    "circulation": 3,
+    "total_price": 66500,
+    "created_at": "2026-05-22T04:49:53Z",
+    "formed_at": "2026-05-23T13:49:53Z",
+    "completed_at": "2026-06-05T13:49:53Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 10,
+    "status": "completed",
+    "creator_login": "creator_demo_39",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 23000,
+    "created_at": "2026-04-18T07:58:20Z",
+    "formed_at": "2026-04-18T17:58:20Z",
+    "completed_at": "2026-04-24T17:58:20Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 11,
+    "status": "completed",
+    "creator_login": "creator_demo_08",
+    "book_title": "Городские этюды",
+    "circulation": 2,
+    "total_price": 2000,
+    "created_at": "2026-04-16T21:49:11Z",
+    "formed_at": "2026-04-17T17:49:11Z",
+    "completed_at": "2026-04-21T17:49:11Z",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 12,
+    "status": "completed",
+    "creator_login": "creator_demo_43",
+    "book_title": "Практикум по типографике",
+    "circulation": 2,
+    "total_price": 3000,
+    "created_at": "2026-04-05T00:56:31Z",
+    "formed_at": "2026-04-06T12:56:31Z",
+    "completed_at": "2026-04-09T12:56:31Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 13,
+    "status": "completed",
+    "creator_login": "creator_demo_34",
+    "book_title": "Практикум по типографике",
+    "circulation": 2,
+    "total_price": 39200,
+    "created_at": "2026-04-27T09:55:36Z",
+    "formed_at": "2026-04-27T17:55:36Z",
+    "completed_at": "2026-05-01T17:55:36Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 14,
+    "status": "completed",
+    "creator_login": "creator_demo_15",
+    "book_title": "Сибирские тетради",
+    "circulation": 3,
+    "total_price": 6500,
+    "created_at": "2026-04-23T05:21:57Z",
+    "formed_at": "2026-04-23T10:21:57Z",
+    "completed_at": "2026-05-05T10:21:57Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 15,
+    "status": "completed",
+    "creator_login": "creator_demo_33",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 2,
+    "total_price": 16000,
+    "created_at": "2026-05-31T15:14:35Z",
+    "formed_at": "2026-06-01T09:14:35Z",
+    "completed_at": "2026-06-12T09:14:35Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 16,
+    "status": "completed",
+    "creator_login": "creator_demo_07",
+    "book_title": "Сибирские тетради",
+    "circulation": 2,
+    "total_price": 10000,
+    "created_at": "2026-05-16T17:34:51Z",
+    "formed_at": "2026-05-18T12:34:51Z",
+    "completed_at": "2026-05-25T12:34:51Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 17,
+    "status": "completed",
+    "creator_login": "creator_demo_13",
+    "book_title": "Сборник рефератов",
+    "circulation": 2,
+    "total_price": 98000,
+    "created_at": "2026-05-04T10:26:23Z",
+    "formed_at": "2026-05-05T15:26:23Z",
+    "completed_at": "2026-05-08T15:26:23Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 18,
+    "status": "completed",
+    "creator_login": "creator_demo_06",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 2,
+    "total_price": 70000,
+    "created_at": "2026-05-12T00:17:19Z",
+    "formed_at": "2026-05-12T11:17:19Z",
+    "completed_at": "2026-05-19T11:17:19Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 19,
+    "status": "completed",
+    "creator_login": "creator_demo_45",
+    "book_title": "Очерки о типографах",
+    "circulation": 2,
+    "total_price": 43200,
+    "created_at": "2026-05-17T04:13:33Z",
+    "formed_at": "2026-05-18T16:13:33Z",
+    "completed_at": "2026-05-29T16:13:33Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 20,
+    "status": "completed",
+    "creator_login": "creator_demo_21",
+    "book_title": "Сибирские тетради",
+    "circulation": 3,
+    "total_price": 72500,
+    "created_at": "2026-05-18T07:12:35Z",
+    "formed_at": "2026-05-18T11:12:35Z",
+    "completed_at": "2026-05-28T11:12:35Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 21,
+    "status": "completed",
+    "creator_login": "creator_demo_05",
+    "book_title": "Очерки о типографах",
+    "circulation": 4,
+    "total_price": 76000,
+    "created_at": "2026-05-17T01:58:51Z",
+    "formed_at": "2026-05-17T17:58:51Z",
+    "completed_at": "2026-05-24T17:58:51Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 22,
+    "status": "completed",
+    "creator_login": "creator_demo_38",
+    "book_title": "Сборник рефератов",
+    "circulation": 4,
+    "total_price": 116000,
+    "created_at": "2026-04-12T08:15:21Z",
+    "formed_at": "2026-04-13T18:15:21Z",
+    "completed_at": "2026-04-19T18:15:21Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 23,
+    "status": "completed",
+    "creator_login": "creator_demo_30",
+    "book_title": "Городские этюды",
+    "circulation": 3,
+    "total_price": 62000,
+    "created_at": "2026-04-26T07:42:41Z",
+    "formed_at": "2026-04-26T12:42:41Z",
+    "completed_at": "2026-04-27T12:42:41Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 24,
+    "status": "completed",
+    "creator_login": "creator_demo_33",
+    "book_title": "Городские этюды",
+    "circulation": 2,
+    "total_price": 86000,
+    "created_at": "2026-05-15T09:36:57Z",
+    "formed_at": "2026-05-15T18:36:57Z",
+    "completed_at": "2026-05-21T18:36:57Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 25,
+    "status": "completed",
+    "creator_login": "creator_demo_42",
+    "book_title": "Сборник рефератов",
+    "circulation": 4,
+    "total_price": 49600,
+    "created_at": "2026-04-08T11:23:43Z",
+    "formed_at": "2026-04-08T12:23:43Z",
+    "completed_at": "2026-04-19T12:23:43Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 26,
+    "status": "completed",
+    "creator_login": "creator_demo_07",
+    "book_title": "Очерки о типографах",
+    "circulation": 2,
+    "total_price": 200,
+    "created_at": "2026-05-24T01:59:01Z",
+    "formed_at": "2026-05-25T13:59:01Z",
+    "completed_at": "2026-05-28T13:59:01Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 27,
+    "status": "completed",
+    "creator_login": "creator_demo_33",
+    "book_title": "Практикум по типографике",
+    "circulation": 3,
+    "total_price": 32000,
+    "created_at": "2026-04-26T20:38:02Z",
+    "formed_at": "2026-04-27T13:38:02Z",
+    "completed_at": "2026-05-11T13:38:02Z",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 28,
+    "status": "completed",
+    "creator_login": "creator_demo_29",
+    "book_title": "Сборник рефератов",
+    "circulation": 4,
+    "total_price": 79200,
+    "created_at": "2026-04-04T12:40:12Z",
+    "formed_at": "2026-04-06T10:40:12Z",
+    "completed_at": "2026-04-13T10:40:12Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 29,
+    "status": "completed",
+    "creator_login": "creator_demo_24",
+    "book_title": "Сборник рефератов",
+    "circulation": 2,
+    "total_price": 800,
+    "created_at": "2026-05-23T21:07:27Z",
+    "formed_at": "2026-05-25T09:07:27Z",
+    "completed_at": "2026-05-28T09:07:27Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 30,
+    "status": "completed",
+    "creator_login": "creator_demo_07",
+    "book_title": "Городские этюды",
+    "circulation": 4,
+    "total_price": 65200,
+    "created_at": "2026-05-11T23:02:32Z",
+    "formed_at": "2026-05-13T11:02:32Z",
+    "completed_at": "2026-05-27T11:02:32Z",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 31,
+    "status": "completed",
+    "creator_login": "creator_demo_12",
+    "book_title": "Очерки о типографах",
+    "circulation": 2,
+    "total_price": 4200,
+    "created_at": "2026-05-09T20:47:40Z",
+    "formed_at": "2026-05-10T18:47:40Z",
+    "completed_at": "2026-05-23T18:47:40Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 32,
+    "status": "completed",
+    "creator_login": "creator_demo_13",
+    "book_title": "Практикум по типографике",
+    "circulation": 2,
+    "total_price": 42000,
+    "created_at": "2026-05-10T13:17:40Z",
+    "formed_at": "2026-05-11T12:17:40Z",
+    "completed_at": "2026-05-16T12:17:40Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 33,
+    "status": "completed",
+    "creator_login": "creator_demo_23",
+    "book_title": "Очерки о типографах",
+    "circulation": 3,
+    "total_price": 24500,
+    "created_at": "2026-04-22T03:01:09Z",
+    "formed_at": "2026-04-23T12:01:09Z",
+    "completed_at": "2026-04-30T12:01:09Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 34,
+    "status": "completed",
+    "creator_login": "creator_demo_38",
+    "book_title": "Городские этюды",
+    "circulation": 2,
+    "total_price": 56000,
+    "created_at": "2026-06-06T14:21:31Z",
+    "formed_at": "2026-06-06T17:21:31Z",
+    "completed_at": "2026-06-08T17:21:31Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 35,
+    "status": "completed",
+    "creator_login": "creator_demo_46",
+    "book_title": "Практикум по типографике",
+    "circulation": 2,
+    "total_price": 60000,
+    "created_at": "2026-05-29T14:22:42Z",
+    "formed_at": "2026-05-29T15:22:42Z",
+    "completed_at": "2026-06-07T15:22:42Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 36,
+    "status": "completed",
+    "creator_login": "creator_demo_13",
+    "book_title": "Практикум по типографике",
+    "circulation": 2,
+    "total_price": 41000,
+    "created_at": "2026-05-21T17:23:02Z",
+    "formed_at": "2026-05-23T12:23:02Z",
+    "completed_at": "2026-05-30T12:23:02Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 37,
+    "status": "completed",
+    "creator_login": "creator_demo_39",
+    "book_title": "Очерки о типографах",
+    "circulation": 4,
+    "total_price": 54400,
+    "created_at": "2026-06-05T14:39:54Z",
+    "formed_at": "2026-06-06T11:39:54Z",
+    "completed_at": "2026-06-14T11:39:54Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 38,
+    "status": "completed",
+    "creator_login": "creator_demo_06",
+    "book_title": "Городские этюды",
+    "circulation": 4,
+    "total_price": 42000,
+    "created_at": "2026-05-13T07:43:09Z",
+    "formed_at": "2026-05-14T16:43:09Z",
+    "completed_at": "2026-05-25T16:43:09Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 39,
+    "status": "completed",
+    "creator_login": "creator_demo_15",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 18500,
+    "created_at": "2026-06-01T08:21:32Z",
+    "formed_at": "2026-06-01T18:21:32Z",
+    "completed_at": "2026-06-02T18:21:32Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 40,
+    "status": "completed",
+    "creator_login": "creator_demo_37",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 4,
+    "total_price": 4000,
+    "created_at": "2026-04-03T14:30:08Z",
+    "formed_at": "2026-04-05T12:30:08Z",
+    "completed_at": "2026-04-17T12:30:08Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 41,
+    "status": "completed",
+    "creator_login": "creator_demo_12",
+    "book_title": "Очерки о типографах",
+    "circulation": 2,
+    "total_price": 17600,
+    "created_at": "2026-05-07T06:25:04Z",
+    "formed_at": "2026-05-08T16:25:04Z",
+    "completed_at": "2026-05-16T16:25:04Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 42,
+    "status": "completed",
+    "creator_login": "creator_demo_43",
+    "book_title": "Сборник рефератов",
+    "circulation": 3,
+    "total_price": 1000,
+    "created_at": "2026-04-05T05:15:02Z",
+    "formed_at": "2026-04-06T17:15:02Z",
+    "completed_at": "2026-04-16T17:15:02Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 43,
+    "status": "completed",
+    "creator_login": "creator_demo_46",
+    "book_title": "Городские этюды",
+    "circulation": 2,
+    "total_price": 13000,
+    "created_at": "2026-05-02T00:39:28Z",
+    "formed_at": "2026-05-02T16:39:28Z",
+    "completed_at": "2026-05-07T16:39:28Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 44,
+    "status": "completed",
+    "creator_login": "creator_demo_25",
+    "book_title": "Очерки о типографах",
+    "circulation": 2,
+    "total_price": 600,
+    "created_at": "2026-05-03T04:57:53Z",
+    "formed_at": "2026-05-03T14:57:53Z",
+    "completed_at": "2026-05-15T14:57:53Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 45,
+    "status": "completed",
+    "creator_login": "creator_demo_02",
+    "book_title": "Сборник рефератов",
+    "circulation": 4,
+    "total_price": 90000,
+    "created_at": "2026-04-21T09:26:46Z",
+    "formed_at": "2026-04-22T10:26:46Z",
+    "completed_at": "2026-04-30T10:26:46Z",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 46,
+    "status": "completed",
+    "creator_login": "creator_demo_22",
+    "book_title": "Очерки о типографах",
+    "circulation": 3,
+    "total_price": 86000,
+    "created_at": "2026-03-30T18:19:19Z",
+    "formed_at": "2026-04-01T14:19:19Z",
+    "completed_at": "2026-04-14T14:19:19Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 47,
+    "status": "completed",
+    "creator_login": "creator_demo_28",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 4,
+    "total_price": 87600,
+    "created_at": "2026-05-09T05:53:34Z",
+    "formed_at": "2026-05-10T11:53:34Z",
+    "completed_at": "2026-05-13T11:53:34Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 48,
+    "status": "completed",
+    "creator_login": "creator_demo_17",
+    "book_title": "Сибирские тетради",
+    "circulation": 3,
+    "total_price": 22700,
+    "created_at": "2026-04-05T06:24:18Z",
+    "formed_at": "2026-04-06T13:24:18Z",
+    "completed_at": "2026-04-07T13:24:18Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 49,
+    "status": "completed",
+    "creator_login": "creator_demo_02",
+    "book_title": "Сборник рефератов",
+    "circulation": 2,
+    "total_price": 36900,
+    "created_at": "2026-05-22T23:22:14Z",
+    "formed_at": "2026-05-23T09:22:14Z",
+    "completed_at": "2026-05-27T09:22:14Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 50,
+    "status": "completed",
+    "creator_login": "creator_demo_17",
+    "book_title": "Городские этюды",
+    "circulation": 4,
+    "total_price": 16900,
+    "created_at": "2026-04-13T05:42:58Z",
+    "formed_at": "2026-04-13T16:42:58Z",
+    "completed_at": "2026-04-23T16:42:58Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 51,
+    "status": "completed",
+    "creator_login": "creator_demo_37",
+    "book_title": "Очерки о типографах",
+    "circulation": 3,
+    "total_price": 69000,
+    "created_at": "2026-05-29T09:49:21Z",
+    "formed_at": "2026-05-30T10:49:21Z",
+    "completed_at": "2026-06-06T10:49:21Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 52,
+    "status": "completed",
+    "creator_login": "creator_demo_37",
+    "book_title": "Сибирские тетради",
+    "circulation": 2,
+    "total_price": 105000,
+    "created_at": "2026-04-19T11:37:30Z",
+    "formed_at": "2026-04-20T10:37:30Z",
+    "completed_at": "2026-04-29T10:37:30Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 53,
+    "status": "completed",
+    "creator_login": "creator_demo_41",
+    "book_title": "Практикум по типографике",
+    "circulation": 3,
+    "total_price": 45000,
+    "created_at": "2026-05-10T16:04:35Z",
+    "formed_at": "2026-05-12T14:04:35Z",
+    "completed_at": "2026-05-15T14:04:35Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 54,
+    "status": "completed",
+    "creator_login": "creator_demo_21",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 49500,
+    "created_at": "2026-05-13T05:46:30Z",
+    "formed_at": "2026-05-13T11:46:30Z",
+    "completed_at": "2026-05-18T11:46:30Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 55,
+    "status": "completed",
+    "creator_login": "creator_demo_17",
+    "book_title": "Городские этюды",
+    "circulation": 3,
+    "total_price": 63000,
+    "created_at": "2026-05-14T18:48:41Z",
+    "formed_at": "2026-05-15T12:48:41Z",
+    "completed_at": "2026-05-25T12:48:41Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 56,
+    "status": "completed",
+    "creator_login": "creator_demo_19",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 2,
+    "total_price": 8000,
+    "created_at": "2026-04-27T15:00:08Z",
+    "formed_at": "2026-04-28T17:00:08Z",
+    "completed_at": "2026-05-10T17:00:08Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 57,
+    "status": "completed",
+    "creator_login": "creator_demo_45",
+    "book_title": "Практикум по типографике",
+    "circulation": 3,
+    "total_price": 34500,
+    "created_at": "2026-04-23T19:42:31Z",
+    "formed_at": "2026-04-24T13:42:31Z",
+    "completed_at": "2026-04-29T13:42:31Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 58,
+    "status": "completed",
+    "creator_login": "creator_demo_47",
+    "book_title": "Сборник рефератов",
+    "circulation": 3,
+    "total_price": 40500,
+    "created_at": "2026-04-24T02:07:46Z",
+    "formed_at": "2026-04-25T12:07:46Z",
+    "completed_at": "2026-05-05T12:07:46Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 59,
+    "status": "completed",
+    "creator_login": "creator_demo_01",
+    "book_title": "Очерки о типографах",
+    "circulation": 3,
+    "total_price": 22500,
+    "created_at": "2026-04-26T23:53:05Z",
+    "formed_at": "2026-04-28T10:53:05Z",
+    "completed_at": "2026-05-01T10:53:05Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 60,
+    "status": "completed",
+    "creator_login": "creator_demo_31",
+    "book_title": "Практикум по типографике",
+    "circulation": 3,
+    "total_price": 38400,
+    "created_at": "2026-04-27T11:03:30Z",
+    "formed_at": "2026-04-28T09:03:30Z",
+    "completed_at": "2026-05-01T09:03:30Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 61,
+    "status": "completed",
+    "creator_login": "creator_demo_10",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 2,
+    "total_price": 87000,
+    "created_at": "2026-04-05T00:55:59Z",
+    "formed_at": "2026-04-06T13:55:59Z",
+    "completed_at": "2026-04-11T13:55:59Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 62,
+    "status": "completed",
+    "creator_login": "creator_demo_40",
+    "book_title": "Сибирские тетради",
+    "circulation": 4,
+    "total_price": 101000,
+    "created_at": "2026-04-07T20:07:09Z",
+    "formed_at": "2026-04-09T12:07:09Z",
+    "completed_at": "2026-04-21T12:07:09Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 63,
+    "status": "completed",
+    "creator_login": "creator_demo_36",
+    "book_title": "Сибирские тетради",
+    "circulation": 2,
+    "total_price": 33000,
+    "created_at": "2026-04-11T01:40:51Z",
+    "formed_at": "2026-04-11T12:40:51Z",
+    "completed_at": "2026-04-12T12:40:51Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 64,
+    "status": "completed",
+    "creator_login": "creator_demo_15",
+    "book_title": "Очерки о типографах",
+    "circulation": 4,
+    "total_price": 31000,
+    "created_at": "2026-05-11T06:44:53Z",
+    "formed_at": "2026-05-11T16:44:53Z",
+    "completed_at": "2026-05-16T16:44:53Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 65,
+    "status": "completed",
+    "creator_login": "creator_demo_45",
+    "book_title": "Городские этюды",
+    "circulation": 3,
+    "total_price": 25500,
+    "created_at": "2026-04-13T13:03:04Z",
+    "formed_at": "2026-04-15T10:03:04Z",
+    "completed_at": "2026-04-22T10:03:04Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 66,
+    "status": "completed",
+    "creator_login": "creator_demo_37",
+    "book_title": "Сборник рефератов",
+    "circulation": 4,
+    "total_price": 57000,
+    "created_at": "2026-04-27T15:34:46Z",
+    "formed_at": "2026-04-27T17:34:46Z",
+    "completed_at": "2026-05-10T17:34:46Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 67,
+    "status": "completed",
+    "creator_login": "creator_demo_42",
+    "book_title": "Практикум по типографике",
+    "circulation": 4,
+    "total_price": 3400,
+    "created_at": "2026-06-04T19:36:46Z",
+    "formed_at": "2026-06-05T13:36:46Z",
+    "completed_at": "2026-06-08T13:36:46Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 68,
+    "status": "completed",
+    "creator_login": "creator_demo_22",
+    "book_title": "Практикум по типографике",
+    "circulation": 2,
+    "total_price": 70800,
+    "created_at": "2026-05-26T18:40:00Z",
+    "formed_at": "2026-05-28T15:40:00Z",
+    "completed_at": "2026-06-05T15:40:00Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 69,
+    "status": "completed",
+    "creator_login": "creator_demo_17",
+    "book_title": "Городские этюды",
+    "circulation": 3,
+    "total_price": 1000,
+    "created_at": "2026-04-29T07:52:46Z",
+    "formed_at": "2026-04-29T15:52:46Z",
+    "completed_at": "2026-05-12T15:52:46Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 70,
+    "status": "completed",
+    "creator_login": "creator_demo_04",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 18000,
+    "created_at": "2026-05-09T07:52:46Z",
+    "formed_at": "2026-05-10T17:52:46Z",
+    "completed_at": "2026-05-16T17:52:46Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 71,
+    "status": "completed",
+    "creator_login": "creator_demo_08",
+    "book_title": "Сибирские тетради",
+    "circulation": 3,
+    "total_price": 58800,
+    "created_at": "2026-05-29T23:40:31Z",
+    "formed_at": "2026-05-31T16:40:31Z",
+    "completed_at": "2026-06-10T16:40:31Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 72,
+    "status": "completed",
+    "creator_login": "creator_demo_15",
+    "book_title": "Сибирские тетради",
+    "circulation": 2,
+    "total_price": 11000,
+    "created_at": "2026-04-23T05:19:12Z",
+    "formed_at": "2026-04-24T11:19:12Z",
+    "completed_at": "2026-04-26T11:19:12Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 73,
+    "status": "completed",
+    "creator_login": "creator_demo_36",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 43500,
+    "created_at": "2026-06-02T10:31:22Z",
+    "formed_at": "2026-06-03T11:31:22Z",
+    "completed_at": "2026-06-07T11:31:22Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 74,
+    "status": "completed",
+    "creator_login": "creator_demo_32",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 4,
+    "total_price": 91000,
+    "created_at": "2026-05-28T12:47:03Z",
+    "formed_at": "2026-05-29T17:47:03Z",
+    "completed_at": "2026-06-07T17:47:03Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 75,
+    "status": "completed",
+    "creator_login": "creator_demo_50",
+    "book_title": "Практикум по типографике",
+    "circulation": 2,
+    "total_price": 90000,
+    "created_at": "2026-05-18T11:21:50Z",
+    "formed_at": "2026-05-18T14:21:50Z",
+    "completed_at": "2026-05-24T14:21:50Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 76,
+    "status": "completed",
+    "creator_login": "creator_demo_22",
+    "book_title": "Сибирские тетради",
+    "circulation": 4,
+    "total_price": 61000,
+    "created_at": "2026-05-16T10:24:52Z",
+    "formed_at": "2026-05-17T15:24:52Z",
+    "completed_at": "2026-05-19T15:24:52Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 77,
+    "status": "completed",
+    "creator_login": "creator_demo_22",
+    "book_title": "Сборник рефератов",
+    "circulation": 3,
+    "total_price": 13800,
+    "created_at": "2026-05-20T19:00:17Z",
+    "formed_at": "2026-05-22T16:00:17Z",
+    "completed_at": "2026-05-29T16:00:17Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 78,
+    "status": "completed",
+    "creator_login": "creator_demo_03",
+    "book_title": "Сборник рефератов",
+    "circulation": 4,
+    "total_price": 93400,
+    "created_at": "2026-06-03T05:54:44Z",
+    "formed_at": "2026-06-03T10:54:44Z",
+    "completed_at": "2026-06-07T10:54:44Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 79,
+    "status": "completed",
+    "creator_login": "creator_demo_46",
+    "book_title": "Сибирские тетради",
+    "circulation": 4,
+    "total_price": 13000,
+    "created_at": "2026-05-31T08:14:42Z",
+    "formed_at": "2026-06-01T13:14:42Z",
+    "completed_at": "2026-06-04T13:14:42Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 80,
+    "status": "completed",
+    "creator_login": "creator_demo_34",
+    "book_title": "Практикум по типографике",
+    "circulation": 2,
+    "total_price": 30600,
+    "created_at": "2026-04-28T20:02:23Z",
+    "formed_at": "2026-04-30T09:02:23Z",
+    "completed_at": "2026-05-11T09:02:23Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 81,
+    "status": "completed",
+    "creator_login": "creator_demo_16",
+    "book_title": "Практикум по типографике",
+    "circulation": 4,
+    "total_price": 45000,
+    "created_at": "2026-04-16T21:11:46Z",
+    "formed_at": "2026-04-18T11:11:46Z",
+    "completed_at": "2026-04-21T11:11:46Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 82,
+    "status": "completed",
+    "creator_login": "creator_demo_35",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 4,
+    "total_price": 37000,
+    "created_at": "2026-04-23T11:40:17Z",
+    "formed_at": "2026-04-23T16:40:17Z",
+    "completed_at": "2026-05-01T16:40:17Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 83,
+    "status": "completed",
+    "creator_login": "creator_demo_25",
+    "book_title": "Сборник рефератов",
+    "circulation": 2,
+    "total_price": 24600,
+    "created_at": "2026-05-03T19:19:34Z",
+    "formed_at": "2026-05-04T18:19:34Z",
+    "completed_at": "2026-05-14T18:19:34Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 84,
+    "status": "completed",
+    "creator_login": "creator_demo_19",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 84000,
+    "created_at": "2026-04-28T22:01:57Z",
+    "formed_at": "2026-04-30T13:01:57Z",
+    "completed_at": "2026-05-13T13:01:57Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 85,
+    "status": "completed",
+    "creator_login": "creator_demo_42",
+    "book_title": "Сибирские тетради",
+    "circulation": 4,
+    "total_price": 36200,
+    "created_at": "2026-05-04T16:40:02Z",
+    "formed_at": "2026-05-05T12:40:02Z",
+    "completed_at": "2026-05-18T12:40:02Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 86,
+    "status": "completed",
+    "creator_login": "creator_demo_13",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 2,
+    "total_price": 104200,
+    "created_at": "2026-05-12T22:37:32Z",
+    "formed_at": "2026-05-14T09:37:32Z",
+    "completed_at": "2026-05-20T09:37:32Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 87,
+    "status": "completed",
+    "creator_login": "creator_demo_08",
+    "book_title": "Практикум по типографике",
+    "circulation": 3,
+    "total_price": 55800,
+    "created_at": "2026-05-22T12:58:32Z",
+    "formed_at": "2026-05-22T17:58:32Z",
+    "completed_at": "2026-05-25T17:58:32Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 88,
+    "status": "completed",
+    "creator_login": "creator_demo_15",
+    "book_title": "Практикум по типографике",
+    "circulation": 4,
+    "total_price": 69000,
+    "created_at": "2026-04-23T13:54:13Z",
+    "formed_at": "2026-04-23T15:54:13Z",
+    "completed_at": "2026-05-03T15:54:13Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 89,
+    "status": "completed",
+    "creator_login": "creator_demo_35",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 2,
+    "total_price": 78200,
+    "created_at": "2026-05-24T13:58:26Z",
+    "formed_at": "2026-05-25T14:58:26Z",
+    "completed_at": "2026-06-02T14:58:26Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 90,
+    "status": "completed",
+    "creator_login": "creator_demo_07",
+    "book_title": "Очерки о типографах",
+    "circulation": 3,
+    "total_price": 81000,
+    "created_at": "2026-05-06T17:26:10Z",
+    "formed_at": "2026-05-07T17:26:10Z",
+    "completed_at": "2026-05-16T17:26:10Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 91,
+    "status": "completed",
+    "creator_login": "creator_demo_39",
+    "book_title": "Сибирские тетради",
+    "circulation": 4,
+    "total_price": 71000,
+    "created_at": "2026-06-02T10:03:19Z",
+    "formed_at": "2026-06-02T14:03:19Z",
+    "completed_at": "2026-06-15T14:03:19Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 92,
+    "status": "completed",
+    "creator_login": "creator_demo_22",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 2,
+    "total_price": 92000,
+    "created_at": "2026-05-01T21:08:57Z",
+    "formed_at": "2026-05-03T12:08:57Z",
+    "completed_at": "2026-05-04T12:08:57Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 93,
+    "status": "completed",
+    "creator_login": "creator_demo_16",
+    "book_title": "Сборник рефератов",
+    "circulation": 3,
+    "total_price": 48900,
+    "created_at": "2026-04-27T14:08:49Z",
+    "formed_at": "2026-04-28T11:08:49Z",
+    "completed_at": "2026-04-29T11:08:49Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 94,
+    "status": "completed",
+    "creator_login": "creator_demo_29",
+    "book_title": "Городские этюды",
+    "circulation": 3,
+    "total_price": 78000,
+    "created_at": "2026-04-17T04:03:23Z",
+    "formed_at": "2026-04-18T13:03:23Z",
+    "completed_at": "2026-04-28T13:03:23Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 95,
+    "status": "completed",
+    "creator_login": "creator_demo_04",
+    "book_title": "Практикум по типографике",
+    "circulation": 2,
+    "total_price": 35000,
+    "created_at": "2026-04-10T14:32:51Z",
+    "formed_at": "2026-04-11T16:32:51Z",
+    "completed_at": "2026-04-18T16:32:51Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 96,
+    "status": "completed",
+    "creator_login": "creator_demo_41",
+    "book_title": "Сборник рефератов",
+    "circulation": 4,
+    "total_price": 98200,
+    "created_at": "2026-06-04T22:31:22Z",
+    "formed_at": "2026-06-06T10:31:22Z",
+    "completed_at": "2026-06-18T10:31:22Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 97,
+    "status": "completed",
+    "creator_login": "creator_demo_50",
+    "book_title": "Сборник рефератов",
+    "circulation": 4,
+    "total_price": 85000,
+    "created_at": "2026-04-30T16:38:13Z",
+    "formed_at": "2026-05-02T15:38:13Z",
+    "completed_at": "2026-05-16T15:38:13Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 98,
+    "status": "completed",
+    "creator_login": "creator_demo_47",
+    "book_title": "Сибирские тетради",
+    "circulation": 3,
+    "total_price": 30000,
+    "created_at": "2026-04-21T18:28:24Z",
+    "formed_at": "2026-04-22T15:28:24Z",
+    "completed_at": "2026-04-29T15:28:24Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 99,
+    "status": "completed",
+    "creator_login": "creator_demo_28",
+    "book_title": "Сибирские тетради",
+    "circulation": 2,
+    "total_price": 29000,
+    "created_at": "2026-04-29T13:23:57Z",
+    "formed_at": "2026-05-01T13:23:57Z",
+    "completed_at": "2026-05-13T13:23:57Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 100,
+    "status": "completed",
+    "creator_login": "creator_demo_43",
+    "book_title": "Сибирские тетради",
+    "circulation": 3,
+    "total_price": 28500,
+    "created_at": "2026-05-06T08:35:48Z",
+    "formed_at": "2026-05-07T11:35:48Z",
+    "completed_at": "2026-05-13T11:35:48Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 101,
+    "status": "completed",
+    "creator_login": "creator_demo_23",
+    "book_title": "Сибирские тетради",
+    "circulation": 3,
+    "total_price": 24000,
+    "created_at": "2026-06-03T02:55:20Z",
+    "formed_at": "2026-06-04T15:55:20Z",
+    "completed_at": "2026-06-13T15:55:20Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 102,
+    "status": "completed",
+    "creator_login": "creator_demo_28",
+    "book_title": "Сборник рефератов",
+    "circulation": 2,
+    "total_price": 58200,
+    "created_at": "2026-04-20T19:42:02Z",
+    "formed_at": "2026-04-22T11:42:02Z",
+    "completed_at": "2026-05-02T11:42:02Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 103,
+    "status": "completed",
+    "creator_login": "creator_demo_01",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 52800,
+    "created_at": "2026-06-05T07:01:35Z",
+    "formed_at": "2026-06-05T17:01:35Z",
+    "completed_at": "2026-06-15T17:01:35Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 104,
+    "status": "completed",
+    "creator_login": "creator_demo_25",
+    "book_title": "Практикум по типографике",
+    "circulation": 2,
+    "total_price": 117000,
+    "created_at": "2026-06-03T09:04:26Z",
+    "formed_at": "2026-06-04T15:04:26Z",
+    "completed_at": "2026-06-10T15:04:26Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 105,
+    "status": "completed",
+    "creator_login": "creator_demo_28",
+    "book_title": "Практикум по типографике",
+    "circulation": 4,
+    "total_price": 21000,
+    "created_at": "2026-04-14T23:19:24Z",
+    "formed_at": "2026-04-16T14:19:24Z",
+    "completed_at": "2026-04-24T14:19:24Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 106,
+    "status": "completed",
+    "creator_login": "creator_demo_19",
+    "book_title": "Очерки о типографах",
+    "circulation": 2,
+    "total_price": 3000,
+    "created_at": "2026-05-09T17:13:05Z",
+    "formed_at": "2026-05-11T13:13:05Z",
+    "completed_at": "2026-05-21T13:13:05Z",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 107,
+    "status": "completed",
+    "creator_login": "creator_demo_20",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 2,
+    "total_price": 34000,
+    "created_at": "2026-05-18T08:42:11Z",
+    "formed_at": "2026-05-18T17:42:11Z",
+    "completed_at": "2026-05-31T17:42:11Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 108,
+    "status": "completed",
+    "creator_login": "creator_demo_28",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 4,
+    "total_price": 37000,
+    "created_at": "2026-04-26T04:20:12Z",
+    "formed_at": "2026-04-26T13:20:12Z",
+    "completed_at": "2026-05-03T13:20:12Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 109,
+    "status": "completed",
+    "creator_login": "creator_demo_30",
+    "book_title": "Сибирские тетради",
+    "circulation": 2,
+    "total_price": 99000,
+    "created_at": "2026-05-22T15:32:24Z",
+    "formed_at": "2026-05-23T12:32:24Z",
+    "completed_at": "2026-06-02T12:32:24Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 110,
+    "status": "completed",
+    "creator_login": "creator_demo_26",
+    "book_title": "Сборник рефератов",
+    "circulation": 4,
+    "total_price": 81000,
+    "created_at": "2026-05-13T12:25:17Z",
+    "formed_at": "2026-05-13T18:25:17Z",
+    "completed_at": "2026-05-20T18:25:17Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 111,
+    "status": "completed",
+    "creator_login": "creator_demo_13",
+    "book_title": "Городские этюды",
+    "circulation": 4,
+    "total_price": 102600,
+    "created_at": "2026-04-30T15:14:31Z",
+    "formed_at": "2026-05-01T14:14:31Z",
+    "completed_at": "2026-05-13T14:14:31Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 112,
+    "status": "completed",
+    "creator_login": "creator_demo_12",
+    "book_title": "Сборник рефератов",
+    "circulation": 2,
+    "total_price": 200,
+    "created_at": "2026-06-03T01:15:28Z",
+    "formed_at": "2026-06-03T11:15:28Z",
+    "completed_at": "2026-06-16T11:15:28Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 113,
+    "status": "completed",
+    "creator_login": "creator_demo_21",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 4,
+    "total_price": 93000,
+    "created_at": "2026-06-03T05:11:48Z",
+    "formed_at": "2026-06-04T10:11:48Z",
+    "completed_at": "2026-06-06T10:11:48Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 114,
+    "status": "completed",
+    "creator_login": "creator_demo_29",
+    "book_title": "Сибирские тетради",
+    "circulation": 3,
+    "total_price": 43800,
+    "created_at": "2026-05-16T12:40:55Z",
+    "formed_at": "2026-05-16T16:40:55Z",
+    "completed_at": "2026-05-22T16:40:55Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 115,
+    "status": "completed",
+    "creator_login": "creator_demo_38",
+    "book_title": "Сборник рефератов",
+    "circulation": 3,
+    "total_price": 18000,
+    "created_at": "2026-04-27T10:41:16Z",
+    "formed_at": "2026-04-29T10:41:16Z",
+    "completed_at": "2026-04-30T10:41:16Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 116,
+    "status": "completed",
+    "creator_login": "creator_demo_29",
+    "book_title": "Сибирские тетради",
+    "circulation": 2,
+    "total_price": 8000,
+    "created_at": "2026-05-14T20:41:19Z",
+    "formed_at": "2026-05-15T18:41:19Z",
+    "completed_at": "2026-05-27T18:41:19Z",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 117,
+    "status": "completed",
+    "creator_login": "creator_demo_34",
+    "book_title": "Сборник рефератов",
+    "circulation": 3,
+    "total_price": 57000,
+    "created_at": "2026-04-08T01:41:04Z",
+    "formed_at": "2026-04-09T17:41:04Z",
+    "completed_at": "2026-04-12T17:41:04Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 118,
+    "status": "completed",
+    "creator_login": "creator_demo_41",
+    "book_title": "Очерки о типографах",
+    "circulation": 2,
+    "total_price": 40000,
+    "created_at": "2026-05-05T16:58:37Z",
+    "formed_at": "2026-05-06T14:58:37Z",
+    "completed_at": "2026-05-08T14:58:37Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 119,
+    "status": "completed",
+    "creator_login": "creator_demo_43",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 4,
+    "total_price": 75000,
+    "created_at": "2026-05-02T11:35:06Z",
+    "formed_at": "2026-05-03T10:35:06Z",
+    "completed_at": "2026-05-08T10:35:06Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 120,
+    "status": "completed",
+    "creator_login": "creator_demo_42",
+    "book_title": "Городские этюды",
+    "circulation": 3,
+    "total_price": 24000,
+    "created_at": "2026-06-04T06:08:05Z",
+    "formed_at": "2026-06-04T15:08:05Z",
+    "completed_at": "2026-06-15T15:08:05Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 121,
+    "status": "completed",
+    "creator_login": "creator_demo_13",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 42300,
+    "created_at": "2026-06-06T08:05:53Z",
+    "formed_at": "2026-06-06T17:05:53Z",
+    "completed_at": "2026-06-09T17:05:53Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 122,
+    "status": "completed",
+    "creator_login": "creator_demo_34",
+    "book_title": "Сибирские тетради",
+    "circulation": 4,
+    "total_price": 39000,
+    "created_at": "2026-04-06T18:54:27Z",
+    "formed_at": "2026-04-08T13:54:27Z",
+    "completed_at": "2026-04-14T13:54:27Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 123,
+    "status": "completed",
+    "creator_login": "creator_demo_27",
+    "book_title": "Городские этюды",
+    "circulation": 2,
+    "total_price": 104800,
+    "created_at": "2026-05-29T15:38:03Z",
+    "formed_at": "2026-05-31T11:38:03Z",
+    "completed_at": "2026-06-12T11:38:03Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 124,
+    "status": "completed",
+    "creator_login": "creator_demo_24",
+    "book_title": "Очерки о типографах",
+    "circulation": 2,
+    "total_price": 21000,
+    "created_at": "2026-04-23T03:39:07Z",
+    "formed_at": "2026-04-24T16:39:07Z",
+    "completed_at": "2026-05-02T16:39:07Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 125,
+    "status": "completed",
+    "creator_login": "creator_demo_29",
+    "book_title": "Сборник рефератов",
+    "circulation": 3,
+    "total_price": 111000,
+    "created_at": "2026-05-16T03:49:32Z",
+    "formed_at": "2026-05-16T13:49:32Z",
+    "completed_at": "2026-05-30T13:49:32Z",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 126,
+    "status": "completed",
+    "creator_login": "creator_demo_26",
+    "book_title": "Сборник рефератов",
+    "circulation": 2,
+    "total_price": 5000,
+    "created_at": "2026-05-12T10:58:05Z",
+    "formed_at": "2026-05-13T10:58:05Z",
+    "completed_at": "2026-05-17T10:58:05Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 127,
+    "status": "completed",
+    "creator_login": "creator_demo_22",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 4,
+    "total_price": 35000,
+    "created_at": "2026-05-08T01:23:56Z",
+    "formed_at": "2026-05-08T10:23:56Z",
+    "completed_at": "2026-05-09T10:23:56Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 128,
+    "status": "completed",
+    "creator_login": "creator_demo_02",
+    "book_title": "Городские этюды",
+    "circulation": 2,
+    "total_price": 10000,
+    "created_at": "2026-04-29T02:44:38Z",
+    "formed_at": "2026-04-29T16:44:38Z",
+    "completed_at": "2026-05-13T16:44:38Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 129,
+    "status": "completed",
+    "creator_login": "creator_demo_40",
+    "book_title": "Практикум по типографике",
+    "circulation": 4,
+    "total_price": 89400,
+    "created_at": "2026-04-15T12:46:21Z",
+    "formed_at": "2026-04-15T17:46:21Z",
+    "completed_at": "2026-04-17T17:46:21Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 130,
+    "status": "completed",
+    "creator_login": "creator_demo_46",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 2,
+    "total_price": 18000,
+    "created_at": "2026-05-18T23:34:11Z",
+    "formed_at": "2026-05-19T18:34:11Z",
+    "completed_at": "2026-05-26T18:34:11Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 131,
+    "status": "completed",
+    "creator_login": "creator_demo_34",
+    "book_title": "Городские этюды",
+    "circulation": 2,
+    "total_price": 25800,
+    "created_at": "2026-04-01T13:22:42Z",
+    "formed_at": "2026-04-01T18:22:42Z",
+    "completed_at": "2026-04-10T18:22:42Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 132,
+    "status": "completed",
+    "creator_login": "creator_demo_41",
+    "book_title": "Практикум по типографике",
+    "circulation": 2,
+    "total_price": 13000,
+    "created_at": "2026-05-23T17:50:10Z",
+    "formed_at": "2026-05-24T17:50:10Z",
+    "completed_at": "2026-05-29T17:50:10Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 133,
+    "status": "completed",
+    "creator_login": "creator_demo_43",
+    "book_title": "Очерки о типографах",
+    "circulation": 4,
+    "total_price": 3000,
+    "created_at": "2026-04-02T07:50:49Z",
+    "formed_at": "2026-04-02T14:50:49Z",
+    "completed_at": "2026-04-15T14:50:49Z",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 134,
+    "status": "completed",
+    "creator_login": "creator_demo_42",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 10500,
+    "created_at": "2026-05-25T18:08:58Z",
+    "formed_at": "2026-05-27T14:08:58Z",
+    "completed_at": "2026-06-04T14:08:58Z",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 135,
+    "status": "completed",
+    "creator_login": "creator_demo_03",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 2,
+    "total_price": 31000,
+    "created_at": "2026-05-17T08:51:30Z",
+    "formed_at": "2026-05-17T11:51:30Z",
+    "completed_at": "2026-05-23T11:51:30Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 136,
+    "status": "completed",
+    "creator_login": "creator_demo_22",
+    "book_title": "Городские этюды",
+    "circulation": 4,
+    "total_price": 87000,
+    "created_at": "2026-05-01T09:25:45Z",
+    "formed_at": "2026-05-01T17:25:45Z",
+    "completed_at": "2026-05-14T17:25:45Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 137,
+    "status": "completed",
+    "creator_login": "creator_demo_40",
+    "book_title": "Практикум по типографике",
+    "circulation": 3,
+    "total_price": 52800,
+    "created_at": "2026-05-06T21:56:48Z",
+    "formed_at": "2026-05-07T15:56:48Z",
+    "completed_at": "2026-05-18T15:56:48Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 138,
+    "status": "completed",
+    "creator_login": "creator_demo_05",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 2,
+    "total_price": 60800,
+    "created_at": "2026-04-04T16:42:14Z",
+    "formed_at": "2026-04-06T10:42:14Z",
+    "completed_at": "2026-04-12T10:42:14Z",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 139,
+    "status": "completed",
+    "creator_login": "creator_demo_24",
+    "book_title": "Городские этюды",
+    "circulation": 3,
+    "total_price": 4200,
+    "created_at": "2026-05-05T10:36:19Z",
+    "formed_at": "2026-05-06T15:36:19Z",
+    "completed_at": "2026-05-19T15:36:19Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 140,
+    "status": "completed",
+    "creator_login": "creator_demo_48",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 2,
+    "total_price": 18000,
+    "created_at": "2026-04-07T10:08:21Z",
+    "formed_at": "2026-04-08T18:08:21Z",
+    "completed_at": "2026-04-17T18:08:21Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 141,
+    "status": "completed",
+    "creator_login": "creator_demo_46",
+    "book_title": "Практикум по типографике",
+    "circulation": 2,
+    "total_price": 30200,
+    "created_at": "2026-05-08T11:07:45Z",
+    "formed_at": "2026-05-08T17:07:45Z",
+    "completed_at": "2026-05-21T17:07:45Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 142,
+    "status": "completed",
+    "creator_login": "creator_demo_41",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 4,
+    "total_price": 102600,
+    "created_at": "2026-06-05T14:42:37Z",
+    "formed_at": "2026-06-06T14:42:37Z",
+    "completed_at": "2026-06-15T14:42:37Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 143,
+    "status": "completed",
+    "creator_login": "creator_demo_37",
+    "book_title": "Городские этюды",
+    "circulation": 4,
+    "total_price": 15000,
+    "created_at": "2026-04-22T04:12:15Z",
+    "formed_at": "2026-04-23T10:12:15Z",
+    "completed_at": "2026-05-06T10:12:15Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 144,
+    "status": "completed",
+    "creator_login": "creator_demo_46",
+    "book_title": "Очерки о типографах",
+    "circulation": 3,
+    "total_price": 87000,
+    "created_at": "2026-05-23T04:39:49Z",
+    "formed_at": "2026-05-24T11:39:49Z",
+    "completed_at": "2026-06-02T11:39:49Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 145,
+    "status": "completed",
+    "creator_login": "creator_demo_05",
+    "book_title": "Практикум по типографике",
+    "circulation": 4,
+    "total_price": 3400,
+    "created_at": "2026-05-10T09:52:19Z",
+    "formed_at": "2026-05-11T15:52:19Z",
+    "completed_at": "2026-05-22T15:52:19Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 146,
+    "status": "completed",
+    "creator_login": "creator_demo_34",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 2,
+    "total_price": 9800,
+    "created_at": "2026-05-20T18:08:10Z",
+    "formed_at": "2026-05-21T14:08:10Z",
+    "completed_at": "2026-05-24T14:08:10Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 147,
+    "status": "completed",
+    "creator_login": "creator_demo_41",
+    "book_title": "Сборник рефератов",
+    "circulation": 2,
+    "total_price": 12000,
+    "created_at": "2026-04-16T20:59:37Z",
+    "formed_at": "2026-04-17T14:59:37Z",
+    "completed_at": "2026-04-20T14:59:37Z",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 148,
+    "status": "completed",
+    "creator_login": "creator_demo_38",
+    "book_title": "Сборник рефератов",
+    "circulation": 2,
+    "total_price": 18000,
+    "created_at": "2026-06-01T03:39:27Z",
+    "formed_at": "2026-06-01T13:39:27Z",
+    "completed_at": "2026-06-04T13:39:27Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 149,
+    "status": "completed",
+    "creator_login": "creator_demo_42",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 52500,
+    "created_at": "2026-06-03T05:46:31Z",
+    "formed_at": "2026-06-04T18:46:31Z",
+    "completed_at": "2026-06-11T18:46:31Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 150,
+    "status": "completed",
+    "creator_login": "creator_demo_27",
+    "book_title": "Практикум по типографике",
+    "circulation": 3,
+    "total_price": 12000,
+    "created_at": "2026-05-30T03:31:49Z",
+    "formed_at": "2026-05-31T09:31:49Z",
+    "completed_at": "2026-06-04T09:31:49Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 151,
+    "status": "completed",
+    "creator_login": "creator_demo_07",
+    "book_title": "Городские этюды",
+    "circulation": 4,
+    "total_price": 61000,
+    "created_at": "2026-05-04T02:09:22Z",
+    "formed_at": "2026-05-04T18:09:22Z",
+    "completed_at": "2026-05-12T18:09:22Z",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 152,
+    "status": "completed",
+    "creator_login": "creator_demo_40",
+    "book_title": "Практикум по типографике",
+    "circulation": 3,
+    "total_price": 89400,
+    "created_at": "2026-04-12T21:28:48Z",
+    "formed_at": "2026-04-13T13:28:48Z",
+    "completed_at": "2026-04-27T13:28:48Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 153,
+    "status": "completed",
+    "creator_login": "creator_demo_32",
+    "book_title": "Сибирские тетради",
+    "circulation": 3,
+    "total_price": 45300,
+    "created_at": "2026-04-16T08:59:37Z",
+    "formed_at": "2026-04-16T14:59:37Z",
+    "completed_at": "2026-04-23T14:59:37Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 154,
+    "status": "completed",
+    "creator_login": "creator_demo_39",
+    "book_title": "Очерки о типографах",
+    "circulation": 3,
+    "total_price": 31500,
+    "created_at": "2026-05-18T20:15:15Z",
+    "formed_at": "2026-05-20T16:15:15Z",
+    "completed_at": "2026-05-28T16:15:15Z",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 155,
+    "status": "completed",
+    "creator_login": "creator_demo_47",
+    "book_title": "Городские этюды",
+    "circulation": 3,
+    "total_price": 9000,
+    "created_at": "2026-04-28T15:00:31Z",
+    "formed_at": "2026-04-29T17:00:31Z",
+    "completed_at": "2026-05-05T17:00:31Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 156,
+    "status": "completed",
+    "creator_login": "creator_demo_29",
+    "book_title": "Сборник рефератов",
+    "circulation": 4,
+    "total_price": 27000,
+    "created_at": "2026-04-04T21:03:20Z",
+    "formed_at": "2026-04-05T15:03:20Z",
+    "completed_at": "2026-04-19T15:03:20Z",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 157,
+    "status": "completed",
+    "creator_login": "creator_demo_03",
+    "book_title": "Сибирские тетради",
+    "circulation": 2,
+    "total_price": 29800,
+    "created_at": "2026-05-31T09:07:29Z",
+    "formed_at": "2026-05-31T18:07:29Z",
+    "completed_at": "2026-06-12T18:07:29Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 158,
+    "status": "completed",
+    "creator_login": "creator_demo_20",
+    "book_title": "Сборник рефератов",
+    "circulation": 4,
+    "total_price": 61400,
+    "created_at": "2026-05-02T18:33:27Z",
+    "formed_at": "2026-05-03T16:33:27Z",
+    "completed_at": "2026-05-12T16:33:27Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 159,
+    "status": "completed",
+    "creator_login": "creator_demo_38",
+    "book_title": "Городские этюды",
+    "circulation": 3,
+    "total_price": 50400,
+    "created_at": "2026-05-18T18:31:11Z",
+    "formed_at": "2026-05-20T17:31:11Z",
+    "completed_at": "2026-06-03T17:31:11Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 160,
+    "status": "completed",
+    "creator_login": "creator_demo_21",
+    "book_title": "Практикум по типографике",
+    "circulation": 3,
+    "total_price": 35700,
+    "created_at": "2026-06-06T23:38:28Z",
+    "formed_at": "2026-06-07T09:38:28Z",
+    "completed_at": "2026-06-14T09:38:28Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 161,
+    "status": "completed",
+    "creator_login": "creator_demo_44",
+    "book_title": "Очерки о типографах",
+    "circulation": 4,
+    "total_price": 74600,
+    "created_at": "2026-06-05T15:26:56Z",
+    "formed_at": "2026-06-07T12:26:56Z",
+    "completed_at": "2026-06-12T12:26:56Z",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 162,
+    "status": "completed",
+    "creator_login": "creator_demo_46",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 27000,
+    "created_at": "2026-05-28T19:12:53Z",
+    "formed_at": "2026-05-30T16:12:53Z",
+    "completed_at": "2026-06-11T16:12:53Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 163,
+    "status": "completed",
+    "creator_login": "creator_demo_25",
+    "book_title": "Практикум по типографике",
+    "circulation": 4,
+    "total_price": 56600,
+    "created_at": "2026-05-17T15:30:35Z",
+    "formed_at": "2026-05-18T14:30:35Z",
+    "completed_at": "2026-05-31T14:30:35Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 164,
+    "status": "completed",
+    "creator_login": "creator_demo_09",
+    "book_title": "Сибирские тетради",
+    "circulation": 3,
+    "total_price": 46500,
+    "created_at": "2026-04-13T21:02:50Z",
+    "formed_at": "2026-04-15T13:02:50Z",
+    "completed_at": "2026-04-27T13:02:50Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 165,
+    "status": "completed",
+    "creator_login": "creator_demo_15",
+    "book_title": "Сибирские тетради",
+    "circulation": 4,
+    "total_price": 11000,
+    "created_at": "2026-05-28T05:15:51Z",
+    "formed_at": "2026-05-28T12:15:51Z",
+    "completed_at": "2026-06-04T12:15:51Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 166,
+    "status": "formed",
+    "creator_login": "creator_demo_31",
+    "book_title": "Очерки о типографах",
+    "circulation": 3,
+    "total_price": 37200,
+    "created_at": "2026-05-03T09:06:23Z",
+    "formed_at": "2026-05-03T16:06:23Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 167,
+    "status": "formed",
+    "creator_login": "creator_demo_15",
+    "book_title": "Сборник рефератов",
+    "circulation": 4,
+    "total_price": 180000,
+    "created_at": "2026-04-28T14:18:46Z",
+    "formed_at": "2026-04-29T14:18:46Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 168,
+    "status": "formed",
+    "creator_login": "creator_demo_19",
+    "book_title": "Сибирские тетради",
+    "circulation": 4,
+    "total_price": 56000,
+    "created_at": "2026-04-04T10:26:40Z",
+    "formed_at": "2026-04-04T11:26:40Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 169,
+    "status": "formed",
+    "creator_login": "creator_demo_42",
+    "book_title": "Сборник рефератов",
+    "circulation": 3,
+    "total_price": 9000,
+    "created_at": "2026-04-30T01:38:15Z",
+    "formed_at": "2026-04-30T18:38:15Z",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 170,
+    "status": "formed",
+    "creator_login": "creator_demo_17",
+    "book_title": "Очерки о типографах",
+    "circulation": 4,
+    "total_price": 122000,
+    "created_at": "2026-05-19T05:54:57Z",
+    "formed_at": "2026-05-19T11:54:57Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 171,
+    "status": "formed",
+    "creator_login": "creator_demo_21",
+    "book_title": "Сибирские тетради",
+    "circulation": 4,
+    "total_price": 60400,
+    "created_at": "2026-04-02T01:50:06Z",
+    "formed_at": "2026-04-02T14:50:06Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 172,
+    "status": "formed",
+    "creator_login": "creator_demo_25",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 7500,
+    "created_at": "2026-06-04T19:11:45Z",
+    "formed_at": "2026-06-05T10:11:45Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 173,
+    "status": "formed",
+    "creator_login": "creator_demo_45",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 27000,
+    "created_at": "2026-04-27T12:19:30Z",
+    "formed_at": "2026-04-27T14:19:30Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 174,
+    "status": "formed",
+    "creator_login": "creator_demo_08",
+    "book_title": "Очерки о типографах",
+    "circulation": 4,
+    "total_price": 69600,
+    "created_at": "2026-06-05T00:29:15Z",
+    "formed_at": "2026-06-05T10:29:15Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 175,
+    "status": "formed",
+    "creator_login": "creator_demo_39",
+    "book_title": "Городские этюды",
+    "circulation": 4,
+    "total_price": 11200,
+    "created_at": "2026-05-07T04:14:21Z",
+    "formed_at": "2026-05-07T18:14:21Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 176,
+    "status": "formed",
+    "creator_login": "creator_demo_46",
+    "book_title": "Городские этюды",
+    "circulation": 4,
+    "total_price": 150000,
+    "created_at": "2026-05-24T13:48:32Z",
+    "formed_at": "2026-05-24T16:48:32Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 177,
+    "status": "formed",
+    "creator_login": "creator_demo_29",
+    "book_title": "Сибирские тетради",
+    "circulation": 4,
+    "total_price": 20400,
+    "created_at": "2026-05-25T12:03:30Z",
+    "formed_at": "2026-05-26T10:03:30Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 178,
+    "status": "formed",
+    "creator_login": "creator_demo_30",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 2,
+    "total_price": 14000,
+    "created_at": "2026-04-21T01:31:12Z",
+    "formed_at": "2026-04-21T18:31:12Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 179,
+    "status": "formed",
+    "creator_login": "creator_demo_20",
+    "book_title": "Очерки о типографах",
+    "circulation": 4,
+    "total_price": 28000,
+    "created_at": "2026-05-11T15:36:33Z",
+    "formed_at": "2026-05-11T16:36:33Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 180,
+    "status": "formed",
+    "creator_login": "creator_demo_03",
+    "book_title": "Практикум по типографике",
+    "circulation": 2,
+    "total_price": 15000,
+    "created_at": "2026-05-09T01:52:38Z",
+    "formed_at": "2026-05-09T13:52:38Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 181,
+    "status": "formed",
+    "creator_login": "creator_demo_27",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 3000,
+    "created_at": "2026-04-07T12:03:16Z",
+    "formed_at": "2026-04-07T17:03:16Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 182,
+    "status": "formed",
+    "creator_login": "creator_demo_23",
+    "book_title": "Сибирские тетради",
+    "circulation": 4,
+    "total_price": 110000,
+    "created_at": "2026-06-02T09:23:41Z",
+    "formed_at": "2026-06-02T15:23:41Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 183,
+    "status": "formed",
+    "creator_login": "creator_demo_44",
+    "book_title": "Очерки о типографах",
+    "circulation": 3,
+    "total_price": 37500,
+    "created_at": "2026-05-22T21:33:10Z",
+    "formed_at": "2026-05-23T15:33:10Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 184,
+    "status": "formed",
+    "creator_login": "creator_demo_13",
+    "book_title": "Очерки о типографах",
+    "circulation": 3,
+    "total_price": 18000,
+    "created_at": "2026-05-12T13:24:23Z",
+    "formed_at": "2026-05-12T17:24:23Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 185,
+    "status": "formed",
+    "creator_login": "creator_demo_07",
+    "book_title": "Сборник рефератов",
+    "circulation": 2,
+    "total_price": 5000,
+    "created_at": "2026-04-04T13:39:18Z",
+    "formed_at": "2026-04-04T15:39:18Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 186,
+    "status": "formed",
+    "creator_login": "creator_demo_26",
+    "book_title": "Практикум по типографике",
+    "circulation": 2,
+    "total_price": 15000,
+    "created_at": "2026-05-14T10:43:59Z",
+    "formed_at": "2026-05-14T18:43:59Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 187,
+    "status": "formed",
+    "creator_login": "creator_demo_15",
+    "book_title": "Очерки о типографах",
+    "circulation": 3,
+    "total_price": 7200,
+    "created_at": "2026-05-22T17:48:53Z",
+    "formed_at": "2026-05-23T12:48:53Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 188,
+    "status": "formed",
+    "creator_login": "creator_demo_20",
+    "book_title": "Городские этюды",
+    "circulation": 3,
+    "total_price": 94500,
+    "created_at": "2026-05-02T16:38:58Z",
+    "formed_at": "2026-05-02T18:38:58Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 189,
+    "status": "formed",
+    "creator_login": "creator_demo_43",
+    "book_title": "Практикум по типографике",
+    "circulation": 4,
+    "total_price": 24000,
+    "created_at": "2026-05-25T01:56:50Z",
+    "formed_at": "2026-05-25T18:56:50Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 190,
+    "status": "formed",
+    "creator_login": "creator_demo_16",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 45000,
+    "created_at": "2026-05-02T05:26:18Z",
+    "formed_at": "2026-05-02T15:26:18Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 191,
+    "status": "formed",
+    "creator_login": "creator_demo_36",
+    "book_title": "Сборник рефератов",
+    "circulation": 3,
+    "total_price": 21000,
+    "created_at": "2026-04-15T11:58:50Z",
+    "formed_at": "2026-04-15T16:58:50Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 192,
+    "status": "formed",
+    "creator_login": "creator_demo_35",
+    "book_title": "Очерки о типографах",
+    "circulation": 2,
+    "total_price": 66000,
+    "created_at": "2026-05-09T05:16:55Z",
+    "formed_at": "2026-05-09T12:16:55Z",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 193,
+    "status": "formed",
+    "creator_login": "creator_demo_47",
+    "book_title": "Очерки о типографах",
+    "circulation": 4,
+    "total_price": 60000,
+    "created_at": "2026-04-05T19:24:20Z",
+    "formed_at": "2026-04-06T13:24:20Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 194,
+    "status": "formed",
+    "creator_login": "creator_demo_49",
+    "book_title": "Практикум по типографике",
+    "circulation": 4,
+    "total_price": 132000,
+    "created_at": "2026-04-22T08:13:06Z",
+    "formed_at": "2026-04-22T16:13:06Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 195,
+    "status": "formed",
+    "creator_login": "creator_demo_35",
+    "book_title": "Очерки о типографах",
+    "circulation": 3,
+    "total_price": 30000,
+    "created_at": "2026-05-30T00:25:27Z",
+    "formed_at": "2026-05-30T12:25:27Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 196,
+    "status": "formed",
+    "creator_login": "creator_demo_27",
+    "book_title": "Сибирские тетради",
+    "circulation": 3,
+    "total_price": 117000,
+    "created_at": "2026-04-30T18:23:33Z",
+    "formed_at": "2026-05-01T13:23:33Z",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 197,
+    "status": "formed",
+    "creator_login": "creator_demo_25",
+    "book_title": "Сборник рефератов",
+    "circulation": 2,
+    "total_price": 18200,
+    "created_at": "2026-04-22T03:01:21Z",
+    "formed_at": "2026-04-22T11:01:21Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 198,
+    "status": "formed",
+    "creator_login": "creator_demo_11",
+    "book_title": "Очерки о типографах",
+    "circulation": 3,
+    "total_price": 45000,
+    "created_at": "2026-05-19T05:41:24Z",
+    "formed_at": "2026-05-19T17:41:24Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 199,
+    "status": "formed",
+    "creator_login": "creator_demo_09",
+    "book_title": "Очерки о типографах",
+    "circulation": 3,
+    "total_price": 59400,
+    "created_at": "2026-04-17T03:46:03Z",
+    "formed_at": "2026-04-17T11:46:03Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 200,
+    "status": "formed",
+    "creator_login": "creator_demo_41",
+    "book_title": "Очерки о типографах",
+    "circulation": 4,
+    "total_price": 32000,
+    "created_at": "2026-04-06T15:00:36Z",
+    "formed_at": "2026-04-07T11:00:36Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 201,
+    "status": "formed",
+    "creator_login": "creator_demo_01",
+    "book_title": "Сибирские тетради",
+    "circulation": 3,
+    "total_price": 31500,
+    "created_at": "2026-05-17T23:01:50Z",
+    "formed_at": "2026-05-18T16:01:50Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 202,
+    "status": "formed",
+    "creator_login": "creator_demo_28",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 4,
+    "total_price": 42000,
+    "created_at": "2026-04-28T13:18:32Z",
+    "formed_at": "2026-04-28T17:18:32Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 203,
+    "status": "formed",
+    "creator_login": "creator_demo_06",
+    "book_title": "Городские этюды",
+    "circulation": 3,
+    "total_price": 33000,
+    "created_at": "2026-04-10T04:09:39Z",
+    "formed_at": "2026-04-10T17:09:39Z",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 204,
+    "status": "formed",
+    "creator_login": "creator_demo_06",
+    "book_title": "Практикум по типографике",
+    "circulation": 2,
+    "total_price": 108000,
+    "created_at": "2026-05-15T05:15:32Z",
+    "formed_at": "2026-05-15T18:15:32Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 205,
+    "status": "formed",
+    "creator_login": "creator_demo_06",
+    "book_title": "Практикум по типографике",
+    "circulation": 2,
+    "total_price": 30000,
+    "created_at": "2026-05-07T03:30:07Z",
+    "formed_at": "2026-05-07T17:30:07Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 206,
+    "status": "formed",
+    "creator_login": "creator_demo_14",
+    "book_title": "Очерки о типографах",
+    "circulation": 2,
+    "total_price": 7000,
+    "created_at": "2026-06-01T19:36:34Z",
+    "formed_at": "2026-06-02T14:36:34Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 207,
+    "status": "formed",
+    "creator_login": "creator_demo_43",
+    "book_title": "Сибирские тетради",
+    "circulation": 4,
+    "total_price": 36000,
+    "created_at": "2026-05-17T07:02:45Z",
+    "formed_at": "2026-05-17T13:02:45Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 208,
+    "status": "formed",
+    "creator_login": "creator_demo_16",
+    "book_title": "Сборник рефератов",
+    "circulation": 4,
+    "total_price": 92000,
+    "created_at": "2026-04-30T20:13:08Z",
+    "formed_at": "2026-05-01T09:13:08Z",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 209,
+    "status": "formed",
+    "creator_login": "creator_demo_05",
+    "book_title": "Городские этюды",
+    "circulation": 2,
+    "total_price": 45200,
+    "created_at": "2026-06-05T21:21:20Z",
+    "formed_at": "2026-06-06T17:21:20Z",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 210,
+    "status": "formed",
+    "creator_login": "creator_demo_36",
+    "book_title": "Практикум по типографике",
+    "circulation": 3,
+    "total_price": 60000,
+    "created_at": "2026-05-30T04:25:34Z",
+    "formed_at": "2026-05-30T18:25:34Z",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 211,
+    "status": "formed",
+    "creator_login": "creator_demo_25",
+    "book_title": "Очерки о типографах",
+    "circulation": 2,
+    "total_price": 118000,
+    "created_at": "2026-04-18T21:42:01Z",
+    "formed_at": "2026-04-19T18:42:01Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 212,
+    "status": "formed",
+    "creator_login": "creator_demo_07",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 141000,
+    "created_at": "2026-04-16T12:20:28Z",
+    "formed_at": "2026-04-16T15:20:28Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 213,
+    "status": "formed",
+    "creator_login": "creator_demo_25",
+    "book_title": "Сибирские тетради",
+    "circulation": 3,
+    "total_price": 166200,
+    "created_at": "2026-04-19T05:28:16Z",
+    "formed_at": "2026-04-19T15:28:16Z",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 214,
+    "status": "formed",
+    "creator_login": "creator_demo_34",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 4,
+    "total_price": 14000,
+    "created_at": "2026-05-10T17:49:50Z",
+    "formed_at": "2026-05-11T15:49:50Z",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 215,
+    "status": "formed",
+    "creator_login": "creator_demo_18",
+    "book_title": "Практикум по типографике",
+    "circulation": 3,
+    "total_price": 27000,
+    "created_at": "2026-05-08T01:08:11Z",
+    "formed_at": "2026-05-08T11:08:11Z",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 216,
+    "status": "rejected",
+    "creator_login": "creator_demo_09",
+    "book_title": "Городские этюды",
+    "circulation": 2,
+    "total_price": 29000,
+    "created_at": "2026-05-18T09:23:26Z",
+    "formed_at": "2026-05-18T10:23:26Z",
+    "completed_at": "2026-05-22T10:23:26Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 217,
+    "status": "rejected",
+    "creator_login": "creator_demo_21",
+    "book_title": "Сборник рефератов",
+    "circulation": 3,
+    "total_price": 30000,
+    "created_at": "2026-05-02T19:24:19Z",
+    "formed_at": "2026-05-03T18:24:19Z",
+    "completed_at": "2026-05-05T18:24:19Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 218,
+    "status": "rejected",
+    "creator_login": "creator_demo_25",
+    "book_title": "Городские этюды",
+    "circulation": 3,
+    "total_price": 75000,
+    "created_at": "2026-05-17T01:11:24Z",
+    "formed_at": "2026-05-17T14:11:24Z",
+    "completed_at": "2026-05-20T14:11:24Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 219,
+    "status": "rejected",
+    "creator_login": "creator_demo_14",
+    "book_title": "Практикум по типографике",
+    "circulation": 4,
+    "total_price": 82000,
+    "created_at": "2026-04-12T08:12:40Z",
+    "formed_at": "2026-04-12T18:12:40Z",
+    "completed_at": "2026-04-19T18:12:40Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 220,
+    "status": "rejected",
+    "creator_login": "creator_demo_28",
+    "book_title": "Практикум по типографике",
+    "circulation": 4,
+    "total_price": 42400,
+    "created_at": "2026-06-07T07:52:23Z",
+    "formed_at": "2026-06-07T10:52:23Z",
+    "completed_at": "2026-06-11T10:52:23Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 221,
+    "status": "rejected",
+    "creator_login": "creator_demo_06",
+    "book_title": "Сибирские тетради",
+    "circulation": 4,
+    "total_price": 172000,
+    "created_at": "2026-05-29T08:37:12Z",
+    "formed_at": "2026-05-29T16:37:12Z",
+    "completed_at": "2026-06-04T16:37:12Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 222,
+    "status": "rejected",
+    "creator_login": "creator_demo_07",
+    "book_title": "Сибирские тетради",
+    "circulation": 3,
+    "total_price": 24000,
+    "created_at": "2026-06-04T10:10:56Z",
+    "formed_at": "2026-06-04T14:10:56Z",
+    "completed_at": "2026-06-07T14:10:56Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 223,
+    "status": "rejected",
+    "creator_login": "creator_demo_38",
+    "book_title": "Очерки о типографах",
+    "circulation": 4,
+    "total_price": 20000,
+    "created_at": "2026-04-22T00:47:00Z",
+    "formed_at": "2026-04-22T17:47:00Z",
+    "completed_at": "2026-04-24T17:47:00Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 224,
+    "status": "rejected",
+    "creator_login": "creator_demo_08",
+    "book_title": "Очерки о типографах",
+    "circulation": 2,
+    "total_price": 12000,
+    "created_at": "2026-05-04T04:30:56Z",
+    "formed_at": "2026-05-04T09:30:56Z",
+    "completed_at": "2026-05-07T09:30:56Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 225,
+    "status": "rejected",
+    "creator_login": "creator_demo_29",
+    "book_title": "Очерки о типографах",
+    "circulation": 2,
+    "total_price": 18000,
+    "created_at": "2026-04-30T15:29:25Z",
+    "formed_at": "2026-05-01T14:29:25Z",
+    "completed_at": "2026-05-05T14:29:25Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 226,
+    "status": "rejected",
+    "creator_login": "creator_demo_42",
+    "book_title": "Сибирские тетради",
+    "circulation": 3,
+    "total_price": 45000,
+    "created_at": "2026-05-01T12:19:46Z",
+    "formed_at": "2026-05-02T10:19:46Z",
+    "completed_at": "2026-05-09T10:19:46Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 227,
+    "status": "rejected",
+    "creator_login": "creator_demo_30",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 28200,
+    "created_at": "2026-04-16T23:33:22Z",
+    "formed_at": "2026-04-17T12:33:22Z",
+    "completed_at": "2026-04-23T12:33:22Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 228,
+    "status": "rejected",
+    "creator_login": "creator_demo_01",
+    "book_title": "Очерки о типографах",
+    "circulation": 3,
+    "total_price": 73500,
+    "created_at": "2026-04-19T04:40:13Z",
+    "formed_at": "2026-04-19T11:40:13Z",
+    "completed_at": "2026-04-21T11:40:13Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 229,
+    "status": "rejected",
+    "creator_login": "creator_demo_21",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 10500,
+    "created_at": "2026-04-27T19:36:25Z",
+    "formed_at": "2026-04-28T10:36:25Z",
+    "completed_at": "2026-04-29T10:36:25Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 230,
+    "status": "rejected",
+    "creator_login": "creator_demo_40",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 51000,
+    "created_at": "2026-04-25T18:33:39Z",
+    "formed_at": "2026-04-26T16:33:39Z",
+    "completed_at": "2026-05-02T16:33:39Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 231,
+    "status": "rejected",
+    "creator_login": "creator_demo_16",
+    "book_title": "Городские этюды",
+    "circulation": 2,
+    "total_price": 3200,
+    "created_at": "2026-04-30T14:37:48Z",
+    "formed_at": "2026-04-30T18:37:48Z",
+    "completed_at": "2026-05-02T18:37:48Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 232,
+    "status": "rejected",
+    "creator_login": "creator_demo_45",
+    "book_title": "Очерки о типографах",
+    "circulation": 4,
+    "total_price": 89200,
+    "created_at": "2026-05-07T05:32:58Z",
+    "formed_at": "2026-05-07T11:32:58Z",
+    "completed_at": "2026-05-12T11:32:58Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 233,
+    "status": "rejected",
+    "creator_login": "creator_demo_23",
+    "book_title": "Сибирские тетради",
+    "circulation": 2,
+    "total_price": 12200,
+    "created_at": "2026-04-17T00:18:29Z",
+    "formed_at": "2026-04-17T16:18:29Z",
+    "completed_at": "2026-04-19T16:18:29Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 234,
+    "status": "rejected",
+    "creator_login": "creator_demo_02",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 4,
+    "total_price": 56000,
+    "created_at": "2026-04-20T05:35:56Z",
+    "formed_at": "2026-04-20T15:35:56Z",
+    "completed_at": "2026-04-21T15:35:56Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 235,
+    "status": "rejected",
+    "creator_login": "creator_demo_08",
+    "book_title": "Сборник рефератов",
+    "circulation": 4,
+    "total_price": 53600,
+    "created_at": "2026-04-28T08:34:13Z",
+    "formed_at": "2026-04-28T12:34:13Z",
+    "completed_at": "2026-05-01T12:34:13Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 236,
+    "status": "rejected",
+    "creator_login": "creator_demo_28",
+    "book_title": "Сибирские тетради",
+    "circulation": 2,
+    "total_price": 6000,
+    "created_at": "2026-05-23T14:34:44Z",
+    "formed_at": "2026-05-24T14:34:44Z",
+    "completed_at": "2026-05-31T14:34:44Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 237,
+    "status": "rejected",
+    "creator_login": "creator_demo_06",
+    "book_title": "Практикум по типографике",
+    "circulation": 3,
+    "total_price": 6000,
+    "created_at": "2026-06-03T08:19:55Z",
+    "formed_at": "2026-06-03T12:19:55Z",
+    "completed_at": "2026-06-10T12:19:55Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 238,
+    "status": "rejected",
+    "creator_login": "creator_demo_37",
+    "book_title": "Городские этюды",
+    "circulation": 2,
+    "total_price": 15600,
+    "created_at": "2026-04-23T18:51:27Z",
+    "formed_at": "2026-04-24T12:51:27Z",
+    "completed_at": "2026-04-27T12:51:27Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 239,
+    "status": "rejected",
+    "creator_login": "creator_demo_09",
+    "book_title": "Практикум по типографике",
+    "circulation": 2,
+    "total_price": 39000,
+    "created_at": "2026-05-29T15:10:45Z",
+    "formed_at": "2026-05-29T17:10:45Z",
+    "completed_at": "2026-06-01T17:10:45Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 240,
+    "status": "rejected",
+    "creator_login": "creator_demo_49",
+    "book_title": "Очерки о типографах",
+    "circulation": 2,
+    "total_price": 18200,
+    "created_at": "2026-06-03T22:44:56Z",
+    "formed_at": "2026-06-04T11:44:56Z",
+    "completed_at": "2026-06-08T11:44:56Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 241,
+    "status": "rejected",
+    "creator_login": "creator_demo_33",
+    "book_title": "Очерки о типографах",
+    "circulation": 3,
+    "total_price": 51000,
+    "created_at": "2026-04-15T09:40:02Z",
+    "formed_at": "2026-04-15T18:40:02Z",
+    "completed_at": "2026-04-21T18:40:02Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 242,
+    "status": "rejected",
+    "creator_login": "creator_demo_23",
+    "book_title": "Сибирские тетради",
+    "circulation": 4,
+    "total_price": 238000,
+    "created_at": "2026-05-06T22:31:53Z",
+    "formed_at": "2026-05-07T16:31:53Z",
+    "completed_at": "2026-05-11T16:31:53Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 243,
+    "status": "rejected",
+    "creator_login": "creator_demo_36",
+    "book_title": "Сборник рефератов",
+    "circulation": 3,
+    "total_price": 24000,
+    "created_at": "2026-04-22T10:52:49Z",
+    "formed_at": "2026-04-22T15:52:49Z",
+    "completed_at": "2026-04-27T15:52:49Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 2
+  },
+  {
+    "id": 244,
+    "status": "rejected",
+    "creator_login": "creator_demo_30",
+    "book_title": "Сибирские тетради",
+    "circulation": 4,
+    "total_price": 20000,
+    "created_at": "2026-05-18T10:57:09Z",
+    "formed_at": "2026-05-18T14:57:09Z",
+    "completed_at": "2026-05-25T14:57:09Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 245,
+    "status": "rejected",
+    "creator_login": "creator_demo_09",
+    "book_title": "Очерки о типографах",
+    "circulation": 4,
+    "total_price": 16000,
+    "created_at": "2026-04-16T06:29:41Z",
+    "formed_at": "2026-04-16T16:29:41Z",
+    "completed_at": "2026-04-18T16:29:41Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 246,
+    "status": "rejected",
+    "creator_login": "creator_demo_26",
+    "book_title": "Очерки о типографах",
+    "circulation": 2,
+    "total_price": 109600,
+    "created_at": "2026-04-27T00:41:41Z",
+    "formed_at": "2026-04-27T10:41:41Z",
+    "completed_at": "2026-05-03T10:41:41Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 247,
+    "status": "rejected",
+    "creator_login": "creator_demo_31",
+    "book_title": "Сибирские тетради",
+    "circulation": 2,
+    "total_price": 30000,
+    "created_at": "2026-04-24T10:41:40Z",
+    "formed_at": "2026-04-24T15:41:40Z",
+    "completed_at": "2026-04-29T15:41:40Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 248,
+    "status": "rejected",
+    "creator_login": "creator_demo_05",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 51900,
+    "created_at": "2026-04-23T04:43:46Z",
+    "formed_at": "2026-04-23T17:43:46Z",
+    "completed_at": "2026-04-24T17:43:46Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 249,
+    "status": "rejected",
+    "creator_login": "creator_demo_05",
+    "book_title": "Сборник рефератов",
+    "circulation": 2,
+    "total_price": 25800,
+    "created_at": "2026-04-10T15:20:21Z",
+    "formed_at": "2026-04-11T10:20:21Z",
+    "completed_at": "2026-04-12T10:20:21Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 250,
+    "status": "rejected",
+    "creator_login": "creator_demo_06",
+    "book_title": "Сибирские тетради",
+    "circulation": 2,
+    "total_price": 33800,
+    "created_at": "2026-05-30T06:28:48Z",
+    "formed_at": "2026-05-30T11:28:48Z",
+    "completed_at": "2026-06-06T11:28:48Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 9,
+        "work_name": "Ризография",
+        "price_rub": 3500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 3
+  },
+  {
+    "id": 251,
+    "status": "rejected",
+    "creator_login": "creator_demo_36",
+    "book_title": "Сборник рефератов",
+    "circulation": 2,
+    "total_price": 53800,
+    "created_at": "2026-04-12T22:46:37Z",
+    "formed_at": "2026-04-13T18:46:37Z",
+    "completed_at": "2026-04-19T18:46:37Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 7,
+        "work_name": "Дизайн обложки",
+        "price_rub": 4000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 252,
+    "status": "rejected",
+    "creator_login": "creator_demo_39",
+    "book_title": "Сборник рефератов",
+    "circulation": 4,
+    "total_price": 12000,
+    "created_at": "2026-05-30T06:49:40Z",
+    "formed_at": "2026-05-30T13:49:40Z",
+    "completed_at": "2026-06-05T13:49:40Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 253,
+    "status": "rejected",
+    "creator_login": "creator_demo_08",
+    "book_title": "Алгоритмы для гуманитариев",
+    "circulation": 3,
+    "total_price": 15000,
+    "created_at": "2026-05-08T21:41:45Z",
+    "formed_at": "2026-05-09T13:41:45Z",
+    "completed_at": "2026-05-15T13:41:45Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 254,
+    "status": "rejected",
+    "creator_login": "creator_demo_25",
+    "book_title": "Сборник рефератов",
+    "circulation": 2,
+    "total_price": 6000,
+    "created_at": "2026-05-28T20:33:24Z",
+    "formed_at": "2026-05-29T10:33:24Z",
+    "completed_at": "2026-06-01T10:33:24Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 6,
+        "work_name": "Корректура",
+        "price_rub": 1500,
+        "quantity": 2,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  },
+  {
+    "id": 255,
+    "status": "rejected",
+    "creator_login": "creator_demo_26",
+    "book_title": "Сборник рефератов",
+    "circulation": 2,
+    "total_price": 58000,
+    "created_at": "2026-05-24T01:48:08Z",
+    "formed_at": "2026-05-24T11:48:08Z",
+    "completed_at": "2026-05-30T11:48:08Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 5,
+        "work_name": "Вёрстка",
+        "price_rub": 3000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 256,
+    "status": "rejected",
+    "creator_login": "creator_demo_35",
+    "book_title": "Городские этюды",
+    "circulation": 2,
+    "total_price": 77600,
+    "created_at": "2026-05-20T02:27:43Z",
+    "formed_at": "2026-05-20T15:27:43Z",
+    "completed_at": "2026-05-25T15:27:43Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 3,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 1,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 257,
+    "status": "rejected",
+    "creator_login": "creator_demo_04",
+    "book_title": "Городские этюды",
+    "circulation": 4,
+    "total_price": 172000,
+    "created_at": "2026-05-31T12:19:45Z",
+    "formed_at": "2026-06-01T10:19:45Z",
+    "completed_at": "2026-06-07T10:19:45Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 4,
+        "work_name": "Твёрдый переплёт",
+        "price_rub": 2500,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 1,
+        "work_name": "Цифровая печать",
+        "price_rub": 5000,
+        "quantity": 1,
+        "comment": ""
+      },
+      {
+        "work_id": 2,
+        "work_name": "Офсетная печать",
+        "price_rub": 15000,
+        "quantity": 2,
+        "comment": ""
+      },
+      {
+        "work_id": 8,
+        "work_name": "Присвоение ISBN",
+        "price_rub": 1000,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 4
+  },
+  {
+    "id": 258,
+    "status": "rejected",
+    "creator_login": "creator_demo_11",
+    "book_title": "Практикум по типографике",
+    "circulation": 2,
+    "total_price": 4800,
+    "created_at": "2026-06-03T23:07:23Z",
+    "formed_at": "2026-06-04T11:07:23Z",
+    "completed_at": "2026-06-09T11:07:23Z",
+    "rejection_reason": "Уточните тираж и состав услуг",
+    "works": [
+      {
+        "work_id": 3,
+        "work_name": "Мягкий переплёт",
+        "price_rub": 800,
+        "quantity": 3,
+        "comment": ""
+      }
+    ],
+    "filled_works_count": 1
+  }
+]
