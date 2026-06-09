@@ -56,8 +56,6 @@ export default function AdminStatisticsTab({ orders, works, loading, error }: Ad
   const [chartResetKey, setChartResetKey] = useState(0)
   const [topWorksLimit, setTopWorksLimit] = useState(3)
 
-  const datesDisabled = presetInput !== 'custom'
-
   const filteredOrders = useMemo(
     () => filterOrdersForStats(orders, appliedFilters),
     [orders, appliedFilters],
@@ -86,12 +84,45 @@ export default function AdminStatisticsTab({ orders, works, loading, error }: Ad
   const periodFill = (_entry: { label?: string; value?: number }, index: number) =>
     getDistinctChartColor(index)
 
+  const buildFilters = (
+    preset: StatsPeriodPreset,
+    dateFrom: string,
+    dateTo: string,
+    status: StatsStatusFilter,
+    creatorLogin: string,
+  ): StatsFilters => {
+    if (preset !== 'custom') {
+      const range = resolvePeriodPreset(preset)
+      return {
+        dateFrom: range.dateFrom,
+        dateTo: range.dateTo,
+        preset,
+        status,
+        creatorLogin,
+      }
+    }
+    return { dateFrom, dateTo, preset, status, creatorLogin }
+  }
+
+  const applyFilters = (filters: StatsFilters) => {
+    if (
+      filters.preset === 'custom' &&
+      isStatsDateRangeInvalid(filters.dateFrom, filters.dateTo)
+    ) {
+      setFilterError('Дата «от» не может быть позже даты «до»')
+      return
+    }
+    setFilterError('')
+    setAppliedFilters(filters)
+  }
+
   const handlePresetChange = (preset: StatsPeriodPreset) => {
     setPresetInput(preset)
     if (preset !== 'custom') {
       const range = resolvePeriodPreset(preset)
       setDateFromInput(range.dateFrom)
       setDateToInput(range.dateTo)
+      applyFilters(buildFilters(preset, range.dateFrom, range.dateTo, statusInput, creatorInput))
     }
   }
 
@@ -102,18 +133,9 @@ export default function AdminStatisticsTab({ orders, works, loading, error }: Ad
   }
 
   const handleApplyFilters = () => {
-    if (isStatsDateRangeInvalid(dateFromInput, dateToInput)) {
-      setFilterError('Дата «от» не может быть позже даты «до»')
-      return
-    }
-    setFilterError('')
-    setAppliedFilters({
-      dateFrom: dateFromInput,
-      dateTo: dateToInput,
-      preset: presetInput,
-      status: statusInput,
-      creatorLogin: creatorInput,
-    })
+    applyFilters(
+      buildFilters(presetInput, dateFromInput, dateToInput, statusInput, creatorInput),
+    )
   }
 
   const handleResetFilters = () => {
@@ -187,27 +209,32 @@ export default function AdminStatisticsTab({ orders, works, loading, error }: Ad
               </option>
             ))}
           </select>
+          {presetInput !== 'custom' && (
+            <p className="profile-filter-hint">Для своего диапазона выберите «Произвольный»</p>
+          )}
         </div>
-        <div className="profile-filter-field">
-          <label>Дата от</label>
-          <input
-            type="date"
-            className="profile-input"
-            value={dateFromInput}
-            disabled={datesDisabled}
-            onChange={(e) => handleDateManualChange('from', e.target.value)}
-          />
-        </div>
-        <div className="profile-filter-field">
-          <label>Дата до</label>
-          <input
-            type="date"
-            className="profile-input"
-            value={dateToInput}
-            disabled={datesDisabled}
-            onChange={(e) => handleDateManualChange('to', e.target.value)}
-          />
-        </div>
+        {presetInput === 'custom' && (
+          <>
+            <div className="profile-filter-field">
+              <label>Дата от</label>
+              <input
+                type="date"
+                className="profile-input"
+                value={dateFromInput}
+                onChange={(e) => handleDateManualChange('from', e.target.value)}
+              />
+            </div>
+            <div className="profile-filter-field">
+              <label>Дата до</label>
+              <input
+                type="date"
+                className="profile-input"
+                value={dateToInput}
+                onChange={(e) => handleDateManualChange('to', e.target.value)}
+              />
+            </div>
+          </>
+        )}
         <div className="profile-filter-field">
           <label>Статус</label>
           <select

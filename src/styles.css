@@ -1523,6 +1523,19 @@ input[type="datetime-local"].profile-input {
   display: block;
   min-width: 0;
   max-width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  min-height: 38px;
+  max-height: 38px;
+  line-height: 1.2;
+  color-scheme: light;
+}
+
+.profile-filter-hint {
+  font-size: 12px;
+  color: #888;
+  margin: 4px 0 0;
+  line-height: 1.4;
 }
 
 @media (min-width: 769px) {
