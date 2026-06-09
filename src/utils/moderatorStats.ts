@@ -6,7 +6,7 @@ export interface StatsDateRange {
   dateTo: string
 }
 
-export type StatsPeriodPreset = 'all' | 'last30' | 'thisMonth' | 'lastMonth' | 'custom'
+export type StatsPeriodPreset = 'all' | 'last30' | 'thisMonth' | 'lastMonth'
 
 export type StatsTimeGranularity = 'month' | 'week'
 
@@ -23,7 +23,6 @@ export const STATS_PERIOD_PRESET_LABELS: Record<StatsPeriodPreset, string> = {
   last30: 'Последние 30 дней',
   thisMonth: 'Этот месяц',
   lastMonth: 'Прошлый месяц',
-  custom: 'Произвольный',
 }
 
 export type StatsStatusFilter = '' | 'formed' | 'completed' | 'rejected'
@@ -230,10 +229,12 @@ export function formatPeriodLabel(range: StatsDateRange): string {
 
 export function formatStatsContextLabel(filters: StatsFilters): string {
   const parts: string[] = []
-  if (filters.preset !== 'custom' && filters.preset !== 'all') {
+  if (filters.dateFrom || filters.dateTo) {
+    parts.push(formatPeriodLabel({ dateFrom: filters.dateFrom, dateTo: filters.dateTo }))
+  } else if (filters.preset !== 'all') {
     parts.push(STATS_PERIOD_PRESET_LABELS[filters.preset])
   } else {
-    parts.push(formatPeriodLabel({ dateFrom: filters.dateFrom, dateTo: filters.dateTo }))
+    parts.push('за всё время')
   }
   if (filters.status) {
     parts.push(STATS_STATUS_FILTER_LABELS[filters.status])

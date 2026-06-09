@@ -45,6 +45,8 @@ const defaultFilters: StatsFilters = {
 
 const TIME_SERIES_TYPES = ['bar', 'line', 'area', 'pie'] as const
 
+const STATS_PERIOD_PRESETS: StatsPeriodPreset[] = ['all', 'last30', 'thisMonth', 'lastMonth']
+
 export default function AdminStatisticsTab({ orders, works, loading, error }: AdminStatisticsTabProps) {
   const [presetInput, setPresetInput] = useState<StatsPeriodPreset>('all')
   const [dateFromInput, setDateFromInput] = useState('')
@@ -90,25 +92,10 @@ export default function AdminStatisticsTab({ orders, works, loading, error }: Ad
     dateTo: string,
     status: StatsStatusFilter,
     creatorLogin: string,
-  ): StatsFilters => {
-    if (preset !== 'custom') {
-      const range = resolvePeriodPreset(preset)
-      return {
-        dateFrom: range.dateFrom,
-        dateTo: range.dateTo,
-        preset,
-        status,
-        creatorLogin,
-      }
-    }
-    return { dateFrom, dateTo, preset, status, creatorLogin }
-  }
+  ): StatsFilters => ({ dateFrom, dateTo, preset, status, creatorLogin })
 
   const applyFilters = (filters: StatsFilters) => {
-    if (
-      filters.preset === 'custom' &&
-      isStatsDateRangeInvalid(filters.dateFrom, filters.dateTo)
-    ) {
+    if (isStatsDateRangeInvalid(filters.dateFrom, filters.dateTo)) {
       setFilterError('Дата «от» не может быть позже даты «до»')
       return
     }
@@ -118,16 +105,13 @@ export default function AdminStatisticsTab({ orders, works, loading, error }: Ad
 
   const handlePresetChange = (preset: StatsPeriodPreset) => {
     setPresetInput(preset)
-    if (preset !== 'custom') {
-      const range = resolvePeriodPreset(preset)
-      setDateFromInput(range.dateFrom)
-      setDateToInput(range.dateTo)
-      applyFilters(buildFilters(preset, range.dateFrom, range.dateTo, statusInput, creatorInput))
-    }
+    const range = resolvePeriodPreset(preset)
+    setDateFromInput(range.dateFrom)
+    setDateToInput(range.dateTo)
+    applyFilters(buildFilters(preset, range.dateFrom, range.dateTo, statusInput, creatorInput))
   }
 
   const handleDateManualChange = (which: 'from' | 'to', value: string) => {
-    setPresetInput('custom')
     if (which === 'from') setDateFromInput(value)
     else setDateToInput(value)
   }
@@ -203,38 +187,31 @@ export default function AdminStatisticsTab({ orders, works, loading, error }: Ad
             value={presetInput}
             onChange={(e) => handlePresetChange(e.target.value as StatsPeriodPreset)}
           >
-            {(Object.keys(STATS_PERIOD_PRESET_LABELS) as StatsPeriodPreset[]).map((p) => (
+            {STATS_PERIOD_PRESETS.map((p) => (
               <option key={p} value={p}>
                 {STATS_PERIOD_PRESET_LABELS[p]}
               </option>
             ))}
           </select>
-          {presetInput !== 'custom' && (
-            <p className="profile-filter-hint">Для своего диапазона выберите «Произвольный»</p>
-          )}
         </div>
-        {presetInput === 'custom' && (
-          <>
-            <div className="profile-filter-field">
-              <label>Дата от</label>
-              <input
-                type="date"
-                className="profile-input"
-                value={dateFromInput}
-                onChange={(e) => handleDateManualChange('from', e.target.value)}
-              />
-            </div>
-            <div className="profile-filter-field">
-              <label>Дата до</label>
-              <input
-                type="date"
-                className="profile-input"
-                value={dateToInput}
-                onChange={(e) => handleDateManualChange('to', e.target.value)}
-              />
-            </div>
-          </>
-        )}
+        <div className="profile-filter-field">
+          <label>Дата от</label>
+          <input
+            type="date"
+            className="profile-input"
+            value={dateFromInput}
+            onChange={(e) => handleDateManualChange('from', e.target.value)}
+          />
+        </div>
+        <div className="profile-filter-field">
+          <label>Дата до</label>
+          <input
+            type="date"
+            className="profile-input"
+            value={dateToInput}
+            onChange={(e) => handleDateManualChange('to', e.target.value)}
+          />
+        </div>
         <div className="profile-filter-field">
           <label>Статус</label>
           <select

@@ -1531,13 +1531,6 @@ input[type="datetime-local"].profile-input {
   color-scheme: light;
 }
 
-.profile-filter-hint {
-  font-size: 12px;
-  color: #888;
-  margin: 4px 0 0;
-  line-height: 1.4;
-}
-
 @media (min-width: 769px) {
   .profile-select {
     min-width: 180px;
